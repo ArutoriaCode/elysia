@@ -1,0 +1,23 @@
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+* {
+  box-sizing: content-box !important;
+}
+
+body {
+  font-size: 16px;
+}
+
+:root {
+  --primary-color: #e98add;
+  --primary-color-2: #f9cdf1;
+  --primary-color-3: #fae9f7;
+  --info-color: #e98add;
+  --scrollbar-color: #929292;
+  --border-color: #fafafa;
+  --danger-color: #ec555a;
+  --success-color: #2ed573;
+}
