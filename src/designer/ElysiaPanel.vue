@@ -53,6 +53,7 @@ const menuItems = ref({
   width: 20vw;
   display: flex;
   flex-direction: row;
+  border-right: 1px solid var(--primary-color);
   .elysia-menu {
     height: 100%;
     &.ant-menu-inline-collapsed {
@@ -75,7 +76,6 @@ const menuItems = ref({
 
   .menu-content {
     width: 100%;
-    border-right: 1px solid var(--primary-color);
 
     .menu-header {
       padding: 10px 15px;
