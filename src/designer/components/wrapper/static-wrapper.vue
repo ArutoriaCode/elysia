@@ -1,6 +1,10 @@
 <template>
-  <div class="static-wrapper" @click.self="setSelected(widget.path)">
-    <div class="warapper-slot" :class="{ 'show-shadow': isSelected }">
+  <div class="static-wrapper">
+    <div
+      class="warapper-slot"
+      :class="{ 'show-shadow': isSelected }"
+      @click.stop="setSelected(widget.path)"
+    >
       <slot></slot>
     </div>
     <div class="static-tr" v-if="isSelected">
