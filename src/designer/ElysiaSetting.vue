@@ -39,15 +39,15 @@ import importUseComponent, {
   EVENT_KEY_NAME
 } from './components/property/index.js'
 import { seletedSchema } from './core/select'
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, shallowRef } from 'vue'
 const activeKey = ref(['1', '2'])
 const hasSelected = computed(
   () => seletedSchema.value && seletedSchema.value.id
 )
 
 const propertys = computed(() => Object.keys(seletedSchema.value.options || {}))
-const commonComponentList = ref([])
-const eventComponentList = ref([])
+const commonComponentList = shallowRef([])
+const eventComponentList = shallowRef([])
 
 watch(
   propertys,
