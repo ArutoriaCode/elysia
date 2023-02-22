@@ -6,6 +6,7 @@ import svgLoader from "vite-svg-loader";
 import Components from "unplugin-vue-components/vite";
 
 export default defineConfig({
+  base: import.meta.env.PROD ? '/elysia' : '/',
   plugins: [vue(), vueJsx(), svgLoader(), Components()],
   resolve: {
     alias: {
