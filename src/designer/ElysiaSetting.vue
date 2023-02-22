@@ -23,6 +23,7 @@
             :is="item.module"
             :key="item.property"
             :property="item.property"
+            :propertyCN="item.propertyCN"
           ></component>
         </a-form>
       </a-collapse-panel>
@@ -42,6 +43,7 @@
             :is="item.module"
             :key="item.property"
             :property="item.property"
+            :propertyCN="item.propertyCN"
           ></component>
         </a-form>
       </a-collapse-panel>

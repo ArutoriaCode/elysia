@@ -17,7 +17,7 @@ export default {
    */
   add(action, icon, iconColor = '') {
     // 防止记录的历史数据过多
-    if (history.historyList.length === 30) {
+    if (history.historyList.length === 15) {
       history.historyList.pop();
     }
 

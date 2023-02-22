@@ -1,5 +1,5 @@
 <template>
-  <a-form-item :label="property">
+  <a-form-item :label="propertyCN">
     <a-select v-model:value="modelValue">
       <a-select-option
         v-for="option in selectOptions"
@@ -14,5 +14,5 @@
 <script setup>
 import useDefineModel from './useDefineModel'
 
-const { property, modelValue, selectOptions } = useDefineModel()
+const { propertyCN, modelValue, selectOptions } = useDefineModel()
 </script>

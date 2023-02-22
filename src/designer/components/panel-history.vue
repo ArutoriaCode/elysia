@@ -2,8 +2,9 @@
   <a-list
     class="history-list"
     item-layout="vertical"
-    :data-source="history.historyList"
     row-key="recordTime"
+    :data-source="history.historyList"
+    :locale="{ emptyText: '暂无历史记录' }"
   >
     <template #renderItem="{ item }">
       <a-list-item>

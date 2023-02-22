@@ -1,4 +1,5 @@
 import { defineAsyncComponent, unref } from "vue";
+import propertyCN from './property-cn.js'
 
 export const COMMON_KEY_NAME = "BASE_PROPERTYS";
 export const EVENT_KEY_NAME = "EVENT_PROPERTYS";
@@ -37,6 +38,7 @@ export default function importUseComponent(type, propertys) {
         components.push({
           type,
           property: prop,
+          propertyCN: propertyCN[prop],
           module: defineAsyncComponent(modules[name]) // 异步组件需要defineAsyncComponent包裹返回
         });
       }
@@ -49,6 +51,7 @@ export default function importUseComponent(type, propertys) {
       components.push({
         type,
         property: propertys,
+        propertyCN: propertyCN[propertys],
         module: defineAsyncComponent(modules[name]) // 异步组件需要defineAsyncComponent包裹返回
       });
     }

@@ -9,7 +9,7 @@ const fields = [
     childrenList: [],
     options: {
       text: "按钮",
-      type: "primary"
+      type: "default"
     },
     selects: {
       type: [
