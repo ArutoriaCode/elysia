@@ -1,0 +1,1 @@
+import{s as o}from"./index-7a5835ef.js";import{a0 as l,a1 as n,a as c}from"./vendor-3cd542f4.js";function f(){const{property:e,propertyCN:a}=l(),r=n(o.value.options,e),t=c([]),s=o.value.selects;return s&&s[e]&&(t.value=s[e]),{property:e,modelValue:r,selectOptions:t,propertyCN:a}}export{f as u};
