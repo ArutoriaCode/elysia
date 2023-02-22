@@ -3,12 +3,18 @@
     <div
       class="warapper-slot"
       :class="{ 'show-shadow': isSelected }"
-      @click="setSelected(widget.path)"
+      @click.stop="setSelected(widget.path)"
     >
       <slot></slot>
     </div>
     <div class="static-tr" v-if="isSelected">
-      <span class="w-name move-area" title="长按拖拽">{{ widget.name }}</span>
+      <span class="w-name move-area" title="长按拖拽">
+        <EyeInvisibleFilled
+          v-show="widget.options.hidden === true"
+          title="已隐藏"
+        />
+        {{ widget.name }}
+      </span>
       <div class="baisc-btns">
         <DragOutlined class="move-area" title="长按拖拽" />
         <CopyOutlined @click="copy(widget)" title="拷贝组件" />
@@ -26,8 +32,8 @@ import {
   CopyOutlined,
   ArrowUpOutlined,
   ArrowDownOutlined,
-  DeleteOutlined,
-  DeleteFilled
+  DeleteFilled,
+  EyeInvisibleFilled
 } from '@ant-design/icons-vue'
 import { computed } from 'vue'
 import { seletedSchema, setSelected } from '@/designer/core/select.js'
@@ -54,7 +60,7 @@ const isSelected = computed(
   }
   .static-tr {
     position: absolute;
-    right: -1px;
+    right: -2px;
     top: -26px;
     z-index: 99;
     background-color: var(--info-color);
@@ -65,9 +71,19 @@ const isSelected = computed(
       text-align: center;
       line-height: 26px;
       color: #fff;
-      display: inline-block;
       padding: 0 8px;
       cursor: pointer;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .anticon-eye-invisible {
+        display: inline-block;
+        background-color: var(--info-color);
+        color: #fff;
+        padding-top: 2px;
+        font-size: 18px;
+      }
     }
     .anticon {
       color: #fff;

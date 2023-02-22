@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import store from "./store";
 import { reactive } from "vue";
 import { seletedSchema } from "./select";
@@ -26,7 +27,7 @@ export default {
       seletedSchema,
       icon: icon || "",
       iconColor,
-      recordTime: Date.now()
+      recordTime: dayjs().format('YY/MM/DD HH:mm:ss'),
     });
   }
 };

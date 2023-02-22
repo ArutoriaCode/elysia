@@ -14,6 +14,7 @@
       >
         <a-form
           layout="horizontal"
+          label-align="left"
           :label-col="{ span: 4 }"
           :wrapper-col="{ span: 20 }"
         >
@@ -32,6 +33,7 @@
       >
         <a-form
           layout="horizontal"
+          label-align="left"
           :label-col="{ span: 4 }"
           :wrapper-col="{ span: 20 }"
         >

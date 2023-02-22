@@ -4,7 +4,10 @@ export const COMMON_KEY_NAME = "BASE_PROPERTYS";
 export const EVENT_KEY_NAME = "EVENT_PROPERTYS";
 const PROPERTYS = {
   [COMMON_KEY_NAME]: {
-    title: "text-input"
+    title: "text-input",
+    text: "text-input",
+    type: 'type-select',
+    hidden: 'switch'
   },
   [EVENT_KEY_NAME]: {
     onClick: "js-code-editor"

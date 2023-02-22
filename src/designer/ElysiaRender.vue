@@ -27,11 +27,14 @@ import store from './core/store'
 import { checkMove } from './core/move'
 import { setSelected } from './core/select'
 import { ref, computed } from 'vue';
+import history from './core/history';
 
 const widgetList = computed(() => store.childrenList)
 const readonly = ref(false)
 const onDragAdd = evt => {
   setSelected(evt.newIndex)
+  const { name } = evt.item._underlying_vm_
+  history.add(`添加 ${name} 组件`, 'history-add-icon')
 }
 </script>
 

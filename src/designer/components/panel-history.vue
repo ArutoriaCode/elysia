@@ -10,17 +10,14 @@
         <!-- <template #actions>
           <a key="list-loadmore-edit">还原</a>
         </template> -->
-        <a-skeleton avatar active>
-          <a-list-item-meta :description="item.recordTime">
-            <template #title>
-              <span>{{ item.action }}</span>
-            </template>
-            <template #avatar>
-              <component :is="item.icon"></component>
-            </template>
-          </a-list-item-meta>
-          <div></div>
-        </a-skeleton>
+        <a-list-item-meta :description="item.recordTime">
+          <template #title>
+            <span>{{ item.action }}</span>
+          </template>
+          <template #avatar>
+            <component :is="item.icon"></component>
+          </template>
+        </a-list-item-meta>
       </a-list-item>
     </template>
   </a-list>
@@ -40,7 +37,7 @@ import { history } from '../core/history'
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 0;
+    margin-bottom: 0 !important;
   }
   .ant-list-item-meta-avatar {
     margin-right: 0;
