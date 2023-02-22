@@ -6,7 +6,7 @@ import svgLoader from "vite-svg-loader";
 import Components from "unplugin-vue-components/vite";
 
 export default defineConfig({
-  base: process.env.NODE_ENV === "production" ? "/elysia/" : "/",
+  base: process.env.NODE_ENV === "production" ? "https://arutoriacode.github.io/elysia/" : "/",
   plugins: [vue(), vueJsx(), svgLoader(), Components()],
   resolve: {
     alias: {
@@ -15,7 +15,6 @@ export default defineConfig({
   },
   build: {
     outDir: "docs",
-    assetsDir: './',
     rollupOptions: {
       output: {
         manualChunks(id) {
