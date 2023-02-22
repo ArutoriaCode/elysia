@@ -20,8 +20,8 @@
       </div>
       <div class="menu-body">
         <panel-component v-show="selectedKey === '1'"></panel-component>
-        <!-- <outline-panel v-show="selectedKey === '2'"></outline-panel>
-        <history-panel v-show="selectedKey === '3'"></history-panel> -->
+        <!-- <outline-panel v-show="selectedKey === '2'"></outline-panel> -->
+        <panel-history v-show="selectedKey === '3'"></panel-history>
       </div>
     </div>
   </div>
@@ -29,6 +29,7 @@
 
 <script setup>
 import panelComponent from './components/panel-component.vue'
+import PanelHistory from './components/panel-history.vue'
 import { ref, computed } from 'vue'
 
 const selectedKey = ref('1')
@@ -63,13 +64,12 @@ const menuItems = ref({
     .ant-menu-item {
       // padding: 0 12px !important;
       text-align: center;
-      height: 48px;
-      line-height: 48px;
-      margin: 0;
-      i.anticon {
-        margin-right: 0;
-        font-size: 20px;
-        color: var(--primary-color);
+      height: 52px;
+      line-height: 56px;
+      margin: 0 !important;
+
+      span.anticon.elysia-icon {
+        font-size: 24px;
       }
     }
   }

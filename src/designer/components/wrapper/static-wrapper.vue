@@ -3,19 +3,19 @@
     <div
       class="warapper-slot"
       :class="{ 'show-shadow': isSelected }"
-      @click.stop="setSelected(widget.path)"
+      @click="setSelected(widget.path)"
     >
       <slot></slot>
     </div>
     <div class="static-tr" v-if="isSelected">
-      <span class="w-name">{{ widget.name }}</span>
+      <span class="w-name move-area" title="长按拖拽">{{ widget.name }}</span>
       <div class="baisc-btns">
-        <DragOutlined class="move-area" />
-        <CopyOutlined @click="copy(widget)" />
-        <ArrowUpOutlined @click="upMove(widget)" />
-        <ArrowDownOutlined />
+        <DragOutlined class="move-area" title="长按拖拽" />
+        <CopyOutlined @click="copy(widget)" title="拷贝组件" />
+        <ArrowUpOutlined @click="upMove(widget)" title="上移组件" />
+        <ArrowDownOutlined @click="downMove(widget)" title="下移组件" />
         <slot name="custom-bar"></slot>
-        <MinusSquareOutlined class="trash-widget" />
+        <DeleteFilled @click="remove(widget)" title="删除组件"></DeleteFilled>
       </div>
     </div>
   </div>
@@ -26,11 +26,12 @@ import {
   CopyOutlined,
   ArrowUpOutlined,
   ArrowDownOutlined,
-  MinusSquareOutlined
+  DeleteOutlined,
+  DeleteFilled
 } from '@ant-design/icons-vue'
 import { computed } from 'vue'
 import { seletedSchema, setSelected } from '@/designer/core/select.js'
-import { upMove } from '@/designer/core/move.js'
+import { upMove, downMove, remove } from '@/designer/core/move.js'
 import copy from '@/designer/core/copy.js'
 const props = defineProps({
   widget: {
@@ -48,6 +49,9 @@ const isSelected = computed(
   position: relative;
   margin-bottom: 3px;
   width: auto;
+  & + .static-wrapper {
+    margin-top: 8px;
+  }
   .static-tr {
     position: absolute;
     right: -1px;
@@ -71,10 +75,6 @@ const isSelected = computed(
       font-size: 20px;
       padding: 0 4px;
       cursor: pointer;
-    }
-
-    .trash-widget.anticon {
-      background-color: var(--danger-color);
     }
   }
 

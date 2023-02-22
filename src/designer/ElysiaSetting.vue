@@ -5,30 +5,43 @@
       :bordered="false"
       v-show="hasSelected"
       class="custom-collapse"
+      ghost
     >
       <a-collapse-panel
         key="1"
         header="常见属性"
         v-show="commonComponentList.length > 0"
       >
-        <component
-          v-for="item in commonComponentList"
-          :is="item.module"
-          :key="item.property"
-          :property="item.property"
-        ></component>
+        <a-form
+          layout="horizontal"
+          :label-col="{ span: 4 }"
+          :wrapper-col="{ span: 20 }"
+        >
+          <component
+            v-for="item in commonComponentList"
+            :is="item.module"
+            :key="item.property"
+            :property="item.property"
+          ></component>
+        </a-form>
       </a-collapse-panel>
       <a-collapse-panel
         key="2"
         header="事件"
         v-show="eventComponentList.length > 0"
       >
-        <component
-          v-for="item in eventComponentList"
-          :is="item.module"
-          :key="item.property"
-          :property="item.property"
-        ></component>
+        <a-form
+          layout="horizontal"
+          :label-col="{ span: 4 }"
+          :wrapper-col="{ span: 20 }"
+        >
+          <component
+            v-for="item in eventComponentList"
+            :is="item.module"
+            :key="item.property"
+            :property="item.property"
+          ></component>
+        </a-form>
       </a-collapse-panel>
     </a-collapse>
   </div>

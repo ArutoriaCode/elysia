@@ -1,5 +1,5 @@
 span.anticon.elysia-icon {
   display: inline-block;
-  color: #e98add !important;
-  font-size: 18px;
+  color: var(--primary-color) !important;
+  font-size: 20px;
 }

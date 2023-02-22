@@ -1,8 +1,7 @@
 <template>
-  <div>
-    {{ property }}：
+  <a-form-item :label="property">
     <a-input v-model:value="modelValue"></a-input>
-  </div>
+  </a-form-item>
 </template>
 <script setup>
 import useDefineModel from './useDefineModel'

@@ -37,7 +37,7 @@ const onDragAdd = evt => {
 
 <style lang="less">
 .elysia-render {
-  height: 100vh;
+  height: calc(100vh - 48px);
   width: 55vw;
   padding: 24px;
   overflow: hidden;
@@ -49,7 +49,7 @@ const onDragAdd = evt => {
   }
 
   .root-form {
-    height: 100vh;
+    height: 100%;
     width: 100%;
   }
 }

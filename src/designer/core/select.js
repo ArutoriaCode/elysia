@@ -10,5 +10,6 @@ export const seletedSchema = shallowRef({});
 
 export function setSelected(path) {
   const widget = find(path);
+  console.log("🚀 ~ file: select.js:13 ~ setSelected ~ widget", widget)
   seletedSchema.value = { ...widget };
 }

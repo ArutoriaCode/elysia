@@ -81,12 +81,12 @@ const onPushComponent = widget => {}
     line-height: 40px;
     text-align: center;
     border-radius: 6px;
-    background-color: var(--info-color);
-    color: #fff;
+    border: 1px solid var(--info-color);
+    color: var(--info-color);
     list-style: none;
     cursor: grab;
     margin: 0 4px 4px 0;
-    font-size: 14px;
+    font-size: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -94,7 +94,6 @@ const onPushComponent = widget => {}
     span.anticon.elysia-icon {
       font-size: 18px;
       padding-right: 8px;
-      color: #fff !important;
     }
   }
 }
