@@ -15,6 +15,7 @@ export default defineConfig({
   },
   build: {
     outDir: "docs",
+    assetsDir: 'elysia',
     rollupOptions: {
       output: {
         manualChunks(id) {
