@@ -1,5 +1,7 @@
-import { CONTAINER_TYPE } from "../store";
+import useAlias from "@/designer/hooks/useAlias";
 import { v4 as uuidv4 } from "uuid";
+import { CONTAINER_TYPE, PANEL_COMPONENT } from '@/designer/utils/helper'
+
 const containers = [
   {
     id: uuidv4(),
@@ -8,11 +10,14 @@ const containers = [
     icon: "card-icon", // from icons/
     childrenList: [],
     options: {
-      title: "卡片",
+      title: "卡片标题",
       hidden: false,
       cardWidth: "100%"
     }
   }
 ];
 
-export default containers;
+export default containers.map(v => {
+  v.nameAlias = useAlias([PANEL_COMPONENT, v.name]);
+  return v;
+});

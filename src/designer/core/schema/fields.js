@@ -1,5 +1,7 @@
-import { FIELD_TYPE } from "../store";
+import useAlias from "@/designer/hooks/useAlias";
+import { FIELD_TYPE, PANEL_COMPONENT } from '@/designer/utils/helper'
 import { v4 as uuidv4 } from "uuid";
+
 const fields = [
   {
     id: uuidv4(),
@@ -21,4 +23,7 @@ const fields = [
   }
 ];
 
-export default fields;
+export default fields.map(v => {
+  v.nameAlias = useAlias([PANEL_COMPONENT, v.name]);
+  return v;
+});;

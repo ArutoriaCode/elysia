@@ -51,10 +51,8 @@
   </div>
 </template>
 <script setup>
-import importUseComponent, {
-  COMMON_KEY_NAME,
-  EVENT_KEY_NAME
-} from './components/property/index.js'
+import importUseComponent from './components/property/index.js'
+import { COMMON_KEY_NAME, EVENT_KEY_NAME } from '@/designer/utils/helper.js'
 import { seletedSchema } from './core/select'
 import { ref, computed, watch, shallowRef } from 'vue'
 const activeKey = ref(['1', '2'])

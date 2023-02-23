@@ -1,9 +1,6 @@
 import { reactive, isReactive } from "vue";
 import { v4 as uuidv4 } from "uuid";
 
-export const FIELD_TYPE = "field";
-export const CONTAINER_TYPE = "container";
-
 /**
  * 重新计算某个组件在`childrenList`的路径信息
  *

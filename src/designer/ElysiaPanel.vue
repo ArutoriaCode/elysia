@@ -20,8 +20,8 @@
       </div>
       <div class="menu-body">
         <panel-component v-show="selectedKey === '1'"></panel-component>
-        <panel-outline v-show="selectedKey === '2'"></panel-outline>
-        <panel-history v-show="selectedKey === '3'"></panel-history>
+        <panel-outline v-if="selectedKey === '2'"></panel-outline>
+        <panel-history v-if="selectedKey === '3'"></panel-history>
       </div>
     </div>
   </div>

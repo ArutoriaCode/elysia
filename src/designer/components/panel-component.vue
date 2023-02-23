@@ -24,7 +24,7 @@
             slot="item"
           >
             <component :is="widget.icon"></component>
-            {{ widget.name }}
+            {{ widget.nameAlias || widget.name }}
           </li>
         </template>
       </draggable>
@@ -48,7 +48,7 @@
             slot="item"
           >
             <component :is="widget.icon"></component>
-            {{ widget.name }}
+            {{ widget.nameAlias || widget.name }}
           </li>
         </template>
       </draggable>
@@ -56,15 +56,21 @@
   </a-collapse>
 </template>
 <script setup>
+
 import Draggable from 'vuedraggable'
+import store from '@/designer/core/store.js';
 import { clone } from '@/designer/core/clone.js'
 import { checkMove } from '@/designer/core/move.js'
 import { containersSchema, fieldsSchema } from '@/designer/core/schema/index.js'
 import { ref } from 'vue'
+import { computedPath } from '../core/store'
 
 const activeKey = ref(['1', '2'])
 
-const onPushComponent = widget => {}
+const onPushComponent = widget => {
+  store.childrenList.push(widget)
+  computedPath(store.childrenList)
+}
 </script>
 <style lang="less">
 .custom-collapse {

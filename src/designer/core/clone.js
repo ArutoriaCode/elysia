@@ -1,6 +1,6 @@
 import cloneDeep from "lodash.clonedeep";
 import { v4 as uuidV4 } from "uuid";
-import { CONTAINER_TYPE } from "./store";
+import { CONTAINER_TYPE } from '@/designer/utils/helper'
 import { reactive } from "vue";
 import { isObject } from "../utils";
 

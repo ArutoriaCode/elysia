@@ -3,7 +3,9 @@
     <a-tree
       v-model:selectedKeys="selectedKeys"
       :tree-data="outlineTree"
+      :selectedKeys="selectedKeys"
       default-expand-all
+      @select="onSelect"
     >
       <template #switcherIcon="{ switcherCls }">
         <down-outlined :class="switcherCls" />
@@ -14,9 +16,17 @@
 <script setup>
 import store from '@/designer/core/store.js'
 import { DownOutlined } from '@ant-design/icons-vue'
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
+import { setSelected } from '../core/select'
+import { seletedSchema } from '@/designer/core/select.js'
 
-const selectedKeys = ref([])
+const selectedKeys = computed(() => {
+  if (seletedSchema.value && seletedSchema.value.id) {
+    return [seletedSchema.value.id]
+  }
+
+  return []
+})
 
 function createTree (children) {
   if (children && children.length == 0) {
@@ -25,9 +35,10 @@ function createTree (children) {
 
   return children.map(v => {
     return {
-      title: v.name,
+      title: v.nameAlias || v.name,
       key: v.id,
       icon: v.icon,
+      path: v.path,
       children: createTree(v.childrenList)
     }
   })
@@ -43,4 +54,18 @@ const outlineTree = computed(() => {
     }
   ]
 })
+
+function onSelect (selectedKeys, { node }) {
+  if (node.parent === undefined) {
+    setSelected()
+    return
+  }
+
+  setSelected(node.path)
+}
 </script>
+<style>
+.panel-outline {
+  padding-top: 12px;
+}
+</style>
