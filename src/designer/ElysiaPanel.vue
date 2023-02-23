@@ -20,7 +20,7 @@
       </div>
       <div class="menu-body">
         <panel-component v-show="selectedKey === '1'"></panel-component>
-        <!-- <outline-panel v-show="selectedKey === '2'"></outline-panel> -->
+        <panel-outline v-show="selectedKey === '2'"></panel-outline>
         <panel-history v-show="selectedKey === '3'"></panel-history>
       </div>
     </div>
@@ -29,8 +29,14 @@
 
 <script setup>
 import panelComponent from './components/panel-component.vue'
-import PanelHistory from './components/panel-history.vue'
-import { ref, computed } from 'vue'
+import { ref, computed, defineAsyncComponent } from 'vue'
+
+const panelOutline = defineAsyncComponent(() =>
+  import('./components/panel-outline.vue')
+)
+const panelHistory = defineAsyncComponent(() =>
+  import('./components/panel-history.vue')
+)
 
 const menuItems = {
   1: { title: '组件', icon: 'cubes-icon' },

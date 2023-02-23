@@ -1,33 +1,34 @@
 <template>
-  <a-list
-    class="history-list"
-    item-layout="vertical"
-    row-key="recordTime"
-    :data-source="history.historyList"
-    :locale="{ emptyText: '暂无历史记录' }"
-  >
-    <template #renderItem="{ item }">
-      <a-list-item>
-        <!-- <template #actions>
+  <div class="panel-history">
+    <a-list
+      item-layout="vertical"
+      row-key="recordTime"
+      :data-source="history.historyList"
+      :locale="{ emptyText: '暂无历史记录' }"
+    >
+      <template #renderItem="{ item }">
+        <a-list-item>
+          <!-- <template #actions>
           <a key="list-loadmore-edit">还原</a>
         </template> -->
-        <a-list-item-meta :description="item.recordTime">
-          <template #title>
-            <span>{{ item.action }}</span>
-          </template>
-          <template #avatar>
-            <component :is="item.icon"></component>
-          </template>
-        </a-list-item-meta>
-      </a-list-item>
-    </template>
-  </a-list>
+          <a-list-item-meta :description="item.recordTime">
+            <template #title>
+              <span>{{ item.action }}</span>
+            </template>
+            <template #avatar>
+              <component :is="item.icon"></component>
+            </template>
+          </a-list-item-meta>
+        </a-list-item>
+      </template>
+    </a-list>
+  </div>
 </template>
 <script setup>
 import { history } from '../core/history'
 </script>
 <style lang="less">
-.history-list {
+.panel-history {
   .ant-list-item {
     cursor: pointer;
     &:hover {
