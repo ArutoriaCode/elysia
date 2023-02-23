@@ -1,5 +1,5 @@
 <template>
-  <div class="elysia-wrapper">
+  <div class="elysia-panel">
     <a-menu
       v-model:selectedKeys="activeKeys"
       mode="vertical"
@@ -49,12 +49,7 @@ const menuItems = ref({
 </script>
 
 <style lang="less">
-.elysia-wrapper {
-  height: 100%;
-  width: 20vw;
-  display: flex;
-  flex-direction: row;
-  border-right: 1px solid var(--primary-color);
+.elysia-panel {
   .elysia-menu {
     height: 100%;
     &.ant-menu-inline-collapsed {

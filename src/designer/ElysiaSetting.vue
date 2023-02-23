@@ -75,10 +75,3 @@ watch(
   { immediate: true }
 )
 </script>
-<style>
-.elysia-setting {
-  height: 100vh;
-  width: 25vw;
-  border-left: 1px solid var(--primary-color);
-}
-</style>

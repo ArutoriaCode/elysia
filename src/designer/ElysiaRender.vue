@@ -26,8 +26,8 @@ import draggable from 'vuedraggable'
 import store from './core/store'
 import { checkMove } from './core/move'
 import { setSelected } from './core/select'
-import { ref, computed } from 'vue';
-import history from './core/history';
+import { ref, computed } from 'vue'
+import history from './core/history'
 
 const widgetList = computed(() => store.childrenList)
 const readonly = ref(false)
@@ -40,12 +40,6 @@ const onDragAdd = evt => {
 
 <style lang="less">
 .elysia-render {
-  height: calc(100vh - 48px);
-  width: 55vw;
-  padding: 24px;
-  overflow: hidden;
-  overflow-y: auto;
-
   .draggable-render {
     height: 100%;
     width: 100%;
