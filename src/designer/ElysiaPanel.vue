@@ -32,6 +32,11 @@ import panelComponent from './components/panel-component.vue'
 import PanelHistory from './components/panel-history.vue'
 import { ref, computed } from 'vue'
 
+const menuItems = {
+  1: { title: '组件', icon: 'cubes-icon' },
+  2: { title: '大纲', icon: 'bars-staggered-icon' },
+  3: { title: '历史', icon: 'history-icon' }
+}
 const selectedKey = ref('1')
 const activeKeys = computed({
   set (value) {
@@ -40,11 +45,6 @@ const activeKeys = computed({
   get () {
     return [selectedKey.value]
   }
-})
-const menuItems = ref({
-  1: { title: '组件', icon: 'cubes-icon' },
-  2: { title: '大纲', icon: 'bars-staggered-icon' },
-  3: { title: '历史', icon: 'history-icon' }
 })
 </script>
 
