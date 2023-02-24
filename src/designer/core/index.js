@@ -1,4 +1,4 @@
-import store from "./store";
+import * as store from "./store";
 import * as schema from "./schema/index";
 import * as move from "./move";
 import copy from "./copy";

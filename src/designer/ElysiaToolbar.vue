@@ -6,13 +6,19 @@
     </div>
 
     <div>
+      <clear-outlined title="清空设计" @click="clearStore" />
       <play-circle-filled title="预览" />
       <code-filled title="查看代码" />
     </div>
   </div>
 </template>
 <script setup>
-import { PlayCircleFilled, CodeFilled } from '@ant-design/icons-vue'
+import {
+  PlayCircleFilled,
+  CodeFilled,
+  ClearOutlined
+} from '@ant-design/icons-vue'
+import { clearStore } from './core/store'
 </script>
 <style lang="less">
 .elysia-toolbar {

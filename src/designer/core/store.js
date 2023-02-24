@@ -1,5 +1,6 @@
 import { reactive, isReactive } from "vue";
 import { v4 as uuidv4 } from "uuid";
+import history from "./history";
 
 /**
  * 重新计算某个组件在`childrenList`的路径信息
@@ -31,6 +32,12 @@ export function computedPath(childrenList, indexInParent = []) {
   });
 }
 
+const defaultGlobalOptions = {
+  globalStyles: "",
+  onMounted: "",
+  onUnmounted: ""
+};
+
 /**
  * 设计器渲染响应式对象
  */
@@ -39,11 +46,16 @@ const schemaJson = reactive({
   name: "a-form",
   childrenList: [],
   path: [],
-  options: {
-    globalStyles: "",
-    onMounted: "",
-    onUnmounted: ""
-  }
+  options: { ...defaultGlobalOptions }
 });
+
+export function clearStore(record = true) {
+  schemaJson.childrenList = [];
+  schemaJson.options = { ...defaultGlobalOptions };
+
+  if (record) {
+    history.add(`清空数据`, 'broom-icon')
+  }
+}
 
 export default schemaJson;
