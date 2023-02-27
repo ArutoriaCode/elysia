@@ -23,6 +23,7 @@ import { DownOutlined } from '@ant-design/icons-vue'
 import { computed } from 'vue'
 import { setSelected } from '../core/select'
 import { seletedSchema } from '@/designer/core/select.js'
+import { CONTAINER_TYPE } from '../utils/helper'
 
 const selectedKeys = computed(() => {
   if (seletedSchema.value && seletedSchema.value.id) {
@@ -38,13 +39,18 @@ function createTree (children) {
   }
 
   return children.map(v => {
-    return {
+    const tree = {
       title: v.nameAlias || v.name,
       key: v.id,
       iconType: v.icon,
-      path: v.path,
-      children: createTree(v.childrenList)
+      path: v.path
     }
+
+    if (v.type === CONTAINER_TYPE) {
+      tree.children = createTree(v.childrenList)
+    }
+
+    return tree
   })
 }
 

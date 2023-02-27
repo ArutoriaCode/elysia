@@ -3,7 +3,7 @@
     <div
       class="warapper-slot"
       :class="{ 'show-shadow': isSelected }"
-      @click.stop="onSetSelect(widget.path)"
+      @click.stop="onSetSelect"
     >
       <slot></slot>
     </div>
@@ -47,14 +47,6 @@ const props = defineProps({
   }
 })
 
-const onSetSelect = path => {
-  if (isViewStatus.value) {
-    return // 查看记录的历史，不做操作
-  }
-
-  setSelected(path)
-}
-
 const isSelected = computed(() => {
   if (isViewStatus.value) {
     return false
@@ -63,6 +55,18 @@ const isSelected = computed(() => {
   const selected = seletedSchema.value
   return selected && selected.id === props.widget.id
 })
+
+const onSetSelect = () => {
+  if (isViewStatus.value) {
+    return // 查看记录的历史，不做操作
+  }
+
+  if (isSelected.value) {
+    return // 当前已经是选中的状态
+  }
+
+  setSelected(props.widget)
+}
 </script>
 <style lang="less" scoped>
 .static-wrapper {

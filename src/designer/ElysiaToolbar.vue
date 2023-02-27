@@ -10,13 +10,11 @@
       </div>
 
       <div>
-        <clear-outlined title="清空设计" @click="clearStore" />
         <play-circle-filled title="预览" />
-        <code-filled
-          title="查看代码"
-          v-if="active === 'render'"
-          @click="onViewJson"
-        />
+        <template v-if="active === 'render'">
+          <clear-outlined title="清空设计" @click="onClearStore" />
+          <code-filled title="查看代码" @click="onViewJson" />
+        </template>
         <build-filled title="设计视图" v-else @click="onViewRender" />
       </div>
     </div>
@@ -37,10 +35,19 @@ import recorder, { isViewStatus } from './core/recorder'
 import { ref } from 'vue'
 
 const active = ref('render')
+const onClearStore = () => {
+  if (isViewStatus.value) {
+    return
+  }
+
+  clearStore()
+}
+
 const onViewJson = () => {
   active.value = 'json'
   viewJson()
 }
+
 const onViewRender = () => {
   viewSchemaJson.value = null
   active.value = 'render'
@@ -60,9 +67,12 @@ const onViewRender = () => {
       cursor: pointer;
       user-select: none;
       padding: 8px;
+      transition: transform 0.4s;
       &:hover {
-        transition: transform 0.3s;
-        transform: scale(1.2);
+        transform: scale(1.3);
+      }
+      &:active {
+        transform: scale(1.1);
       }
     }
   }

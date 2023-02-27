@@ -60,6 +60,6 @@ export function remove(widget) {
   if (parent) {
     const newChildrenList = parent.childrenList.filter(c => c.id !== id);
     parent.childrenList = computedPath(newChildrenList, parent.path);
-    recorder.add(`删除 ${nameAlias} 组件`, "trash-icon", "var(--danger-color)");
+    recorder.add(`删除${nameAlias}组件`, "minus-icon");
   }
 }

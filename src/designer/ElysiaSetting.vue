@@ -54,11 +54,17 @@
 import importUseComponent from './components/property/index.js'
 import { COMMON_KEY_NAME, EVENT_KEY_NAME } from '@/designer/utils/helper.js'
 import { seletedSchema } from './core/select'
+import { isViewStatus } from './core/recorder'
 import { ref, computed, watch, shallowRef } from 'vue'
 const activeKey = ref(['1', '2'])
-const hasSelected = computed(
-  () => seletedSchema.value && seletedSchema.value.id
-)
+const hasSelected = computed(() => {
+  if (isViewStatus.value) {
+    return false
+  }
+
+  const selected = seletedSchema.value
+  return selected && !!selected.id
+})
 
 const propertys = computed(() => Object.keys(seletedSchema.value.options || {}))
 const commonComponentList = shallowRef([])

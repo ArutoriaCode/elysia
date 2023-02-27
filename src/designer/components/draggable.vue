@@ -60,7 +60,7 @@ const props = defineProps({
 
 const onAdd = evt => {
   const { path, nameAlias } = props.widget
-  setSelected([...path, evt.newIndex])
-  recorder.add(`向${nameAlias}组件插入子组件`, 'history-add-icon')
+  const widget = setSelected([...path, evt.newIndex])
+  recorder.add(`向${nameAlias}组件插入${widget.nameAlias}组件`, 'history-add-icon')
 }
 </script>
