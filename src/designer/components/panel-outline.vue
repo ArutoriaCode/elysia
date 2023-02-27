@@ -4,11 +4,15 @@
       v-model:selectedKeys="selectedKeys"
       :tree-data="outlineTree"
       :selectedKeys="selectedKeys"
+      show-icon
       default-expand-all
       @select="onSelect"
     >
       <template #switcherIcon="{ switcherCls }">
         <down-outlined :class="switcherCls" />
+      </template>
+      <template #icon="{ iconType }">
+        <component :is="iconType"></component>
       </template>
     </a-tree>
   </div>
@@ -37,7 +41,7 @@ function createTree (children) {
     return {
       title: v.nameAlias || v.name,
       key: v.id,
-      icon: v.icon,
+      iconType: v.icon,
       path: v.path,
       children: createTree(v.childrenList)
     }
@@ -49,7 +53,7 @@ const outlineTree = computed(() => {
     {
       title: '表单',
       key: store.id,
-      icon: 'layer-group-icon',
+      iconType: 'layer-group-icon',
       children: createTree(store.childrenList)
     }
   ]
@@ -64,8 +68,22 @@ function onSelect (selectedKeys, { node }) {
   setSelected(node.path)
 }
 </script>
-<style>
+<style lang="less">
 .panel-outline {
   padding-top: 12px;
+  height: 100%;
+
+  .ant-tree-node-content-wrapper {
+    display: flex;
+    align-items: center;
+    .anticon.elysia-icon {
+      font-size: 16px;
+    }
+
+    .ant-tree-title {
+      min-width: 32px;
+      text-align: center;
+    }
+  }
 }
 </style>

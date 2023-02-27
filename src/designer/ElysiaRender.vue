@@ -8,7 +8,7 @@
         v-bind="{ group: 'dragGroup', ghostClass: 'ghost', animation: 300 }"
         :list="widgetList"
         :move="checkMove"
-        :disabled="readonly"
+        :disabled="isViewStatus"
         @add="onDragAdd"
         item-key="id"
       >
@@ -26,20 +26,21 @@ import draggable from 'vuedraggable'
 import store from './core/store'
 import { checkMove } from './core/move'
 import { setSelected } from './core/select'
-import { ref, computed } from 'vue'
-import history from './core/history'
+import { computed } from 'vue'
+import recorder, { isViewStatus } from './core/recorder'
 
 const widgetList = computed(() => store.childrenList)
-const readonly = ref(false)
 const onDragAdd = evt => {
   setSelected(evt.newIndex)
-  const { name } = evt.item._underlying_vm_
-  history.add(`添加 ${name} 组件`, 'history-add-icon')
+  const { name, nameAlias } = evt.item._underlying_vm_
+  recorder.add(`添加${nameAlias || name}组件`, 'history-add-icon')
 }
 </script>
 
 <style lang="less">
 .elysia-render {
+  height: 100%;
+  width: 100%;
   .draggable-render {
     height: 100%;
     width: 100%;

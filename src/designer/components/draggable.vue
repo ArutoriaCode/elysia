@@ -10,6 +10,7 @@
     :animation="animation"
     :component-data="{ path: widget.path }"
     :item-key="itemKey"
+    :disabled="isViewStatus"
     @add="onAdd"
   >
     <template v-for="slot in Object.keys($slots)" v-slot:[slot]="scope">
@@ -22,7 +23,7 @@ import draggable from 'vuedraggable'
 import { checkMove } from '../core/move'
 import { clone } from '../core/clone'
 import { setSelected } from '../core/select'
-import history from '../core/history'
+import recorder, { isViewStatus } from '../core/recorder'
 
 const props = defineProps({
   list: {
@@ -41,6 +42,7 @@ const props = defineProps({
     type: Number,
     default: 300
   },
+  // 组件信息，必须传递！ 用于move事件来自动计算路径信息
   widget: {
     type: Object,
     required: true
@@ -49,6 +51,7 @@ const props = defineProps({
     type: String,
     default: 'id'
   },
+  // 可以进行拖拽操作的区域
   handle: {
     type: String,
     default: '.move-area'
@@ -56,8 +59,8 @@ const props = defineProps({
 })
 
 const onAdd = evt => {
-  const { path, name } = props.widget
+  const { path, nameAlias } = props.widget
   setSelected([...path, evt.newIndex])
-  history.add(`向 ${name} 组件插入子组件`, 'history-add-icon')
+  recorder.add(`向${nameAlias}组件插入子组件`, 'history-add-icon')
 }
 </script>

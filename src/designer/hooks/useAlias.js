@@ -23,12 +23,22 @@ const aliasDict = reactive({
 });
 
 /**
- * @param {string} key 用于新增、覆盖或者获取
+ * @param {string | string[]} key 用于新增、覆盖或者获取
  * @param {string} value 传值则新增或覆盖
  */
 export default function useAlias(key, value) {
-  if ((key === "string" || Array.isArray(key)) && !value) {
-    return get(aliasDict, key); // 取值
+  // 无设置的值则为取值
+  if (!value) {
+    let defaultValue = "";
+    if (key === "string") {
+      defaultValue = key;
+    }
+
+    if (Array.isArray(key)) {
+      defaultValue = [...key].pop();
+    }
+
+    return get(aliasDict, key, defaultValue);
   }
 
   // 赋值

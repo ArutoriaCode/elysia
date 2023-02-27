@@ -20,8 +20,8 @@
       </div>
       <div class="menu-body">
         <panel-component v-show="selectedKey === '1'"></panel-component>
-        <panel-outline v-if="selectedKey === '2'"></panel-outline>
-        <panel-history v-if="selectedKey === '3'"></panel-history>
+        <panel-outline v-show="selectedKey === '2'"></panel-outline>
+        <panel-history v-show="selectedKey === '3'"></panel-history>
       </div>
     </div>
   </div>
@@ -76,8 +76,7 @@ const activeKeys = computed({
   }
 
   .menu-content {
-    width: 100%;
-
+    width: calc(100% - 57px);
     .menu-header {
       padding: 10px 15px;
       display: flex;
@@ -93,6 +92,12 @@ const activeKeys = computed({
         display: flex;
         align-items: center;
       }
+    }
+
+    .menu-body {
+      width: 100%;
+      max-height: calc(100vh - 54px);
+      overflow: auto;
     }
   }
 }

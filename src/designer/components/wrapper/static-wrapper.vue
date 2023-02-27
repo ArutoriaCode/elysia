@@ -3,7 +3,7 @@
     <div
       class="warapper-slot"
       :class="{ 'show-shadow': isSelected }"
-      @click.stop="setSelected(widget.path)"
+      @click.stop="onSetSelect(widget.path)"
     >
       <slot></slot>
     </div>
@@ -13,7 +13,7 @@
           v-show="widget.options.hidden === true"
           title="已隐藏"
         />
-        {{ widget.name }}
+        {{ widget.nameAlias }}
       </span>
       <div class="baisc-btns">
         <DragOutlined class="move-area" title="长按拖拽" />
@@ -39,6 +39,7 @@ import { computed } from 'vue'
 import { seletedSchema, setSelected } from '@/designer/core/select.js'
 import { upMove, downMove, remove } from '@/designer/core/move.js'
 import copy from '@/designer/core/copy.js'
+import { isViewStatus } from '../../core/recorder'
 const props = defineProps({
   widget: {
     type: Object,
@@ -46,9 +47,22 @@ const props = defineProps({
   }
 })
 
-const isSelected = computed(
-  () => seletedSchema.value && seletedSchema.value.id === props.widget.id
-)
+const onSetSelect = path => {
+  if (isViewStatus.value) {
+    return // 查看记录的历史，不做操作
+  }
+
+  setSelected(path)
+}
+
+const isSelected = computed(() => {
+  if (isViewStatus.value) {
+    return false
+  }
+
+  const selected = seletedSchema.value
+  return selected && selected.id === props.widget.id
+})
 </script>
 <style lang="less" scoped>
 .static-wrapper {

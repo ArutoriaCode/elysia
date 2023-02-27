@@ -4,8 +4,12 @@
       <elysia-panel></elysia-panel>
     </div>
     <div class="main-wrapper">
-      <elysia-toolbar></elysia-toolbar>
-      <elysia-render></elysia-render>
+      <elysia-toolbar>
+        <template v-slot:default="{ active }">
+          <elysia-render v-show="active === 'render'"></elysia-render>
+          <elysia-json v-show="active === 'json'"></elysia-json>
+        </template>
+      </elysia-toolbar>
     </div>
     <div class="aside-wrapper settings">
       <elysia-setting></elysia-setting>
@@ -17,6 +21,9 @@ import ElysiaPanel from './ElysiaPanel.vue'
 import ElysiaRender from './ElysiaRender.vue'
 import ElysiaSetting from './ElysiaSetting.vue'
 import ElysiaToolbar from './ElysiaToolbar.vue'
+import { defineAsyncComponent } from 'vue'
+
+const ElysiaJson = defineAsyncComponent(() => import('./ElysiaJson.vue'))
 </script>
 <style lang="less">
 body {
@@ -39,7 +46,7 @@ body {
     height: 48px;
   }
 
-  .elysia-render {
+  .elysia-main-content {
     padding: 24px;
     height: calc(100vh - 48px); // 48px = .elysia-toolbar height
     width: 55vw;

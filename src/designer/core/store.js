@@ -1,6 +1,6 @@
-import { reactive, isReactive } from "vue";
+import { reactive, isReactive, shallowRef, computed } from "vue";
 import { v4 as uuidv4 } from "uuid";
-import history from "./history";
+import recorder from "./recorder";
 
 /**
  * 重新计算某个组件在`childrenList`的路径信息
@@ -54,8 +54,14 @@ export function clearStore(record = true) {
   schemaJson.options = { ...defaultGlobalOptions };
 
   if (record) {
-    history.add(`清空数据`, 'broom-icon')
+    recorder.add(`清空数据`, "broom-icon");
   }
+}
+
+export const viewSchemaJson = shallowRef(null);
+export const viewStatus = computed(() => !!viewSchemaJson.value);
+export function viewJson() {
+  viewSchemaJson.value = JSON.stringify(schemaJson, null, 2);
 }
 
 export default schemaJson;

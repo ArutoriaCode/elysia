@@ -1,5 +1,6 @@
+import { hasProp, isObject } from "../utils";
 import { find } from "./find";
-import { shallowRef } from "vue";
+import { isReactive, shallowRef } from "vue";
 
 /**
  * 当前选中的组件的schema
@@ -8,10 +9,25 @@ import { shallowRef } from "vue";
  */
 export const seletedSchema = shallowRef({});
 
-export function setSelected(path) {
-  if (path === undefined || path === null) {
+/**
+ * 设置选中聚焦的组件
+ * @param {Array | Object} value 包含着路径信息的组件对象或路径信息数组
+ */
+export function setSelected(value) {
+  if (value === undefined || value === null) {
     seletedSchema.value = {};
     return;
+  }
+
+  let path = [];
+  if (isObject(value) && hasProp(value, "path")) {
+    path = value.path;
+  }
+
+  if (Array.isArray(value)) {
+    path = value;
+  } else {
+    path = [value];
   }
 
   const widget = find(path);
