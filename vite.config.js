@@ -22,8 +22,7 @@ export default defineConfig({
     }),
     visualizer({
       emitFile: false,
-      file: "stats.html",
-      open: true
+      file: "stats.html"
     })
   ],
   resolve: {
@@ -43,8 +42,6 @@ export default defineConfig({
               case "ant-design-vue":
               case "@ant-design/icons-vue":
               case "vuedraggable":
-              case "@codemirror":
-              case "vue-codemirror":
                 return "module-" + arr[0];
                 break;
               default:
