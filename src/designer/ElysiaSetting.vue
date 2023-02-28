@@ -51,8 +51,8 @@
   </div>
 </template>
 <script setup>
-import importUseComponent from './components/property/index.js'
 import { COMMON_KEY_NAME, EVENT_KEY_NAME } from '@/designer/utils/helper.js'
+import importUseComponent from './components/property/index.js'
 import { seletedSchema } from './core/select'
 import { isViewStatus } from './core/recorder'
 import { ref, computed, watch, shallowRef } from 'vue'

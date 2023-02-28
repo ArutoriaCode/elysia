@@ -23,12 +23,12 @@ export function setSelected(value) {
   let path = [];
   if (isObject(value) && hasProp(value, "path")) {
     path = value.path;
-  }
-
-  if (Array.isArray(value)) {
-    path = value;
   } else {
-    path = [value];
+    if (Array.isArray(value)) {
+      path = value;
+    } else {
+      path = [value];
+    }
   }
 
   const widget = find(path);

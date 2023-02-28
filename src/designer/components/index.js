@@ -1,5 +1,6 @@
 export default {
   install(app) {
+    // 导入组件
     const widgets = {
       ...import.meta.glob("./containers/**/*.vue", { eager: true }),
       ...import.meta.glob("./fields/**/*.vue", { eager: true })

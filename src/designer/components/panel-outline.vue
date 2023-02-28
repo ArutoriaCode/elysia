@@ -89,6 +89,7 @@ function onSelect (selectedKeys, { node }) {
     .ant-tree-title {
       min-width: 32px;
       text-align: center;
+      color: var(--primary-color) !important;
     }
   }
 }

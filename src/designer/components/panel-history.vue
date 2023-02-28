@@ -30,6 +30,12 @@ import recorder, { historys } from '../core/recorder'
     cursor: pointer;
     &:hover {
       background-color: var(--primary-color-3);
+      .ant-list-item-meta-description {
+        color: var(--primary-color);
+      }
+      .ant-list-item-meta-avatar .anticon {
+        transform: scale(1.25);
+      }
     }
   }
   .ant-list-item-meta {
@@ -40,19 +46,22 @@ import recorder, { historys } from '../core/recorder'
 
     .ant-list-item-meta-description {
       text-align: right;
+      color: var(--primary-color-2);
     }
 
     .ant-list-item-meta-title {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      color: var(--primary-color) !important;
     }
 
     .ant-list-item-meta-avatar {
       margin-right: 0;
       padding: 0 12px 0 24px;
-      .anticon.elysia-icon {
+      .anticon, .anticon.elysia-icon {
         font-size: 20px;
+        transition: transform 0.42s;
       }
     }
     .ant-list-item-meta-content {

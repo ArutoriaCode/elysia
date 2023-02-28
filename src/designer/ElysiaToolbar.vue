@@ -10,9 +10,9 @@
       </div>
 
       <div>
-        <play-circle-filled title="预览" />
         <template v-if="active === 'render'">
           <clear-outlined title="清空设计" @click="onClearStore" />
+          <play-circle-filled title="预览" @click="onViewBuilds" />
           <code-filled title="查看代码" @click="onViewJson" />
         </template>
         <build-filled title="设计视图" v-else @click="onViewRender" />
@@ -30,17 +30,43 @@ import {
   ClearOutlined,
   BuildFilled
 } from '@ant-design/icons-vue'
-import { clearStore, viewJson, viewSchemaJson } from './core/store'
+import {
+  clearStore,
+  viewBuilds,
+  viewJson,
+  viewBuildsJson,
+  viewSchemaJson
+} from './core/store'
 import recorder, { isViewStatus } from './core/recorder'
-import { ref } from 'vue'
+import { computed } from 'vue'
+import { setSelected } from '@/designer/core/select.js';
 
-const active = ref('render')
+const props = defineProps({
+  modelValue: String
+})
+
+const emits = defineEmits(['update:modelValue'])
+const active = computed({
+  set (value) {
+    emits('update:modelValue', value)
+  },
+  get () {
+    return props.modelValue
+  }
+})
+
 const onClearStore = () => {
   if (isViewStatus.value) {
     return
   }
 
+  setSelected(null)
   clearStore()
+}
+
+const onViewBuilds = () => {
+  active.value = 'builds'
+  viewBuilds()
 }
 
 const onViewJson = () => {
@@ -49,6 +75,7 @@ const onViewJson = () => {
 }
 
 const onViewRender = () => {
+  viewBuildsJson.value = null
   viewSchemaJson.value = null
   active.value = 'render'
 }

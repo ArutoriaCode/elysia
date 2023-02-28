@@ -39,16 +39,16 @@ const onDragAdd = evt => {
 
 <style lang="less">
 .elysia-render {
-  height: 100%;
   width: 100%;
-  .draggable-render {
-    height: 100%;
-    width: 100%;
-  }
+  // min-height: 100%;
 
   .root-form {
-    height: 100%;
     width: 100%;
+
+    .draggable-render {
+      width: 100%;
+      min-height: calc(100vh - 96px);
+    }
   }
 }
 </style>

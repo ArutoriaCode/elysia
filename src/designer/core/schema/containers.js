@@ -1,6 +1,6 @@
-import useAlias from "@/designer/hooks/useAlias";
-import { v4 as uuidv4 } from "uuid";
 import { CONTAINER_TYPE, PANEL_COMPONENT } from '@/designer/utils/helper'
+import { v4 as uuidv4 } from "uuid";
+import useAlias from "@/designer/hooks/useAlias";
 
 const containers = [
   {

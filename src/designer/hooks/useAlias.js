@@ -1,10 +1,6 @@
-import { reactive } from "vue";
 import get from "lodash.get";
-import {
-  COMMON_KEY_NAME,
-  EVENT_KEY_NAME,
-  PANEL_COMPONENT
-} from "@/designer/utils/helper";
+import { reactive } from "vue";
+import { COMMON_KEY_NAME, EVENT_KEY_NAME, PANEL_COMPONENT } from "../utils/helper";
 
 const aliasDict = reactive({
   [COMMON_KEY_NAME]: {
@@ -61,5 +57,5 @@ export default function useAlias(key, value) {
   });
 
   setValue = value;
-  return;
+  return value;
 }

@@ -1,6 +1,6 @@
 import { defineAsyncComponent, unref } from "vue";
-import useAlias from "@/designer/hooks/useAlias";
 import { PROPERTYS } from "@/designer/utils/helper";
+import useAlias from "@/designer/hooks/useAlias";
 
 function getPropertyType(type, prop) {
   if (Reflect.has(PROPERTYS[type], prop)) {

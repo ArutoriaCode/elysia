@@ -64,4 +64,10 @@ export function viewJson() {
   viewSchemaJson.value = JSON.stringify(schemaJson, null, 2);
 }
 
+export const viewBuildsJson = shallowRef(null);
+export const viewBuildsStatus = computed(() => !!viewBuildsJson.value);
+export function viewBuilds() {
+  viewBuildsJson.value = JSON.stringify(schemaJson, null, 2);
+}
+
 export default schemaJson;

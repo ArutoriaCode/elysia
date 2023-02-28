@@ -28,9 +28,10 @@
 </template>
 
 <script setup>
-import panelComponent from './components/panel-component.vue'
 import { ref, computed, defineAsyncComponent } from 'vue'
-
+const panelComponent = defineAsyncComponent(() =>
+  import('./components/panel-component.vue')
+)
 const panelOutline = defineAsyncComponent(() =>
   import('./components/panel-outline.vue')
 )
@@ -72,6 +73,12 @@ const activeKeys = computed({
       span.anticon.elysia-icon {
         font-size: 24px;
       }
+    }
+  }
+
+  .menu-header {
+    .menu-header-title {
+      color: var(--primary-color);
     }
   }
 

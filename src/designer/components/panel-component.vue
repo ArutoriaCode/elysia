@@ -56,9 +56,8 @@
   </a-collapse>
 </template>
 <script setup>
-
 import Draggable from 'vuedraggable'
-import store from '@/designer/core/store.js';
+import store from '@/designer/core/store.js'
 import { clone } from '@/designer/core/clone.js'
 import { checkMove } from '@/designer/core/move.js'
 import { containersSchema, fieldsSchema } from '@/designer/core/schema/index.js'
@@ -74,6 +73,13 @@ const onPushComponent = widget => {
 </script>
 <style lang="less">
 .custom-collapse {
+  .ant-collapse-header {
+    color: var(--primary-color) !important;
+    span.anticon {
+      color: var(--primary-color) !important;
+    }
+  }
+
   .widget-ul {
     margin: 0;
     padding: 0;
