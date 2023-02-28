@@ -20,10 +20,9 @@ import ElysiaPanel from './ElysiaPanel.vue'
 import ElysiaRender from './ElysiaRender.vue'
 import ElysiaSetting from './ElysiaSetting.vue'
 import ElysiaToolbar from './ElysiaToolbar.vue'
-import { defineAsyncComponent, ref, computed } from 'vue'
-
-const ElysiaJson = defineAsyncComponent(() => import('./ElysiaJson.vue'))
-const ElysiaBuilds = defineAsyncComponent(() => import('./ElysiaBuilds.vue'))
+import ElysiaJson from './ElysiaJson.vue'
+import ElysiaBuilds from './ElysiaBuilds.vue'
+import { ref, computed } from 'vue'
 
 const active = ref('render')
 const mainWrapperStyle = computed(() =>

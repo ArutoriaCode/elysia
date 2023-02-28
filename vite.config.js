@@ -4,10 +4,21 @@ import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import svgLoader from "vite-svg-loader";
 import Components from "unplugin-vue-components/vite";
+import { visualizer } from "rollup-plugin-visualizer";
 
 export default defineConfig({
   base: process.env.NODE_ENV === "production" ? "/elysia/" : "/",
-  plugins: [vue(), vueJsx(), svgLoader(), Components()],
+  plugins: [
+    vue(),
+    vueJsx(),
+    svgLoader(),
+    Components(),
+    visualizer({
+      emitFile: false,
+      file: "stats.html",
+      open: true
+    })
+  ],
   resolve: {
     alias: {
       "@": resolve(__dirname, "src")
@@ -24,6 +35,8 @@ export default defineConfig({
               case "@vue":
               case "ant-design-vue":
               case "@ant-design/icons-vue":
+              case "vuedraggable":
+              case "@codemirror":
                 return "module-" + arr[0];
                 break;
               default:
