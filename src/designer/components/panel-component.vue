@@ -13,6 +13,7 @@
         :group="{ name: 'dragGroup', pull: 'clone', put: false }"
         :move="checkMove"
         :clone="clone"
+        :sort="false"
         item-key="id"
       >
         <template #item="{ element: widget, index }">
@@ -37,6 +38,7 @@
         :group="{ name: 'dragGroup', pull: 'clone', put: false }"
         :move="checkMove"
         :clone="clone"
+        :sort="false"
         item-key="id"
       >
         <template #item="{ element: widget, index }">

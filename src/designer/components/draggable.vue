@@ -62,5 +62,22 @@ const onAdd = evt => {
   const { path, nameAlias } = props.widget
   const widget = setSelected([...path, evt.newIndex])
   recorder.add(`向${nameAlias}组件插入${widget.nameAlias}组件`, 'history-add-icon')
+
+const onEnd = evt => {
+  console.log('onEnd -------------------->', evt)
+  const fromData = evt.from.__draggable_component__.componentData;
+  const toData = evt.to.__draggable_component__.componentData;
+
+  if (fromData && fromData.parent) {
+    fromData.parent.childrenList = computedPath(
+      fromData.parent.childrenList,
+      fromData.parent.path
+    );
+  }
+
+  toData.parent.childrenList = computedPath(
+    toData.parent.childrenList,
+    toData.parent.path
+  );
 }
 </script>
