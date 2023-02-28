@@ -1,4 +1,3 @@
-import "ant-design-vue/dist/antd.css";
 import { Menu, Button, Collapse, Card, Form, Input, List, Select, Switch, Tree } from "ant-design-vue";
 
 export default {
