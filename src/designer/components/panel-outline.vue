@@ -19,8 +19,9 @@
 </template>
 <script setup>
 import store from '@/designer/core/store.js'
+import useDebounce from '@/designer/hooks/useDebounce'
 import { DownOutlined } from '@ant-design/icons-vue'
-import { computed } from 'vue'
+import { watch, computed, shallowRef } from 'vue'
 import { setSelected } from '../core/select'
 import { seletedSchema } from '@/designer/core/select.js'
 import { CONTAINER_TYPE } from '../utils/helper'
@@ -54,16 +55,20 @@ function createTree (children) {
   })
 }
 
-const outlineTree = computed(() => {
-  return [
-    {
-      title: '表单',
-      key: store.id,
-      iconType: 'layer-group-icon',
-      children: createTree(store.childrenList)
-    }
-  ]
-})
+const outlineTree = shallowRef([
+  {
+    title: '表单',
+    key: store.id,
+    iconType: 'layer-group-icon',
+    children: []
+  }
+])
+
+const updateTree = useDebounce(childrenList => {
+  outlineTree.children = createTree(childrenList)
+}, 300)
+
+watch(store.childrenList, updateTree)
 
 function onSelect (selectedKeys, { node }) {
   if (node.parent === undefined) {

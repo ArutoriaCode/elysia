@@ -103,7 +103,7 @@ const onPushComponent = widget => {
     align-items: center;
     justify-content: center;
     user-select: none;
-    span.anticon.elysia-icon {
+    span.anticon {
       font-size: 18px;
       padding-right: 8px;
     }

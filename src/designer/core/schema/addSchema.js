@@ -1,4 +1,5 @@
-import { containersSchema, fieldsSchema } from "./index";
+import { CONTAINER_TYPE, FIELD_TYPE } from "../../utils/helper.js";
+import { containersSchema, fieldsSchema } from "./index.js";
 
 // 提供给外部使用的
 export default function addSchema(type, schemaJson) {

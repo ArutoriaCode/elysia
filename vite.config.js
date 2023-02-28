@@ -32,7 +32,7 @@ export default defineConfig({
   },
   build: {
     outDir: "docs",
-    chunkSizeWarningLimit: 600,
+    chunkSizeWarningLimit: 1024,
     rollupOptions: {
       output: {
         manualChunks(id) {
@@ -42,7 +42,6 @@ export default defineConfig({
               case "@vue":
               case "ant-design-vue":
               case "@ant-design/icons-vue":
-              case "dayjs":
                 return "module-" + arr[0];
                 break;
               default:
