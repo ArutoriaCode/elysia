@@ -4,6 +4,7 @@ import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import svgLoader from "vite-svg-loader";
 import Components from "unplugin-vue-components/vite";
+import legacy from '@vitejs/plugin-legacy'
 import { visualizer } from "rollup-plugin-visualizer";
 
 export default defineConfig({
@@ -13,6 +14,9 @@ export default defineConfig({
     vueJsx(),
     svgLoader(),
     Components(),
+    legacy({
+      targets: ['defaults', 'not IE 11'],
+    }),
     visualizer({
       emitFile: false,
       file: "stats.html",

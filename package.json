@@ -23,6 +23,7 @@
     "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
+    "@vitejs/plugin-legacy": "^4.0.1",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vitejs/plugin-vue-jsx": "^3.0.0",
     "less": "^4.1.3",
