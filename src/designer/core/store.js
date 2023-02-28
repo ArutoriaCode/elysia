@@ -1,6 +1,7 @@
 import { reactive, isReactive, shallowRef, computed } from "vue";
 import { v4 as uuidv4 } from "uuid";
 import recorder from "./recorder";
+import cloneDeep from "lodash.clonedeep";
 
 /**
  * 重新计算某个组件在`childrenList`的路径信息
@@ -24,6 +25,7 @@ import recorder from "./recorder";
 export function computedPath(childrenList, indexInParent = []) {
   return childrenList.map((v, index) => {
     v.path = [...indexInParent, index];
+    console.log("🚀 ~ file: store.js:28 ~ returnchildrenList.map ~ v.path:", v.path)
     if (Array.isArray(v.childrenList)) {
       v.childrenList = computedPath(v.childrenList, v.path);
     }

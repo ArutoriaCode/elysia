@@ -9,8 +9,10 @@
         :list="widgetList"
         :move="checkMove"
         :disabled="isViewStatus"
-        @add="onDragAdd"
+        :component-data="{ parent: store }"
         item-key="id"
+        @add.stop="onAdd"
+        @end.stop="onEnd"
       >
         <!-- :is="elysia-xxx" 加上一个前缀，免得一些命名会被当做内置标签渲染 比如: button input -->
         <template #item="{ element: widget }">
@@ -23,17 +25,26 @@
 
 <script setup>
 import draggable from 'vuedraggable'
-import store from './core/store'
+import store, { computedPath } from './core/store'
 import { checkMove } from './core/move'
 import { setSelected } from './core/select'
-import { computed } from 'vue'
+import { computed, nextTick } from 'vue'
 import recorder, { isViewStatus } from './core/recorder'
 
 const widgetList = computed(() => store.childrenList)
-const onDragAdd = evt => {
-  setSelected(evt.newIndex)
+const onAdd = evt => {
+  store.childrenList = computedPath(store.childrenList)
+
   const { name, nameAlias } = evt.item._underlying_vm_
   recorder.add(`添加${nameAlias || name}组件`, 'history-add-icon')
+  nextTick(() => {
+    setSelected(evt.newIndex)
+  })
+}
+
+const onEnd = evt => {
+  console.log('onEnd -------------------->', evt)
+  store.childrenList = computedPath(store.childrenList)
 }
 </script>
 

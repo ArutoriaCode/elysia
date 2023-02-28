@@ -7,11 +7,8 @@ import { computedPath } from "./store";
 export function checkMove(evt) {
   // _underlying_vm_ 是经过克隆函数后的响应式对象，也是最终要加入到拖拽目标所绑定的响应式列表
   const { _underlying_vm_: vm } = evt.dragged;
-  const { futureIndex } = evt.draggedContext;
-  const { component } = evt.relatedContext;
 
-  const { path = [] } = component.componentData || {};
-  vm.path = [...path, futureIndex]; // 记录各自在chilrenList列表的索引位置
+  vm.path = []; // 记录各自在chilrenList列表的索引位置
 
   // pass
   return true;

@@ -1,5 +1,5 @@
 <template>
-  <draggable
+  <v-draggable
     v-bind="$attrs"
     :handle="handle"
     :move="checkMove"
@@ -8,22 +8,26 @@
     :group="group"
     :ghostClass="ghostClass"
     :animation="animation"
-    :component-data="{ path: widget.path }"
+    :component-data="{ parent: widget }"
     :item-key="itemKey"
     :disabled="isViewStatus"
-    @add="onAdd"
+    @add.stop="onAdd"
+    @end.stop="onEnd"
   >
     <template v-for="slot in Object.keys($slots)" v-slot:[slot]="scope">
       <slot :name="slot" v-bind="scope" />
     </template>
-  </draggable>
+  </v-draggable>
 </template>
 <script setup>
-import draggable from 'vuedraggable'
+import vDraggable from 'vuedraggable'
 import { checkMove } from '../core/move'
 import { clone } from '../core/clone'
 import { setSelected } from '../core/select'
 import recorder, { isViewStatus } from '../core/recorder'
+import { nextTick } from 'vue'
+import { computedPath } from '../core/store'
+import store from '@/designer/core/store.js';
 
 const props = defineProps({
   list: {
@@ -59,25 +63,19 @@ const props = defineProps({
 })
 
 const onAdd = evt => {
-  const { path, nameAlias } = props.widget
-  const widget = setSelected([...path, evt.newIndex])
-  recorder.add(`向${nameAlias}组件插入${widget.nameAlias}组件`, 'history-add-icon')
+  store.childrenList = computedPath(store.childrenList)
+  nextTick(() => {
+    const { path, nameAlias } = props.widget
+    const widget = setSelected([...path, evt.newIndex])
+    recorder.add(
+      `向${nameAlias}组件插入${widget.nameAlias}组件`,
+      'history-add-icon'
+    )
+  })
+}
 
 const onEnd = evt => {
   console.log('onEnd -------------------->', evt)
-  const fromData = evt.from.__draggable_component__.componentData;
-  const toData = evt.to.__draggable_component__.componentData;
-
-  if (fromData && fromData.parent) {
-    fromData.parent.childrenList = computedPath(
-      fromData.parent.childrenList,
-      fromData.parent.path
-    );
-  }
-
-  toData.parent.childrenList = computedPath(
-    toData.parent.childrenList,
-    toData.parent.path
-  );
+  store.childrenList = computedPath(store.childrenList)
 }
 </script>
