@@ -15,6 +15,7 @@ export const seletedSchema = shallowRef({});
  * @returns {null | { id: string; name: string; path: string; childrenList?: []}} 返回null 或者 选中的组件（响应式对象）
  */
 export function setSelected(value) {
+  console.log("🚀 ~ file: select.js:18 ~ setSelected ~ value:", value)
   if (value === undefined || value === null) {
     seletedSchema.value = {};
     return value;

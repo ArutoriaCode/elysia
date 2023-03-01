@@ -3,17 +3,15 @@ import { findParent } from "./find";
 import { setSelected } from "./select";
 import { computedPath } from "./store";
 import recorder from "./recorder";
-import useAlias from "../hooks/useAlias";
 
 /** 复制当前组件 */
 export default function copy(widget) {
   const { path = [], nameAlias } = widget;
   const copyWidget = cloneSchema(widget);
   const parent = findParent(path);
-  const newChildrenList = [...parent.childrenList, copyWidget];
-  parent.childrenList = computedPath(newChildrenList, parent.path); // 重新计算路径
+  parent.childrenList = [...parent.childrenList, copyWidget]
+  computedPath(parent); // 重新计算路径
 
   setSelected(copyWidget.path); // 添加后并聚焦
-
   recorder.add(`复制${nameAlias}组件`, "copy-icon");
 }

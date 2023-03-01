@@ -17,14 +17,14 @@ export function find(indexInParentList) {
     indexInParentList = [indexInParentList];
   }
 
-  if (indexInParentList.length === 0) {
-    return store; // 无路经时，默认返回顶层
+  if (indexInParentList.length === 1 && indexInParentList.includes("root")) {
+    return store;
   }
 
   const fullPathList = [];
   indexInParentList.forEach(path => {
-    if (path === undefined) {
-      fullPathList.push("childrenList");
+    if (path === "root") {
+      return;
     } else {
       fullPathList.push("childrenList", path);
     }
@@ -47,8 +47,11 @@ export function findParent(indexInParentList) {
     indexInParentList = indexInParentList.path;
   }
 
-  const isRoot = indexInParentList.length === 1; // 当只有一条路径信息时，则表明当前组件在最顶层了
-  const findPath = isRoot ? [] :  indexInParentList.slice(0, indexInParentList.length - 1);
-  const parentPathList = [...findPath];
-  return find(parentPathList);
+  const isRoot = indexInParentList.length <= 2 && indexInParentList[0] === "root";
+  if (isRoot) {
+    return store;
+  }
+
+  const findPath = indexInParentList.slice(0, indexInParentList.length - 1); // 寻找的是父级，所以去掉本层级的路径
+  return find(findPath);
 }

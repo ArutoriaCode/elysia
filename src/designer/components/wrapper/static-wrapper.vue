@@ -1,10 +1,6 @@
 <template>
-  <div class="static-wrapper">
-    <div
-      class="warapper-slot"
-      :class="{ 'show-shadow': isSelected }"
-      @click.stop="onSetSelect"
-    >
+  <div class="static-wrapper" @click.stop.prevent="onSetSelect">
+    <div :class="{ 'warapper-slot': true, 'show-shadow': isSelected }">
       <slot></slot>
     </div>
     <div class="static-tr" v-if="isSelected">
@@ -17,11 +13,11 @@
       </span>
       <div class="baisc-btns">
         <DragOutlined class="move-area" title="长按拖拽" />
-        <CopyOutlined @click="copy(widget)" title="拷贝组件" />
-        <ArrowUpOutlined @click="upMove(widget)" title="上移组件" />
-        <ArrowDownOutlined @click="downMove(widget)" title="下移组件" />
+        <CopyOutlined @click.stop.prevent="copy(widget)" title="拷贝组件" />
+        <ArrowUpOutlined @click.stop.prevent="upMove(widget)" title="上移组件" />
+        <ArrowDownOutlined @click.stop.prevent="downMove(widget)" title="下移组件" />
         <slot name="custom-bar"></slot>
-        <DeleteFilled @click="remove(widget)" title="删除组件"></DeleteFilled>
+        <DeleteFilled @click.stop.prevent="remove(widget)" title="删除组件"></DeleteFilled>
       </div>
     </div>
   </div>
@@ -56,7 +52,8 @@ const isSelected = computed(() => {
   return selected && selected.id === props.widget.id
 })
 
-const onSetSelect = () => {
+const onSetSelect = evt => {
+  console.log('🚀 ~ file: static-wrapper.vue:56 ~ onSetSelect ~ evt:', evt)
   if (isViewStatus.value) {
     return // 查看记录的历史，不做操作
   }
@@ -65,6 +62,10 @@ const onSetSelect = () => {
     return // 当前已经是选中的状态
   }
 
+  console.log(
+    '🚀 ~ file: static-wrapper.vue:67 ~ onSetSelect ~ props.widget:',
+    props.widget
+  )
   setSelected(props.widget)
 }
 </script>

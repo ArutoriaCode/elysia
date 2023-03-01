@@ -4,34 +4,20 @@ import recorder from "./recorder";
 import cloneDeep from "lodash.clonedeep";
 
 /**
- * 重新计算某个组件在`childrenList`的路径信息
- *
- * 使用示例：
- * ```javascript
- * import store from 'path/store';
- *
- * const newWidget = { ...省略 } // 要存储到 设计器渲染响应式对象 的数据
- *
- * const { path, childrenList } = store
- * store.childrenList = computedPath([...childrenList, newWidget], path) // 重新计算路径
- *
- * // 假设 store.childrenList = [{ childrenList: [{ childrenList: [], ...省略 }] }]
- * const { path, childrenList } = store.childrenList[0]
- *
- * // 同样要重新计算路径
- * store.childrenList[0].childrenList = computedPath([...childrenList, newWidget], path)
- * ```
+ * 回显`schemaJson`时调用
  */
-export function computedPath(childrenList, indexInParent = []) {
-  return childrenList.map((v, index) => {
-    v.path = [...indexInParent, index];
-    console.log("🚀 ~ file: store.js:28 ~ returnchildrenList.map ~ v.path:", v.path)
-    if (Array.isArray(v.childrenList)) {
-      v.childrenList = computedPath(v.childrenList, v.path);
-    }
+export function computedPath(widget) {
+  function _computed(childrenList, parentPath) {
+    return childrenList.map((v, index) => {
+      v.path = [...parentPath, index];
+      if (Array.isArray(v.childrenList)) {
+        _computed(v.childrenList, v.path);
+      }
+    });
+  }
 
-    return isReactive(v) ? v : reactive(v);
-  });
+  const indexInParent = widget.path || [];
+  _computed(widget.childrenList, indexInParent);
 }
 
 const defaultGlobalOptions = {
@@ -47,7 +33,7 @@ const schemaJson = reactive({
   id: uuidv4(),
   name: "a-form",
   childrenList: [],
-  path: [],
+  path: ["root"],
   options: { ...defaultGlobalOptions }
 });
 

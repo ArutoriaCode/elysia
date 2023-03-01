@@ -1,14 +1,12 @@
 <template>
-  <div class="widget-button">
-    <static-wrapper :widget="widget">
-      <a-button :type="widget.options.type">
-        {{  widget.options.text  }}
-      </a-button>
-    </static-wrapper>
-  </div>
+  <static-wrapper :widget="widget">
+    <a-button :type="widget.options.type">
+      {{ widget.options.text }}
+    </a-button>
+  </static-wrapper>
 </template>
 <script setup>
-import staticWrapper from '@/designer/components/wrapper/static-wrapper.vue';
+import staticWrapper from '@/designer/components/wrapper/static-wrapper.vue'
 defineProps({
   widget: Object
 })

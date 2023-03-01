@@ -55,7 +55,7 @@ export function clone(widget) {
   cloneWidget.id = uuidV4(); // id 必须重新生成并覆盖
 
   cloneWidget.options = {
-    field: cloneWidget.name + Math.round(Math.random() * 1000 * Math.random()) * 5, // 唯一字段标识
+    field: cloneWidget.name + Math.round(Math.random() * 100 * Math.random()) * 5, // 唯一字段标识
     ...(cloneWidget.options || {})
   };
 

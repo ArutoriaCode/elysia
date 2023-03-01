@@ -9,12 +9,13 @@
       <draggable
         tag="ul"
         class="widget-ul"
+        item-key="id"
         :list="containersSchema"
         :group="{ name: 'dragGroup', pull: 'clone', put: false }"
         :move="checkMove"
         :clone="clone"
         :sort="false"
-        item-key="id"
+        @end="onEndMove"
       >
         <template #item="{ element: widget, index }">
           <li
@@ -34,12 +35,13 @@
       <draggable
         tag="ul"
         class="widget-ul"
+        item-key="id"
         :list="fieldsSchema"
         :group="{ name: 'dragGroup', pull: 'clone', put: false }"
-        :move="checkMove"
         :clone="clone"
         :sort="false"
-        item-key="id"
+        :move="checkMove"
+        @end="onEndMove"
       >
         <template #item="{ element: widget, index }">
           <li
@@ -63,14 +65,25 @@ import store from '@/designer/core/store.js'
 import { clone } from '@/designer/core/clone.js'
 import { checkMove } from '@/designer/core/move.js'
 import { containersSchema, fieldsSchema } from '@/designer/core/schema/index.js'
-import { ref } from 'vue'
-import { computedPath } from '../core/store'
+import { setSelected } from '@/designer/core/select.js'
+import { ref } from 'vue';
+import recorder from '../core/recorder'
 
 const activeKey = ref(['1', '2'])
 
 const onPushComponent = widget => {
+  const indexInParent = store.childrenList.length - 1
+  widget.path = [indexInParent < 0 ? 0 : indexInParent]
   store.childrenList.push(widget)
-  computedPath(store.childrenList)
+}
+
+const onEndMove = evt => {
+  // 左侧栏无法移动，所以不需要计算拖拽来源的路径信息
+  const toData = evt.to.__draggable_component__.componentData
+  const parentPathList = toData.index
+  const vm = evt.item._underlying_vm_
+  vm.path = [...parentPathList, evt.newIndex]
+  setSelected(vm.path)
 }
 </script>
 <style lang="less">
