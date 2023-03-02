@@ -11,7 +11,7 @@
     :component-data="{ index: widget.path, type: widget.name }"
     :item-key="itemKey"
     :disabled="isViewStatus"
-    @end.stop.prevent="onEndMove"
+    @end="onEndMove"
   >
     <!-- 传递插槽需要有个dom包括着，否则draggable在获取item插槽无法拿到对应dom节点，从而导致无法拖动 -->
     <template #item="scope">
@@ -76,10 +76,5 @@ const onEndMove = evt => {
   vm.path = [...parentPathList, evt.newIndex]
 
   setSelected(vm.path)
-}
-</script>
-<script>
-export default {
-  inheritAttrs: false
 }
 </script>
