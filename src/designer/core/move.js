@@ -5,7 +5,6 @@ import { computedPath } from "./store";
 
 /** 校验当前组件是否允许拖到目标组件下 */
 export function checkMove(evt) {
-  console.log("🚀 ~ file: move.js:8 ~ checkMove ~ evt:", evt)
   // pass
   return true;
 }

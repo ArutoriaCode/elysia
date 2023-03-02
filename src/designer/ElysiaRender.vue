@@ -16,7 +16,7 @@
         :list="widgetList"
         :move="checkMove"
         :disabled="isViewStatus"
-        :component-data="{ index: store.path, type: 'root-form' }"
+        :component-data="{ index: store.path }"
         @end="onEndMove"
       >
         <!-- :is="elysia-xxx" 加上一个前缀，免得一些命名会被当做内置标签渲染 比如: button input -->
@@ -40,19 +40,48 @@ import { find } from './core/find'
 const widgetList = computed(() => store.childrenList)
 
 const onEndMove = evt => {
-  // vm 响应式对象
   const vm = evt.item._underlying_vm_
-  if (evt.to !== evt.from) {
-    // 不同容器内的子组件的拖拽，被拖拽过来的组件其容器内的子组件都需要重新计算路径
-    const parent = evt.from.__draggable_component__.componentData
-    computedPath(find(parent.index))
-  } else {
-    // 容器内排序
-    const toData = evt.to.__draggable_component__.componentData
-    vm.path = [...toData.index, evt.newIndex]
+
+  const { to, from } = evt
+  const toData = evt.to.__draggable_component__.componentData
+  const fromData = evt.from.__draggable_component__.componentData
+  const targetIsRoot =
+    toData.index.length === 1 && toData.index.includes('root')
+
+  if (to !== from && targetIsRoot) {
+    // 如果拖拽的目标是最外层，就没必要再计算拖拽源头的路径信息了，因为整个数据包括源头都会被重新计算
+    computedPath(store)
+    recorder.add(`${fromData.name}拖拽至顶层`, 'sort-icon')
+    setSelected(vm.path)
+    return
   }
 
-  // 通过`computedPath` 或 `vm.path = [...toData.index, evt.newIndex]`重新计算了路径信息
+  const fromIsRoot =
+    fromData.index.length === 1 && fromData.index.includes('root')
+  if (fromIsRoot) {
+    computedPath(store)
+    nextTick(() => {
+      const parentPathList = evt.to.__draggable_component__.componentData.index // 变量重新指向最新路径信息
+      vm.path = [...parentPathList, evt.newIndex]
+    })
+
+    recorder.add(`${vm.nameAlias}拖拽至${toData.name}组件`, 'sort-icon')
+    return
+  }
+
+  if (to !== from) {
+    // 重新计算拖拽源头的容器下的所有子组件路径信息
+    const parent = find(fromData.index)
+    computedPath(parent)
+  }
+
+  nextTick(() => {
+    const parentPathList = evt.to.__draggable_component__.componentData.index // 变量重新指向最新路径信息
+    vm.path = [...parentPathList, evt.newIndex]
+  })
+
+  recorder.add(`${from.nameAlias}拖拽至${toData.name}组件`, 'sort-icon')
+
   setSelected(vm.path)
 }
 </script>

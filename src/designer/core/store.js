@@ -2,6 +2,7 @@ import { reactive, isReactive, shallowRef, computed } from "vue";
 import { v4 as uuidv4 } from "uuid";
 import recorder from "./recorder";
 import cloneDeep from "lodash.clonedeep";
+import { CONTAINER_TYPE } from "../utils/helper";
 
 /**
  * 回显`schemaJson`时调用
@@ -10,13 +11,13 @@ export function computedPath(widget) {
   function _computed(childrenList, parentPath) {
     return childrenList.map((v, index) => {
       v.path = [...parentPath, index];
-      if (Array.isArray(v.childrenList)) {
+      if (v.type === CONTAINER_TYPE && Array.isArray(v.childrenList)) {
         _computed(v.childrenList, v.path);
       }
     });
   }
 
-  const indexInParent = widget.path || [];
+  const indexInParent = widget.path || ['root'];
   _computed(widget.childrenList, indexInParent);
 }
 

@@ -53,7 +53,6 @@ const isSelected = computed(() => {
 })
 
 const onSetSelect = evt => {
-  console.log('🚀 ~ file: static-wrapper.vue:56 ~ onSetSelect ~ evt:', evt)
   if (isViewStatus.value) {
     return // 查看记录的历史，不做操作
   }
@@ -62,10 +61,6 @@ const onSetSelect = evt => {
     return // 当前已经是选中的状态
   }
 
-  console.log(
-    '🚀 ~ file: static-wrapper.vue:67 ~ onSetSelect ~ props.widget:',
-    props.widget
-  )
   setSelected(props.widget)
 }
 </script>

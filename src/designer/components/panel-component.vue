@@ -66,8 +66,9 @@ import { clone } from '@/designer/core/clone.js'
 import { checkMove } from '@/designer/core/move.js'
 import { containersSchema, fieldsSchema } from '@/designer/core/schema/index.js'
 import { setSelected } from '@/designer/core/select.js'
-import { ref } from 'vue';
+import { ref, nextTick } from 'vue'
 import recorder from '../core/recorder'
+import { computedPath } from '../core/store'
 
 const activeKey = ref(['1', '2'])
 
@@ -78,12 +79,29 @@ const onPushComponent = widget => {
 }
 
 const onEndMove = evt => {
+  if (evt.to === evt.from) {
+    return
+  }
+
   // 左侧栏无法移动，所以不需要计算拖拽来源的路径信息
-  const toData = evt.to.__draggable_component__.componentData
-  const parentPathList = toData.index
   const vm = evt.item._underlying_vm_
-  vm.path = [...parentPathList, evt.newIndex]
-  setSelected(vm.path)
+
+  const toData = evt.to.__draggable_component__.componentData
+  const action = toData.name
+    ? `向${toData.name}组件插入${vm.nameAlias || vm.name}组件`
+    : `添加${vm.nameAlias}组件`
+
+  recorder.add(action, 'history-add-icon')
+  const isRoot = toData.index.length === 1 && toData.index.includes('root')
+  if (isRoot) {
+    computedPath(store)
+  }
+
+  nextTick(() => {
+    const parentPathList = evt.to.__draggable_component__.componentData.index
+    vm.path = [...parentPathList, evt.newIndex]
+    setSelected(vm.path)
+  })
 }
 </script>
 <style lang="less">
