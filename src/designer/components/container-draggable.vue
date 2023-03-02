@@ -13,8 +13,11 @@
     :disabled="isViewStatus"
     @end.stop.prevent="onEndMove"
   >
-    <template v-for="slotKey in Object.keys($slots)" v-slot:[slotKey]="scope">
-      <slot :name="slotKey" v-bind="scope" />
+    <!-- 传递插槽需要有个dom包括着，否则draggable在获取item插槽无法拿到对应dom节点，从而导致无法拖动 -->
+    <template #item="scope">
+      <div :id="scope.element.id">
+        <slot v-bind="scope"></slot>
+      </div>
     </template>
   </draggable>
 </template>
@@ -73,5 +76,10 @@ const onEndMove = evt => {
   vm.path = [...parentPathList, evt.newIndex]
 
   setSelected(vm.path)
+}
+</script>
+<script>
+export default {
+  inheritAttrs: false
 }
 </script>
