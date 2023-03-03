@@ -1,0 +1,1 @@
+import{s as o}from"./index-beb74ed4.js";import{b6 as c,y as l,k as n}from"./module-@vue-bde5bc49.js";function i(p){const{property:e,propertyCN:r}=c(),a=l(o.value.options,e),t=n([]),s=o.value.selects;return s&&s[e]&&(t.value=s[e]),{property:e,modelValue:a,selectOptions:t,propertyCN:r}}export{i as u};
