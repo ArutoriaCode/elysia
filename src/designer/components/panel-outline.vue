@@ -21,7 +21,7 @@
 import store from '@/designer/core/store.js'
 import useDebounce from '@/designer/hooks/useDebounce'
 import { DownOutlined } from '@ant-design/icons-vue'
-import { watch, computed, shallowRef } from 'vue'
+import { watch, computed, reactive } from 'vue'
 import { setSelected } from '../core/select'
 import { seletedSchema } from '@/designer/core/select.js'
 import { CONTAINER_TYPE } from '../utils/helper'
@@ -55,7 +55,7 @@ function createTree (children) {
   })
 }
 
-const outlineTree = shallowRef([
+const outlineTree = reactive([
   {
     title: '表单',
     key: store.id,
@@ -65,10 +65,12 @@ const outlineTree = shallowRef([
 ])
 
 const updateTree = useDebounce(childrenList => {
-  outlineTree.children = createTree(childrenList)
-}, 300)
+  const children = createTree(childrenList)
 
-watch(store.childrenList, updateTree)
+  outlineTree[0].children = children
+}, 800)
+
+watch(store.childrenList, updateTree, { deep: true })
 
 function onSelect (selectedKeys, { node }) {
   if (node.parent === undefined) {
@@ -87,8 +89,9 @@ function onSelect (selectedKeys, { node }) {
   .ant-tree-node-content-wrapper {
     display: flex;
     align-items: center;
-    .anticon.elysia-icon {
+    .anticon, .elysia-icon {
       font-size: 16px;
+      color: var(--primary-color) !important;
     }
 
     .ant-tree-title {

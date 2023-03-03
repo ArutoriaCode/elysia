@@ -104,7 +104,7 @@ const onViewRender = () => {
     }
   }
   .elysia-main-content.active-json {
-    padding: 0;
+    padding: 0 !important;
   }
 }
 </style>
