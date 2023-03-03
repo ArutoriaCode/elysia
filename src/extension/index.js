@@ -2,8 +2,7 @@ const extension = import.meta.glob("./**/index.js", { eager: true });
 export default {
   install: app => {
     Object.keys(extension).forEach(key => {
-      const name = key.replace(/\.\/(.*?)\/index\.js/, "elysia-$1");
-      app.component(name, extension[key].default)
-    })
+      app.use(extension[key].default);
+    });
   }
 };

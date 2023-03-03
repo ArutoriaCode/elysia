@@ -1,6 +1,6 @@
 import { seletedSchema } from "@/designer/core/select.js";
 import { useAttrs, toRef, ref } from "vue";
-export default function () {
+export default function (cb) {
   const { property, propertyCN } = useAttrs();
   const modelValue = toRef(seletedSchema.value.options, property);
 
@@ -10,6 +10,5 @@ export default function () {
     selectOptions.value = selects[property];
   }
 
-  // 后续property根据字典转换为中文
   return { property, modelValue, selectOptions, propertyCN };
 }

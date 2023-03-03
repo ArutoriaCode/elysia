@@ -117,7 +117,7 @@ const onEndMove = evt => {
     margin: 0;
     padding: 0;
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
   }
   .widget-item {
     min-width: 84px;
@@ -125,12 +125,12 @@ const onEndMove = evt => {
     padding: 0 12px;
     line-height: 40px;
     text-align: center;
-    border-radius: 6px;
+    border-radius: 8px;
     border: 1px solid var(--info-color);
     color: var(--info-color);
     list-style: none;
     cursor: grab;
-    margin: 0 4px 4px 0;
+    margin: 0 8px 4px 0;
     font-size: 15px;
     display: flex;
     align-items: center;

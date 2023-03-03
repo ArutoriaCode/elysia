@@ -79,6 +79,7 @@ const activeKeys = computed({
   .menu-header {
     .menu-header-title {
       color: var(--primary-color);
+      font-weight: bold;
     }
   }
 

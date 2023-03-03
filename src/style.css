@@ -8,10 +8,10 @@ body {
 }
 
 :root {
-  --primary-color: #e98add;
-  --primary-color-2: #f9cdf1;
-  --primary-color-3: #fae9f7;
-  --info-color: #e98add;
+  --primary-color: #2e86de;
+  --primary-color-2: #6aa3db;
+  --primary-color-3: #91b6db;
+  --info-color: #2e86de;
   --scrollbar-color: #929292;
   --border-color: #fafafa;
   --danger-color: #ec555a;

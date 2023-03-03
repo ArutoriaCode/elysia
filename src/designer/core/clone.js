@@ -1,14 +1,14 @@
 import cloneDeep from "lodash.clonedeep";
 import { v4 as uuidV4 } from "uuid";
-import { CONTAINER_TYPE } from '@/designer/utils/helper'
+import { CONTAINER_TYPE } from "@/designer/utils/helper";
 import { reactive } from "vue";
 import { isObject } from "../utils";
 
 /**
  * 深度克隆组件信息
- * 
+ *
  * TODO: 如果要赋值到设计器渲染响应式对象（store）中，请注意调用`store`中`computedPath`重新计算路径
- * 
+ *
  * @param {{ id: string, name: string; path: string[]; childrenList?: [] } | Array<{ id: string, name: string; path: string[], childrenList?: [] }>} schema 要
  */
 export function cloneSchema(schema) {
@@ -54,10 +54,10 @@ export function clone(widget) {
   const cloneWidget = cloneDeep(widget);
   cloneWidget.id = uuidV4(); // id 必须重新生成并覆盖
 
-  cloneWidget.options = {
-    field: cloneWidget.name + Math.round(Math.random() * 100 * Math.random()) * 5, // 唯一字段标识
-    ...(cloneWidget.options || {})
-  };
+  if (cloneWidget.isFormItem) {
+    cloneWidget.options.field =
+      cloneWidget.name + Math.round(Math.random() * 100 * Math.random()) * 5;
+  }
 
   if (cloneWidget.type === CONTAINER_TYPE && !Array.isArray(cloneWidget.childrenList)) {
     cloneWidget.childrenList = []; // 容器组件如未定义子组件列表，自动定义

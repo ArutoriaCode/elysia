@@ -14,7 +14,8 @@ const aliasDict = reactive({
   },
   [PANEL_COMPONENT]: {
     card: "卡片",
-    button: "按钮"
+    button: "按钮",
+    text: '文本'
   }
 });
 
