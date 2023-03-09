@@ -1,5 +1,8 @@
 <template>
-  <div class="elysia-panel">
+  <div
+    class="elysia-panel"
+    :class="{ fixed: config.panelFixed, 'hidden-panel': config.hiddenPanel }"
+  >
     <a-menu
       v-model:selectedKeys="activeKeys"
       mode="vertical"
@@ -9,6 +12,7 @@
         :key="key"
         :title="menu.title"
         v-for="(menu, key) in menuItems"
+        @click="setPanelVisible(true)"
       >
         <component :is="menu.icon"></component>
       </a-menu-item>
@@ -16,7 +20,14 @@
     <div class="menu-content">
       <div class="menu-header">
         <h2 class="menu-header-title">{{ menuItems[selectedKey].title }}</h2>
-        <div class="menu-header-actions"></div>
+        <div class="menu-header-actions">
+          <pushpin-filled
+            v-if="config.panelFixed"
+            @click="setPanelFixed(false)"
+          />
+          <pushpin-outlined v-else @click="setPanelFixed(true)" />
+          <close-outlined @click="setPanelVisible(false)" />
+        </div>
       </div>
       <div class="menu-body">
         <panel-component v-show="selectedKey === '1'"></panel-component>
@@ -28,7 +39,13 @@
 </template>
 
 <script setup>
+import {
+  PushpinFilled,
+  PushpinOutlined,
+  CloseOutlined
+} from '@ant-design/icons-vue'
 import { ref, computed, defineAsyncComponent } from 'vue'
+import config, { setPanelFixed, setPanelVisible } from '~core/config.js'
 const panelComponent = defineAsyncComponent(() =>
   import('./components/panel-component.vue')
 )
@@ -44,6 +61,7 @@ const menuItems = {
   2: { title: '大纲', icon: 'bars-staggered-icon' },
   3: { title: '历史', icon: 'history-icon' }
 }
+
 const selectedKey = ref('1')
 const activeKeys = computed({
   set (value) {
@@ -57,6 +75,11 @@ const activeKeys = computed({
 
 <style lang="less">
 .elysia-panel {
+  height: 100%;
+  width: 20vw;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
   .elysia-menu {
     height: 100%;
     &.ant-menu-inline-collapsed {
@@ -66,25 +89,20 @@ const activeKeys = computed({
     .ant-menu-item {
       // padding: 0 12px !important;
       text-align: center;
-      height: 52px;
+      height: 49px;
       line-height: 56px;
       margin: 0 !important;
-
       span.anticon.elysia-icon {
         font-size: 24px;
       }
     }
   }
 
-  .menu-header {
-    .menu-header-title {
-      color: var(--primary-color);
-      font-weight: bold;
-    }
-  }
-
   .menu-content {
-    width: calc(100% - 57px);
+    background-color: #fff;
+    width: calc(100% - 56px);
+    height: 100%;
+    border-right: 1px solid var(--primary-color);
     .menu-header {
       padding: 10px 15px;
       display: flex;
@@ -92,6 +110,8 @@ const activeKeys = computed({
       justify-content: space-between;
       border-bottom: 1px solid var(--border-color);
       &-title {
+        color: var(--primary-color);
+        font-weight: bold;
         margin: 0;
         font-size: 20px;
       }
@@ -99,6 +119,22 @@ const activeKeys = computed({
       &-actions {
         display: flex;
         align-items: center;
+        color: var(--primary-color);
+        .anticon {
+          cursor: pointer;
+          padding: 4px;
+          transition: transform 0.4s;
+          font-size: 16px;
+          & + .anticon {
+            margin-left: 4px;
+          }
+          &:hover {
+            transform: scale(1.4);
+          }
+          &.anticon-close:hover {
+            transform: rotate(180deg);
+          }
+        }
       }
     }
 
@@ -106,6 +142,26 @@ const activeKeys = computed({
       width: 100%;
       max-height: calc(100vh - 54px);
       overflow: auto;
+    }
+  }
+
+  &.fixed {
+    width: 56px;
+    .menu-content {
+      position: fixed;
+      left: 56px;
+      width: calc(20vw - 56px);
+    }
+  }
+
+  &.hidden-panel {
+    width: 56px !important;
+    .ant-menu.ant-menu-root {
+      border-right: 1px solid var(--primary-color);
+    }
+    .menu-header,
+    .menu-content {
+      display: none;
     }
   }
 }

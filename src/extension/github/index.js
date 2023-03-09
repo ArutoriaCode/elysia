@@ -16,7 +16,7 @@ Github.install = app => {
       // 注册组件的名称（前面还会拼上 ‘elysia-’ 哦~）
       name: Github.name,
       // 组件栏中别名（展示中文）
-      nameAlias: useAlias([COMMON_KEY_NAME, Github.name], 'Github'),
+      nameAlias: useAlias([COMMON_KEY_NAME, Github.name], "Github"),
       type: FIELD_TYPE,
       // 可导入图标组件或者已经全局注册的组件名称
       icon: defineAsyncComponent(() => import("@ant-design/icons-vue/GithubOutlined")),
@@ -42,7 +42,9 @@ Github.install = app => {
         // 属性的类型 目前有基础属性以及事件属性
         type: COMMON_KEY_NAME,
         // 自定义属性编辑器组件需要自身导入
-        component: defineAsyncComponent(() => import("./property/input-number.vue"))
+        component: defineAsyncComponent(() => import("./property/input-number.vue")),
+        // useAlias([COMMON_KEY_NAME, 'fontSize', alias])
+        alias: '字体大小'
       }
     }
   );

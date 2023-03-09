@@ -1,5 +1,6 @@
 import { isObject } from "@/designer/utils";
 import { PROPERTYS } from "@/designer/utils/helper";
+import useAlias from "../../designer/hooks/useAlias";
 
 /**
  * 注册组件并处理schema中的一些情况
@@ -19,12 +20,15 @@ export default function (app, component, schemaJson, propertys = {}) {
   }
 
   Object.keys(propertys).forEach(key => {
-    const { name, type, component } = propertys[key];
+    const { name, type, component, alias } = propertys[key];
     if (component) {
       app.component(name, component);
     }
 
     PROPERTYS[type][key] = name;
+    if (alias) {
+      useAlias([type, key], alias);
+    }
   });
 
   return schemaJson;

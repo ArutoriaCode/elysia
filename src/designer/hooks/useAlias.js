@@ -1,4 +1,5 @@
 import get from "lodash.get";
+import set from "lodash.set";
 import { reactive } from "vue";
 import { COMMON_KEY_NAME, EVENT_KEY_NAME, PANEL_COMPONENT } from "../utils/helper";
 
@@ -15,7 +16,7 @@ const aliasDict = reactive({
   [PANEL_COMPONENT]: {
     card: "卡片",
     button: "按钮",
-    text: '文本'
+    text: "文本"
   }
 });
 
@@ -24,39 +25,18 @@ const aliasDict = reactive({
  * @param {string} value 传值则新增或覆盖
  */
 export default function useAlias(key, value) {
+  let targetPath = key;
+  let defaultValue = key;
+
+  if (Array.isArray(key)) {
+    defaultValue = [...key].pop();
+  }
+
   // 无设置的值则为取值
   if (!value) {
-    let defaultValue = "";
-    if (key === "string") {
-      defaultValue = key;
-    }
-
-    if (Array.isArray(key)) {
-      defaultValue = [...key].pop();
-    }
-
-    return get(aliasDict, key, defaultValue);
+    return get(aliasDict, targetPath, defaultValue);
   }
 
-  // 赋值
-  if (typeof key === "string") {
-    aliasDict[key] = value;
-    return;
-  }
-
-  if (!Array.isArray(key)) {
-    return;
-  }
-
-  let setValue = null;
-  key.map(k => {
-    if (setValue) {
-      setValue = setValue[key];
-      return;
-    }
-    setValue = aliasDict[key];
-  });
-
-  setValue = value;
-  return value;
+  set(aliasDict, key, value || defaultValue);
+  return value || defaultValue;
 }

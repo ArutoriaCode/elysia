@@ -83,6 +83,8 @@ const onViewRender = () => {
 <style lang="less">
 .elysia-main {
   .elysia-toolbar {
+    width: 100%;
+    height: 48px;
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -23,7 +23,7 @@ const fields = [
     icon: "text-icon", // from icons/
     options: {
       text: "文本",
-      hidden: "按钮"
+      hidden: false
     }
   }
 ];

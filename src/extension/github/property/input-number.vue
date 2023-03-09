@@ -7,7 +7,7 @@
   </a-form-item>
 </template>
 <script setup>
-import useDefineModel from '@property/useDefineModel.js'
+import useDefineModel from '~property/useDefineModel.js'
 import { seletedSchema } from '@/designer/core/select.js'
 import { ref } from 'vue'
 

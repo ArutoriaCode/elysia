@@ -10,7 +10,7 @@
         <elysia-builds v-show="active === 'builds'" />
       </elysia-toolbar>
     </div>
-    <div class="aside-wrapper settings" :style="settingStyle">
+    <div class="aside-wrapper settings">
       <elysia-setting></elysia-setting>
     </div>
   </div>
@@ -23,18 +23,23 @@ import ElysiaToolbar from './ElysiaToolbar.vue'
 import ElysiaJson from './ElysiaJson.vue'
 import ElysiaBuilds from './ElysiaBuilds.vue'
 import { ref, computed } from 'vue'
+import config from '~core/config.js'
 
 const active = ref('render')
-const mainWrapperStyle = computed(() =>
-  active.value !== 'builds' ? { width: '55vw' } : { width: '80vw' }
-)
-
-const settingStyle = computed(() => {
+const mainWrapperStyle = computed(() => {
+  let width = 80
   if (active.value !== 'builds') {
-    return { width: '25vw' }
+    width = 55
   }
 
-  return { width: 0, display: 'none' }
+  if (config.hiddenPanel || config.panelFixed === true) {
+    width += 20
+  }
+  if (config.hiddenSetting || config.settingFixed === true) {
+    width += 25
+  }
+
+  return { width: width + 'vw' }
 })
 </script>
 <style lang="less">
@@ -45,21 +50,7 @@ body {
   display: flex;
   flex-direction: row;
 
-  .elysia-panel {
-    height: 100%;
-    width: 20vw;
-    display: flex;
-    flex-direction: row;
-    border-right: 1px solid var(--primary-color);
-  }
-
-  .elysia-toolbar {
-    width: 100%;
-    height: 48px;
-  }
-
   .main-wrapper {
-    transition: width 0.3s;
     .elysia-main-content {
       padding: 24px;
       height: calc(100vh - 48px); // 48px = .elysia-toolbar height
@@ -71,11 +62,6 @@ body {
 
   .aside-wrapper.settings {
     transition: width 0.3s;
-    .elysia-setting {
-      height: 100vh;
-      width: 100%;
-      border-left: 1px solid var(--primary-color);
-    }
   }
 }
 </style>
