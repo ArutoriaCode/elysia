@@ -59,9 +59,11 @@ import recorder, { historys } from '../core/recorder'
     .ant-list-item-meta-avatar {
       margin-right: 0;
       padding: 0 12px 0 24px;
-      .anticon, .anticon.elysia-icon {
+      .anticon,
+      .anticon.elysia-icon {
         font-size: 20px;
         transition: transform 0.42s;
+        color: var(--primary-color);
       }
     }
     .ant-list-item-meta-content {
