@@ -171,13 +171,14 @@ watch(
 
 .show-setting-box {
   position: fixed;
+  z-index: 100;
   top: 50%;
   right: 0;
   transform: translateY(-50%);
   background-color: #fff;
   border: 1px solid var(--primary-color);
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
   width: 42px;
   height: 42px;
   display: flex;

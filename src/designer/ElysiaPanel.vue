@@ -149,6 +149,7 @@ const activeKeys = computed({
     width: 56px;
     .menu-content {
       position: fixed;
+      z-index: 100;
       left: 56px;
       width: calc(20vw - 56px);
     }

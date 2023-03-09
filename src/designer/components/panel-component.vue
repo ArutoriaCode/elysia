@@ -121,16 +121,16 @@ const onEndMove = evt => {
   }
   .widget-item {
     min-width: 84px;
-    height: 40px;
-    padding: 0 12px;
-    line-height: 40px;
+    height: 36px;
+    padding: 0 8px;
+    line-height: 36px;
     text-align: center;
     border-radius: 8px;
     border: 1px solid var(--info-color);
     color: var(--info-color);
     list-style: none;
     cursor: grab;
-    margin: 0 8px 4px 0;
+    margin: 0 6px 6px 0;
     font-size: 15px;
     display: flex;
     align-items: center;
