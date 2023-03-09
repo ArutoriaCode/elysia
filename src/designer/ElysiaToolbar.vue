@@ -5,12 +5,12 @@
         <undo-icon
           title="撤销"
           :class="{ disabled: disabledUndo }"
-          @click="recorder.undo"
+          @click="onUndo"
         ></undo-icon>
         <redo-icon
           title="重做"
           :class="{ disabled: disabledRedo }"
-          @click="recorder.redo"
+          @click="onRedo"
         ></redo-icon>
       </div>
       <div v-else>
@@ -50,7 +50,7 @@ import recorder, {
   disabledUndo,
   disabledRedo
 } from './core/recorder'
-import { computed } from 'vue'
+import { computed, nextTick } from 'vue'
 import { setSelected } from '@/designer/core/select.js'
 
 const props = defineProps({
@@ -90,6 +90,22 @@ const onViewRender = () => {
   viewBuildsJson.value = null
   viewSchemaJson.value = null
   active.value = 'render'
+}
+
+const onUndo = () => {
+  recorder.undo()
+  nextTick(() => {
+    active.value === 'builds' && viewBuilds()
+    active.value === 'json' && viewJson()
+  })
+}
+
+const onRedo = () => {
+  recorder.redo()
+  nextTick(() => {
+    active.value === 'builds' && viewBuilds()
+    active.value === 'json' && viewJson()
+  })
 }
 </script>
 <style lang="less">
