@@ -24,6 +24,8 @@ import ElysiaJson from './ElysiaJson.vue'
 import ElysiaBuilds from './ElysiaBuilds.vue'
 import { ref, computed } from 'vue'
 import config from '~core/config.js'
+import recorder from './core/recorder'
+import { CheckCircleFilled } from '@ant-design/icons-vue'
 
 const active = ref('render')
 const mainWrapperStyle = computed(() => {
@@ -41,6 +43,8 @@ const mainWrapperStyle = computed(() => {
 
   return { width: width + 'vw' }
 })
+
+recorder.add('初始化缺省记录', CheckCircleFilled)
 </script>
 <style lang="less">
 body {

@@ -2,8 +2,16 @@
   <div class="elysia-main">
     <div class="elysia-toolbar">
       <div v-if="!isViewStatus">
-        <undo-icon title="撤销"></undo-icon>
-        <redo-icon title="重做"></redo-icon>
+        <undo-icon
+          title="撤销"
+          :class="{ disabled: disabledUndo }"
+          @click="recorder.undo"
+        ></undo-icon>
+        <redo-icon
+          title="重做"
+          :class="{ disabled: disabledRedo }"
+          @click="recorder.redo"
+        ></redo-icon>
       </div>
       <div v-else>
         <restore-icon title="还原" @click="recorder.restore"></restore-icon>
@@ -37,9 +45,13 @@ import {
   viewBuildsJson,
   viewSchemaJson
 } from './core/store'
-import recorder, { isViewStatus } from './core/recorder'
+import recorder, {
+  isViewStatus,
+  disabledUndo,
+  disabledRedo
+} from './core/recorder'
 import { computed } from 'vue'
-import { setSelected } from '@/designer/core/select.js';
+import { setSelected } from '@/designer/core/select.js'
 
 const props = defineProps({
   modelValue: String
@@ -102,6 +114,16 @@ const onViewRender = () => {
       }
       &:active {
         transform: scale(1.1);
+      }
+
+      &.disabled {
+        color: #bbbbbb !important;
+        &:hover {
+          transform: scale(1);
+        }
+        &:active {
+          transform: scale(1);
+        }
       }
     }
   }

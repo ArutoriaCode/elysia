@@ -18,7 +18,7 @@
   </div>
 </template>
 <script setup>
-import store from '@/designer/core/store.js'
+import store from '~core/store.js'
 import useDebounce from '@/designer/hooks/useDebounce'
 import { DownOutlined } from '@ant-design/icons-vue'
 import { watch, computed, reactive } from 'vue'
@@ -70,7 +70,15 @@ const updateTree = useDebounce(childrenList => {
   outlineTree[0].children = children
 }, 800)
 
-watch(store.childrenList, updateTree, { deep: true })
+watch(
+  () => store.childrenList,
+  (value, oldValue) => {
+    console.log('value', value)
+    console.log('oldValue', oldValue)
+    updateTree(value)
+  },
+  { deep: true }
+)
 
 function onSelect (selectedKeys, { node }) {
   if (node.parent === undefined) {
@@ -89,7 +97,8 @@ function onSelect (selectedKeys, { node }) {
   .ant-tree-node-content-wrapper {
     display: flex;
     align-items: center;
-    .anticon, .elysia-icon {
+    .anticon,
+    .elysia-icon {
       font-size: 16px;
       color: var(--primary-color) !important;
     }

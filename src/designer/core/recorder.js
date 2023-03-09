@@ -11,6 +11,14 @@ export const historys = reactive({
 
 const actionStore = shallowRef(null);
 export const isViewStatus = computed(() => actionStore.value !== null);
+export const disabledRedo = computed(
+  () => historys.step === 0 || historys.historyList.length === 0
+);
+export const disabledUndo = computed(() => {
+  const undoStep = historys.step + 1;
+  const maxStep = historys.historyList.length - 1;
+  return undoStep > maxStep;
+});
 
 const recorder = {
   /**
@@ -20,11 +28,12 @@ const recorder = {
    */
   add(action, icon) {
     // 防止记录的历史数据过多
-    if (historys.historyList.length === 10) {
+    if (historys.historyList.length === 20) {
       historys.historyList.pop();
     }
 
     const selected = seletedSchema.value;
+    historys.step = 0;
     historys.historyList.unshift({
       action,
       store: cloneDeep(store),
@@ -42,7 +51,6 @@ const recorder = {
       store[key] = item.store[key];
     });
 
-    store.childrenList = computedPath(store.childrenList);
     setSelected(item.selectedPath);
   },
   restore(record = true) {
@@ -54,6 +62,38 @@ const recorder = {
     if (record) {
       recorder.add("还原", "restore-icon");
     }
+  },
+  redo() {
+    if (disabledRedo.value) {
+      return;
+    }
+
+    const redoStep = historys.step - 1;
+    const redoData = historys.historyList[redoStep];
+    if (!redoData) {
+      return;
+    }
+
+    Object.keys(redoData.store).forEach(key => {
+      store[key] = redoData.store[key];
+    });
+    historys.step = redoStep;
+  },
+  undo() {
+    if (disabledUndo.value) {
+      return;
+    }
+
+    const undoStep = historys.step + 1;
+    const undoData = historys.historyList[undoStep];
+    if (!undoData) {
+      return;
+    }
+
+    Object.keys(undoData.store).forEach(key => {
+      store[key] = undoData.store[key];
+    });
+    historys.step = undoStep;
   }
 };
 
