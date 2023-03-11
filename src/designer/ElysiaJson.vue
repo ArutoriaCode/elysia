@@ -13,7 +13,7 @@ const extensions = [json()]
       :indent-with-tab="true"
       :tab-size="2"
       :extensions="extensions"
-      readonly
+      disabled
     />
   </div>
 </template>

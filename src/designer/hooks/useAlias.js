@@ -11,7 +11,7 @@ const aliasDict = reactive({
     hidden: "隐藏"
   },
   [EVENT_KEY_NAME]: {
-    onClick: "点击触发"
+    onClick: "点击事件"
   },
   [PANEL_COMPONENT]: {
     card: "卡片",

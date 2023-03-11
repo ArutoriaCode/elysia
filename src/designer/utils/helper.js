@@ -22,6 +22,6 @@ export const PROPERTYS = reactive({
     hidden: "switch"
   },
   [EVENT_KEY_NAME]: {
-    onClick: "js-code-editor"
+    onClick: "js-editor"
   }
 });

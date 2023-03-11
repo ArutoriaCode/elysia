@@ -13,9 +13,16 @@
     </component>
   </a-card>
 </template>
-<script setup>
+<script>
 import { getCompName } from '../../utils/helper'
-defineProps({
-  widget: Object
-})
+export default {
+  props: {
+    widget: Object
+  },
+  data () {
+    return {
+      getCompName
+    }
+  }
+}
 </script>

@@ -8,12 +8,16 @@
     <GithubOutlined /> Github
   </a>
 </template>
-<script setup>
+<script>
 import { defineAsyncComponent } from 'vue'
-const GithubOutlined = defineAsyncComponent(() =>
-  import('@ant-design/icons-vue/GithubOutlined')
-)
-defineProps({
-  widget: Object
-})
+export default {
+  components: {
+    GithubOutlined: defineAsyncComponent(() =>
+      import('@ant-design/icons-vue/GithubOutlined')
+    )
+  },
+  props: {
+    widget: Object
+  }
+}
 </script>

@@ -10,7 +10,8 @@ const fields = [
     icon: "button-icon", // from icons/
     options: {
       text: "按钮",
-      type: "default"
+      type: "default",
+      onClick: ""
     },
     selects: {
       type: [{ value: "default" }, { value: "primary" }, { value: "danger" }]

@@ -1,10 +1,21 @@
 <template>
-  <a-button :type="widget.options.type">
+  <a-button :type="widget.options.type" @click="onClick">
     {{ widget.options.text }}
   </a-button>
 </template>
-<script setup>
-defineProps({
-  widget: Object
-})
+<script>
+export default {
+  props: {
+    widget: Object
+  },
+  methods: {
+    onClick () {
+      const { options } = this.widget
+      if (options && options.onClick) {
+        const clickMethod = new Function(options.onClick)
+        clickMethod.call(this)
+      }
+    }
+  }
+}
 </script>

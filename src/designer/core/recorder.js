@@ -42,17 +42,19 @@ const recorder = {
       recordTime: dayjs().format("YY/MM/DD HH:mm:ss")
     });
   },
-  viewHistory(item) {
+  /** 查看预览历史记录 */
+  viewHistory(historyItem) {
     if (!actionStore.value) {
       actionStore.value = cloneDeep(store);
     }
 
-    Object.keys(item.store).forEach(key => {
-      store[key] = item.store[key];
+    Object.keys(historyItem.store).forEach(key => {
+      store[key] = historyItem.store[key];
     });
 
-    setSelected(item.selectedPath);
+    setSelected(historyItem.selectedPath);
   },
+  /** 还原当前选中预览的历史记录 */
   restore(record = true) {
     if (!isViewStatus.value) {
       return;
@@ -63,6 +65,7 @@ const recorder = {
       recorder.add("还原", "restore-icon");
     }
   },
+  /** 重做 */
   redo() {
     if (disabledRedo.value) {
       return;
@@ -77,8 +80,11 @@ const recorder = {
     Object.keys(redoData.store).forEach(key => {
       store[key] = redoData.store[key];
     });
+
+    setSelected(redoData.selectedPath);
     historys.step = redoStep;
   },
+  /** 撤销 */
   undo() {
     if (disabledUndo.value) {
       return;
@@ -93,6 +99,8 @@ const recorder = {
     Object.keys(undoData.store).forEach(key => {
       store[key] = undoData.store[key];
     });
+
+    setSelected(undoData.selectedPath);
     historys.step = undoStep;
   }
 };

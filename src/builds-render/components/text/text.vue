@@ -3,8 +3,10 @@
     {{ widget.options.text }}
   </p>
 </template>
-<script setup>
-defineProps({
-  widget: Object
-})
+<script>
+export default {
+  props: {
+    widget: Object
+  }
+}
 </script>
