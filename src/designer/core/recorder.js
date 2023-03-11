@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import store, { computedPath } from "./store";
+import store from "./store";
 import { reactive, shallowRef, computed } from "vue";
 import { seletedSchema, setSelected } from "./select";
 import cloneDeep from "lodash.clonedeep";

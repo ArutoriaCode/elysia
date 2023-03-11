@@ -14,10 +14,19 @@
       <div class="baisc-btns">
         <DragOutlined class="move-area" title="长按拖拽" />
         <CopyOutlined @click.stop.prevent="copy(widget)" title="拷贝组件" />
-        <ArrowUpOutlined @click.stop.prevent="upMove(widget)" title="上移组件" />
-        <ArrowDownOutlined @click.stop.prevent="downMove(widget)" title="下移组件" />
+        <ArrowUpOutlined
+          @click.stop.prevent="upMove(widget)"
+          title="上移组件"
+        />
+        <ArrowDownOutlined
+          @click.stop.prevent="downMove(widget)"
+          title="下移组件"
+        />
         <slot name="custom-bar"></slot>
-        <DeleteFilled @click.stop.prevent="remove(widget)" title="删除组件"></DeleteFilled>
+        <DeleteFilled
+          @click.stop.prevent="remove(widget)"
+          title="删除组件"
+        ></DeleteFilled>
       </div>
     </div>
   </div>
@@ -63,6 +72,8 @@ const onSetSelect = evt => {
 
   setSelected(props.widget)
 }
+
+setSelected(props.widget)
 </script>
 <style lang="less" scoped>
 .static-wrapper {

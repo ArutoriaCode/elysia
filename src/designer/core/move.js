@@ -1,7 +1,6 @@
 import recorder from "./recorder";
 import cloneDeep from "lodash.clonedeep";
 import { findParent } from "./find";
-import { computedPath } from "./store";
 
 /** 校验当前组件是否允许拖到目标组件下 */
 export function checkMove(evt) {
@@ -23,7 +22,6 @@ export function upMove(widget) {
   newChildrenList.splice(currentIndex, 1); // 从当前数组中删除
   newChildrenList.splice(prevIndex, 0, widget); // 删除后再往前面插入
   parent.childrenList = newChildrenList; // 移动后要重新计算路径信息
-  computedPath(parent); // 移动后要重新计算路径信息
 
   recorder.add(`向上移动 ${nameAlias} 组件`, "history-up-icon");
 }
@@ -42,7 +40,6 @@ export function downMove(widget) {
   newChildrenList.splice(currentIndex, 1); // 从当前数组中删除
   newChildrenList.splice(nextIndex, 0, widget);
   parent.childrenList = newChildrenList;
-  computedPath(parent); // 移动后要重新计算路径信息
 
   recorder.add(`向下移动 ${nameAlias} 组件`, "history-down-icon");
 }
@@ -54,7 +51,6 @@ export function remove(widget) {
   if (parent) {
     const newChildrenList = parent.childrenList.filter(c => c.id !== id);
     parent.childrenList = newChildrenList;
-    computedPath(parent);
 
     recorder.add(`删除${nameAlias}组件`, "minus-icon");
   }

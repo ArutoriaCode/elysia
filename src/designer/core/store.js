@@ -1,24 +1,25 @@
-import { reactive, isReactive, shallowRef, computed } from "vue";
+import { reactive, shallowRef, computed } from "vue";
 import { v4 as uuidv4 } from "uuid";
 import recorder from "./recorder";
 import cloneDeep from "lodash.clonedeep";
-import { CONTAINER_TYPE } from "../utils/helper";
+import { CONTAINER_TYPE, FIELD_TYPE } from "../utils/helper";
+import { isObject } from "../utils";
 
 /**
- * 回显`schemaJson`时调用
+ * 校验schema是否合法，支持单个schema对象或者多个schema对象的数组
  */
-export function computedPath(widget) {
-  function _computed(childrenList, parentPath) {
-    return childrenList.map((v, index) => {
-      v.path = [...parentPath, index];
-      if (v.type === CONTAINER_TYPE && Array.isArray(v.childrenList)) {
-        _computed(v.childrenList, v.path);
-      }
-    });
+export function checkSchema(schema) {
+  if (Array.isArray(schema)) {
+    return schema.every(s => checkSchema(s));
   }
 
-  const indexInParent = widget.path || ['root'];
-  _computed(widget.childrenList, indexInParent);
+  if (!isObject(schema)) {
+    return false;
+  }
+
+  const schemaKeys = ["id", "name", "options", "type"];
+  const valid = schemaKeys.every(key => Reflect.has(schema, key));
+  return valid && [CONTAINER_TYPE, FIELD_TYPE].includes(schema.type);
 }
 
 const defaultGlobalOptions = {
@@ -34,7 +35,7 @@ const schemaJson = reactive({
   id: uuidv4(),
   name: "a-form",
   childrenList: [],
-  path: ["root"],
+  type: CONTAINER_TYPE,
   options: { ...defaultGlobalOptions }
 });
 

@@ -1,7 +1,6 @@
 <template>
   <div class="panel-outline">
     <a-tree
-      v-model:selectedKeys="selectedKeys"
       :tree-data="outlineTree"
       :selectedKeys="selectedKeys"
       show-icon
@@ -34,21 +33,21 @@ const selectedKeys = computed(() => {
   return []
 })
 
-function createTree (children) {
+function createTree (children, path) {
   if (children && children.length == 0) {
     return []
   }
 
-  return children.map(v => {
+  return children.map((v, index) => {
     const tree = {
       title: v.nameAlias || v.name,
       key: v.id,
       iconType: v.icon,
-      path: v.path
+      path: [...path, index]
     }
 
     if (v.type === CONTAINER_TYPE) {
-      tree.children = createTree(v.childrenList)
+      tree.children = createTree(v.childrenList, tree.path)
     }
 
     return tree
@@ -60,25 +59,17 @@ const outlineTree = reactive([
     title: '表单',
     key: store.id,
     iconType: 'layer-group-icon',
-    children: []
+    children: [],
+    path: ['root']
   }
 ])
 
 const updateTree = useDebounce(childrenList => {
-  const children = createTree(childrenList)
-
+  const children = createTree(childrenList, ['root'])
   outlineTree[0].children = children
 }, 800)
 
-watch(
-  () => store.childrenList,
-  (value, oldValue) => {
-    console.log('value', value)
-    console.log('oldValue', oldValue)
-    updateTree(value)
-  },
-  { deep: true }
-)
+watch(() => store.childrenList, updateTree, { deep: true })
 
 function onSelect (selectedKeys, { node }) {
   if (node.parent === undefined) {

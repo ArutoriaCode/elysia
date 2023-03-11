@@ -2,12 +2,10 @@ import cloneDeep from "lodash.clonedeep";
 import { v4 as uuidV4 } from "uuid";
 import { CONTAINER_TYPE } from "@/designer/utils/helper";
 import { reactive } from "vue";
-import { isObject } from "../utils";
+import { checkSchema } from "./store";
 
 /**
  * 深度克隆组件信息
- *
- * TODO: 如果要赋值到设计器渲染响应式对象（store）中，请注意调用`store`中`computedPath`重新计算路径
  *
  * @param {{ id: string, name: string; path: string[]; childrenList?: [] } | Array<{ id: string, name: string; path: string[], childrenList?: [] }>} schema 要
  */
@@ -32,21 +30,15 @@ export function cloneSchema(schema) {
     return newWidget;
   }
 
-  if (!isObject(schema) && !Array.isArray(schema)) {
-    // 非对象和数组直接返回
+  if (!checkSchema(schema)) {
     return schema;
   }
 
-  // 单个组件及其子组件的克隆、路径重新计算
-  if (isObject(schema)) {
-    return _cloneDeepSchema(schema);
+  if (Array.isArray(schema)) {
+    return schema.map(s => _cloneDeepSchema(s));
   }
 
-  if (Array.isArray(schema) && schema.length === 0) {
-    return schema;
-  }
-
-  return schema.map(s => _cloneDeepSchema(s));
+  return _cloneDeepSchema(schema);
 }
 
 /** 用于绑定到 `vuedraggable` 库的clone钩子函数，如要克隆组件信息请使用`cloneSchema` */
