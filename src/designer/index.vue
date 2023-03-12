@@ -54,16 +54,6 @@ body {
   display: flex;
   flex-direction: row;
 
-  .main-wrapper {
-    .elysia-main-content {
-      padding: 24px;
-      height: calc(100vh - 48px); // 48px = .elysia-toolbar height
-      width: 100%;
-      overflow: hidden;
-      overflow-y: auto;
-    }
-  }
-
   .aside-wrapper.settings {
     transition: width 0.3s;
   }

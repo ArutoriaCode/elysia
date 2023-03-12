@@ -27,6 +27,11 @@ export function setSelected(value) {
   }
 
   if (checkSchema(value)) {
+    const select = seletedSchema.value;
+    if (checkSchema(select) && select.id === value.id) {
+      return; // 已经选中该组件了
+    }
+
     seletedSchema.value = { ...value };
     return value;
   }

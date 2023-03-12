@@ -6,7 +6,7 @@
         :value="option.value"
         :key="option.value"
       >
-        {{ option.value }}
+        {{ option.label || option.value }}
       </a-select-option>
     </a-select>
   </a-form-item>

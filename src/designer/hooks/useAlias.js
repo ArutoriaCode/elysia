@@ -8,15 +8,24 @@ const aliasDict = reactive({
     title: "标题",
     text: "文本",
     type: "类型",
-    hidden: "隐藏"
+    hidden: "隐藏",
+    ghost: "幽灵按钮",
+    shape: "按钮形状",
+    block: "块级按钮",
+    disabled: "禁用",
+    dashed: "是否虚线",
+    orientation: "标题位置"
   },
   [EVENT_KEY_NAME]: {
-    onClick: "点击事件"
+    onClick: "点击事件",
+    onMounted: "",
+    onUnmounted: ""
   },
   [PANEL_COMPONENT]: {
     card: "卡片",
     button: "按钮",
-    text: "文本"
+    text: "文本",
+    divider: "分割线"
   }
 });
 

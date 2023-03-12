@@ -1,5 +1,9 @@
 <template>
-  <div class="elysia-render">
+  <div
+    class="elysia-render"
+    :class="{ 'show-shadow': isSelected }"
+    @click.stop="setSelected(store)"
+  >
     <a-form class="root-form">
       <draggable
         scroll
@@ -37,6 +41,16 @@ import store from './core/store'
 import { checkMove } from './core/move'
 import { computed } from 'vue'
 import recorder, { isViewStatus } from './core/recorder'
+import { seletedSchema, setSelected } from './core/select'
+
+const isSelected = computed(() => {
+  if (isViewStatus.value) {
+    return false
+  }
+
+  const selected = seletedSchema.value
+  return selected && selected.id === store.id
+})
 
 const widgetList = computed(() => store.childrenList)
 
@@ -49,6 +63,14 @@ const onEndMove = evt => {
 </script>
 
 <style lang="less">
+.elysia-main-content {
+  padding: 28px 24px;
+  height: calc(100vh - 48px); // 48px = .elysia-toolbar height
+  width: 100%;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
 .elysia-render {
   width: 100%;
   // min-height: 100%;
@@ -58,8 +80,13 @@ const onEndMove = evt => {
 
     .draggable-render {
       width: 100%;
-      min-height: calc(100vh - 96px);
+      // 48px: toolbar height; 50px: .elysia-main-content padding(top,bottom): 28px
+      min-height: calc(100vh - 48px - 56px);
     }
+  }
+
+  &.show-shadow {
+    outline: 2px dashed var(--info-color) !important;
   }
 }
 </style>

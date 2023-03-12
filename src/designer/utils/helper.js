@@ -18,10 +18,18 @@ export const PROPERTYS = reactive({
   [COMMON_KEY_NAME]: {
     title: "text-input",
     text: "text-input",
-    type: "type-select",
-    hidden: "switch"
+    type: "selecter",
+    shape: "selecter",
+    hidden: "switch",
+    ghost: "switch",
+    disabled: "switch",
+    block: "switch",
+    dashed: "switch",
+    orientation: "selecter"
   },
   [EVENT_KEY_NAME]: {
-    onClick: "js-editor"
+    onClick: "js-editor",
+    onMounted: "js-editor",
+    onUnmounted: "js-editor",
   }
 });

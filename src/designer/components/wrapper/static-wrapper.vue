@@ -1,5 +1,9 @@
 <template>
-  <div class="static-wrapper" @click.stop.prevent="onSetSelect">
+  <div
+    class="static-wrapper"
+    :class="{ [widget.name]: true }"
+    @click.stop.prevent="onSetSelect"
+  >
     <div :class="{ 'warapper-slot': true, 'show-shadow': isSelected }">
       <slot></slot>
     </div>
@@ -64,10 +68,6 @@ const isSelected = computed(() => {
 const onSetSelect = evt => {
   if (isViewStatus.value) {
     return // 查看记录的历史，不做操作
-  }
-
-  if (isSelected.value) {
-    return // 当前已经是选中的状态
   }
 
   setSelected(props.widget)

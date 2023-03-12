@@ -11,10 +11,39 @@ const fields = [
     options: {
       text: "按钮",
       type: "default",
+      shape: "default",
+      ghost: false,
+      disabled: false,
+      block: false,
       onClick: ""
     },
     selects: {
-      type: [{ value: "default" }, { value: "primary" }, { value: "danger" }]
+      type: [
+        { value: "default" },
+        { value: "primary" },
+        { value: "danger" },
+        { value: "link" }
+      ],
+      shape: [{ value: "default" }, { value: "circle" }, { value: "round" }]
+    }
+  },
+  {
+    id: uuidv4(),
+    name: "divider", // 对应 components/fields/button/button.vue 的组件名称
+    type: FIELD_TYPE,
+    icon: "divider-icon", // from icons/
+    options: {
+      title: "分割线",
+      type: "horizontal",
+      dashed: false,
+      orientation: "center"
+    },
+    selects: {
+      type: [
+        { value: "horizontal", label: "水平" },
+        { value: "vertical", label: "垂直" }
+      ],
+      orientation: [{ value: "left" }, { value: "right" }, { value: "center" }]
     }
   },
   {
