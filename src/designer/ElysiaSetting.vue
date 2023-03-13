@@ -117,6 +117,7 @@ watch(
   background-color: #fff;
   border-left: 1px solid var(--primary-color);
   transition: display 0.2s;
+  min-width: 172px;
   .ant-row.ant-form-item {
     border-bottom: 1px solid #f0f0f2;
     margin-bottom: 0;

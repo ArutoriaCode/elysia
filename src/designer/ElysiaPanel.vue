@@ -99,7 +99,9 @@ const activeKeys = computed({
   }
 
   .menu-content {
+    z-index: 100;
     background-color: #fff;
+    min-width: 130px;
     width: calc(100% - 56px);
     height: 100%;
     border-right: 1px solid var(--primary-color);

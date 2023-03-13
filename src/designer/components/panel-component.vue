@@ -124,6 +124,7 @@ const onEndMove = evt => {
     align-items: center;
     justify-content: center;
     user-select: none;
+    white-space: nowrap;
     span.anticon {
       font-size: 18px;
       padding-right: 8px;
