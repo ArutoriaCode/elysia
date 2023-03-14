@@ -10,18 +10,21 @@
     {{ widget.options.text }}
   </a-button>
 </template>
-<script>
-export default {
-  props: {
-    widget: Object
-  },
-  methods: {
-    onClick () {
-      const { options } = this.widget
-      if (options && options.onClick) {
-        const clickMethod = new Function(options.onClick)
-        clickMethod.call(this)
-      }
+<script setup>
+import { getCurrentInstance } from 'vue'
+const props = defineProps({
+  widget: Object
+})
+
+const app = getCurrentInstance()
+const onClick = () => {
+  const { options } = props.widget
+  if (options && options.onClick) {
+    try {
+      const clickMethod = new Function('ctx', options.onClick)
+      clickMethod(app)
+    } catch (e) {
+      console.error(props.widget.name + ' new function failed: ' + e.message)
     }
   }
 }

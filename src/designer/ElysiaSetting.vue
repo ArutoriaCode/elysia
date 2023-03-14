@@ -34,6 +34,15 @@
           label-align="left"
           :label-col="{ span: 8 }"
           :wrapper-col="{ span: 16 }"
+          :rules="{
+            field: [
+              {
+                required: true,
+                message: '唯一标识字段必须输入',
+                trigger: 'blur'
+              }
+            ]
+          }"
         >
           <component
             v-for="item in commonComponentList"
@@ -137,7 +146,7 @@ watch(
       color: var(--primary-color);
       font-weight: bold;
       margin: 0;
-      font-size: 20px;
+      font-size: 18px;
     }
     &-actions {
       color: var(--primary-color);
@@ -167,6 +176,11 @@ watch(
 
   &.hidden-setting {
     display: none !important;
+  }
+
+  .custom-collapse {
+    height: calc(100% - 54px);
+    overflow: hidden auto;
   }
 }
 

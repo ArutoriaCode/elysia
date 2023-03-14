@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-import "./style.css";
+import "./style.less";
 import App from "./App.vue";
 import ElysiaDesigner from "./designer/index";
 import extension from "./extension";

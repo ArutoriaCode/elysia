@@ -29,7 +29,7 @@ const fields = [
   },
   {
     id: uuidv4(),
-    name: "divider", // 对应 components/fields/button/button.vue 的组件名称
+    name: "divider", // 对应 components/fields/divider/divider.vue 的组件名称
     type: FIELD_TYPE,
     icon: "divider-icon", // from icons/
     options: {
@@ -48,12 +48,32 @@ const fields = [
   },
   {
     id: uuidv4(),
-    name: "text", // 对应 components/fields/button/button.vue 的组件名称
+    name: "text", // 对应 components/fields/text/text.vue 的组件名称
     type: FIELD_TYPE,
     icon: "text-icon", // from icons/
     options: {
       text: "文本",
       hidden: false
+    }
+  },
+  {
+    id: uuidv4(),
+    name: "input", // 对应 components/fields/input/input.vue 的组件名称
+    type: FIELD_TYPE,
+    isFormItem: true, // 表单项
+    icon: "input-icon", // from icons/
+    options: {
+      field: "",
+      label: "Label",
+      inputValue: "",
+      maxlength: undefined,
+      size: undefined, // default
+      readonly: false,
+      disabled: false,
+      allowClear: true
+    },
+    selects: {
+      size: [{ value: "large" }, { value: "default" }, { value: "small" }]
     }
   }
 ];

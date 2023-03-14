@@ -1,6 +1,6 @@
 <template>
   <a-form-item :label="propertyCN">
-    <a-select v-model:value="modelValue">
+    <a-select v-model:value="modelValue" allowClear>
       <a-select-option
         v-for="option in selectOptions"
         :value="option.value"

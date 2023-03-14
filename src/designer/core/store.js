@@ -23,7 +23,12 @@ export function checkSchema(schema) {
 }
 
 const defaultGlobalOptions = {
-  globalStyles: "",
+  // 全局样式
+  globalStyle: "",
+  // 全局表单项只读
+  readonly: false,
+  // 全局表单项禁用
+  disabled: false,
   onMounted: "",
   onUnmounted: ""
 };

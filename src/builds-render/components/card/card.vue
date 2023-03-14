@@ -6,23 +6,12 @@
       :is="getCompName(w)"
       :widget="w"
       :key="w.id"
-    >
-      <template v-for="slot in Object.keys($slots)" v-slot:[slot]="scope">
-        <slot name="slot" v-bind="scope"></slot>
-      </template>
-    </component>
+    />
   </a-card>
 </template>
-<script>
+<script setup>
 import { getCompName } from '../../utils/helper'
-export default {
-  props: {
-    widget: Object
-  },
-  data () {
-    return {
-      getCompName
-    }
-  }
-}
+defineProps({
+  widget: Object
+})
 </script>

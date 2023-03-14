@@ -14,7 +14,15 @@ const aliasDict = reactive({
     block: "块级按钮",
     disabled: "禁用",
     dashed: "是否虚线",
-    orientation: "标题位置"
+    orientation: "标题位置",
+    field: "唯一字段标识",
+    inputValue: "默认值",
+    readonly: "只读",
+    disabled: "禁用",
+    label: "标签",
+    size: "大小",
+    maxlength: "文本最大长度",
+    allowClear: "显示清除"
   },
   [EVENT_KEY_NAME]: {
     onClick: "点击事件",
@@ -25,7 +33,8 @@ const aliasDict = reactive({
     card: "卡片",
     button: "按钮",
     text: "文本",
-    divider: "分割线"
+    divider: "分割线",
+    input: "输入框"
   }
 });
 

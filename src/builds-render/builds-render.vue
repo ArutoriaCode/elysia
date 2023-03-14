@@ -1,5 +1,5 @@
 <template>
-  <a-form>
+  <a-form :model="formData">
     <template
       v-for="schema in schemaJsonStore?.childrenList || []"
       :key="schema.id"
@@ -14,8 +14,8 @@
 </template>
 <script setup>
 import { getCompName } from './utils/helper'
-import { computed, ref, watch } from 'vue'
-import useDefineFormModel from './hooks/useDefineFormModel'
+import { computed, provide, reactive } from 'vue'
+import { forms } from './hooks/useDefineFormModel'
 
 const defaultSchemaJson = {
   id: 'default-root-id',
@@ -23,7 +23,7 @@ const defaultSchemaJson = {
   childrenList: [],
   path: [],
   options: {
-    globalStyles: '',
+    globalStyle: '',
     onMounted: '',
     onUnmounted: ''
   }
@@ -47,12 +47,15 @@ const schemaJsonStore = computed(() => {
   return defaultSchemaJson
 })
 
-const formData = ref({})
-watch(
-  schemaJsonStore,
-  val => {
-    formData.value = useDefineFormModel(val)
-  },
-  { immediate: true }
-)
+const formData = forms
+provide('elysia-form', () => {
+  return computed(() => ({
+    name: 'root',
+    options: schemaJsonStore.value.options
+  }))
+})
+
+defineExpose({
+  formData
+})
 </script>

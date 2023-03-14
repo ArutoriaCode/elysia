@@ -115,7 +115,7 @@ const activeKeys = computed({
         color: var(--primary-color);
         font-weight: bold;
         margin: 0;
-        font-size: 20px;
+        font-size: 18px;
       }
 
       &-actions {
@@ -142,7 +142,7 @@ const activeKeys = computed({
 
     .menu-body {
       width: 100%;
-      max-height: calc(100vh - 54px);
+      max-height: calc(100vh - 52px);
       overflow: auto;
     }
   }

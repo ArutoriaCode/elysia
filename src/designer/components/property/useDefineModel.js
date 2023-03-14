@@ -1,6 +1,6 @@
 import { seletedSchema } from "@/designer/core/select.js";
 import { useAttrs, toRef, ref } from "vue";
-export default function (cb) {
+export default function () {
   const { property, propertyCN } = useAttrs();
   const modelValue = toRef(seletedSchema.value.options, property);
 

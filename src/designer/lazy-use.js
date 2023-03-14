@@ -8,7 +8,8 @@ import {
   List,
   Select,
   Switch,
-  Tree
+  Tree,
+  Alert
 } from "ant-design-vue";
 
 import { Modal } from "ant-design-vue";
@@ -27,6 +28,7 @@ export default {
       .use(Select)
       .use(Switch)
       .use(Tree)
+      .use(Alert)
       .use(Modal);
   }
 };

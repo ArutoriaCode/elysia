@@ -14,7 +14,15 @@ const propertys = reactive({
     disabled: "switch",
     block: "switch",
     dashed: "switch",
-    orientation: "selecter"
+    orientation: "selecter",
+    field: "field-input",
+    inputValue: "text-input",
+    readonly: "switch",
+    disabled: "switch",
+    label: "text-input",
+    allowClear: "switch",
+    maxlength: "text-input",
+    size: "selecter"
   },
   [EVENT_KEY_NAME]: {
     onClick: "js-editor",

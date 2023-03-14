@@ -1,10 +1,10 @@
 <template>
   <div
-    class="static-wrapper"
-    :class="{ [widget.name]: true }"
+    class="static-wrapper move-area"
+    :class="{ [widget.name]: true, 'show-shadow': isSelected }"
     @click.stop.prevent="onSetSelect"
   >
-    <div :class="{ 'warapper-slot': true, 'show-shadow': isSelected }">
+    <div class="warapper-slot">
       <slot></slot>
     </div>
     <div class="static-tr" v-if="isSelected">
@@ -65,7 +65,7 @@ const isSelected = computed(() => {
   return selected && selected.id === props.widget.id
 })
 
-const onSetSelect = evt => {
+const onSetSelect = () => {
   if (isViewStatus.value) {
     return // 查看记录的历史，不做操作
   }
@@ -80,15 +80,16 @@ setSelected(props.widget)
   position: relative;
   margin-bottom: 3px;
   width: auto;
+  padding: 12px;
   & + .static-wrapper {
     margin-top: 8px;
   }
   .static-tr {
     position: absolute;
-    right: -2px;
-    top: -26px;
+    right: 12px;
+    top: -8px;
     z-index: 99;
-    background-color: var(--info-color);
+    background-color: var(--primary-color);
     display: flex;
     flex-direction: row;
     border-radius: 4px;
@@ -104,7 +105,7 @@ setSelected(props.widget)
 
       .anticon-eye-invisible {
         display: inline-block;
-        background-color: var(--info-color);
+        background-color: var(--primary-color);
         color: #fff;
         padding-top: 2px;
         font-size: 18px;
@@ -116,12 +117,16 @@ setSelected(props.widget)
       font-size: 20px;
       padding: 0 4px;
       cursor: pointer;
+      &:last-child {
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+      }
     }
   }
 
   .baisc-btns {
     .anticon {
-      background-color: var(--info-color);
+      background-color: var(--primary-color);
       color: #fff;
       padding: 3px;
       font-size: 20px;
@@ -131,8 +136,8 @@ setSelected(props.widget)
     cursor: move !important;
   }
 
-  .warapper-slot.show-shadow {
-    outline: 2px solid var(--info-color) !important;
+  &.show-shadow {
+    background-color: var(--primary-color-2);
   }
 }
 </style>
