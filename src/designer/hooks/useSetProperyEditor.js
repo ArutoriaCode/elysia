@@ -39,7 +39,7 @@ const propertys = reactive({
  * @param {string} propName 属性名称
  * @param {string} propComp 属性编辑所用的组件名称
  */
-export default function usePropery(propType, propName, propComp) {
+export default function useSetProperyEditor(propType, propName, propComp) {
   const compName = get(propertys, [propType, propName]);
   if (!propComp) {
     return compName;

@@ -1,8 +1,8 @@
 import { defineAsyncComponent, getCurrentInstance, unref } from "vue";
-import usePropery from "../../hooks/usePropery";
+import useSetProperyEditor from "../../hooks/useSetProperyEditor";
 
 function getPropertyType(type, prop) {
-  return usePropery(type, prop);
+  return useSetProperyEditor(type, prop);
 }
 
 let app = null;

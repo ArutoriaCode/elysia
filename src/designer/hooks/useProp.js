@@ -1,7 +1,7 @@
 import recorder from "~core/recorder";
-import useAlias from "../../hooks/useAlias";
+import useAlias from "./useAlias";
 import { seletedSchema } from "~core/select";
-import { COMMON_KEY_NAME } from "../../utils/helper";
+import { COMMON_KEY_NAME } from "../utils/helper";
 import { computed, toRef, watch, onUnmounted } from "vue";
 
 /** 属性响应式获取，以及变化监听记录 */

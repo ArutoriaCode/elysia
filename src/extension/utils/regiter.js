@@ -1,6 +1,6 @@
 import { isObject } from "@/designer/utils";
 import useAlias from "../../designer/hooks/useAlias";
-import usePropery from "../../designer/hooks/usePropery";
+import useSetProperyEditor from "../../designer/hooks/useSetProperyEditor";
 
 /**
  * 注册组件并处理schema中的一些情况
@@ -27,7 +27,7 @@ export default function (component, schemaJson, propertys = {}) {
       regiterComponet(name, component);
     }
 
-    usePropery(type, key, name);
+    useSetProperyEditor(type, key, name);
     if (alias) {
       useAlias([type, key], alias);
     }

@@ -54,6 +54,7 @@ import recorder, { historys } from '../core/recorder'
       text-overflow: ellipsis;
       white-space: nowrap;
       color: var(--primary-color) !important;
+      font-size: 15px;
     }
 
     .ant-list-item-meta-avatar {

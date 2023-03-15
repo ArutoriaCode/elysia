@@ -32,7 +32,7 @@
 </template>
 <script setup>
 import useDefineModel from '~property/useDefineModel.js'
-import useProp from './useProp'
+import useProp from '@/designer/hooks/useProp'
 
 const { modelValue, propertyCN } = useDefineModel()
 

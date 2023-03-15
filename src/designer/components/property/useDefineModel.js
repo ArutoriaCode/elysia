@@ -1,6 +1,7 @@
+import useProp from "@/designer/hooks/useProp";
 import { seletedSchema } from "@/designer/core/select.js";
-import { useAttrs, toRef, ref } from "vue";
-import useProp from "./useProp";
+import { useAttrs, ref } from "vue";
+
 export default function () {
   const { property } = useAttrs();
 
