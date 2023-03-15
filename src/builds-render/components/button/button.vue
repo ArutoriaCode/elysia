@@ -12,6 +12,7 @@
 </template>
 <script setup>
 import { getCurrentInstance } from 'vue'
+import { execFunction } from '../../utils/helper'
 const props = defineProps({
   widget: Object
 })
@@ -20,12 +21,7 @@ const app = getCurrentInstance()
 const onClick = () => {
   const { options } = props.widget
   if (options && options.onClick) {
-    try {
-      const clickMethod = new Function('ctx', options.onClick)
-      clickMethod(app)
-    } catch (e) {
-      console.error(props.widget.name + ' new function failed: ' + e.message)
-    }
+    execFunction(app, options.onClick)
   }
 }
 </script>

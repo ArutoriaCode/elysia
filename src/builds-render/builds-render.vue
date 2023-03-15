@@ -1,5 +1,5 @@
 <template>
-  <a-form :model="formData" :rules="rules">
+  <a-form :model="formData" :rules="rules" :ref="setDynamicRefName">
     <template
       v-for="schema in schemaJsonStore?.childrenList || []"
       :key="schema.id"
@@ -14,8 +14,15 @@
 </template>
 <script setup>
 import { getCompName } from './utils/helper'
-import { computed, provide } from 'vue'
+import {
+  computed,
+  getCurrentInstance,
+  onMounted,
+  onUnmounted,
+  provide
+} from 'vue'
 import { useGetForm } from './hooks/useDefineFormModel'
+import { execFunction } from './utils/helper'
 
 const defaultSchemaJson = {
   id: 'default-root-id',
@@ -46,15 +53,35 @@ const schemaJsonStore = computed(() => {
   return defaultSchemaJson
 })
 
-const { formData, rules } = useGetForm('root-form')
-provide('elysia-form', () => {
-  return computed(() => ({
-    name: 'root-form',
-    options: schemaJsonStore.value.options
-  }))
+const rootForm = computed(() => ({
+  name: 'rootForm', // 表单名称，在有多表时名称会不一样
+  options: schemaJsonStore.value.options
+}))
+
+provide('elysia-form', () => rootForm.value)
+
+const { formRef, formData, rules } = useGetForm(rootForm.value.name)
+
+// 设置实例中refs对象的动态名称
+const setDynamicRefName = (el, refs) => {
+  if (el) {
+    formRef.value = el
+    refs[rootForm.value.options.formRefName || 'formRef'] = el
+  }
+}
+
+const app = getCurrentInstance()
+onMounted(() => {
+  const { options } = schemaJsonStore.value
+  if (options && options.onMounted) {
+    execFunction(app, options.onMounted)
+  }
 })
 
-defineExpose({
-  formData
+onUnmounted(() => {
+  const { options } = schemaJsonStore.value
+  if (options && options.onUnmounted) {
+    execFunction(app, options.onUnmounted)
+  }
 })
 </script>

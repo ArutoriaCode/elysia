@@ -23,7 +23,8 @@ const propertys = reactive({
     allowClear: "switch",
     maxlength: "text-input",
     size: "selecter",
-    required: "rules"
+    required: "rules",
+    formRefName: "text-input"
   },
   [EVENT_KEY_NAME]: {
     onClick: "js-editor",

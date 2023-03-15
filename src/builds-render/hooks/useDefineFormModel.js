@@ -1,4 +1,4 @@
-import { inject, reactive, onUnmounted, computed, unref, toRef } from "vue";
+import { inject, reactive, onUnmounted, computed, unref, toRef, ref } from "vue";
 import set from "lodash.set";
 import get from "lodash.get";
 
@@ -6,7 +6,9 @@ export const forms = reactive({});
 export const rules = reactive({});
 
 export function useGetForm(formName) {
+  const formRef = ref(null);
   return {
+    formRef,
     formData: toRef(forms, formName, {}),
     rules: toRef(rules, formName, {})
   };

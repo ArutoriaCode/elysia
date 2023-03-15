@@ -23,6 +23,8 @@ export function checkSchema(schema) {
 }
 
 const defaultGlobalOptions = {
+  // refs 中的名称
+  formRefName: "formRef",
   // 全局样式
   globalStyle: "",
   // 全局表单项只读
