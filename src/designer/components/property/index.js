@@ -1,5 +1,4 @@
 import { defineAsyncComponent, getCurrentInstance, unref } from "vue";
-import useAlias from "@/designer/hooks/useAlias";
 import usePropery from "../../hooks/usePropery";
 
 function getPropertyType(type, prop) {
@@ -28,7 +27,6 @@ export default function importUseComponent(type, propertys) {
     const data = {
       type,
       property: propertys,
-      propertyCN: useAlias([type, propertys]),
       module: null
     };
 

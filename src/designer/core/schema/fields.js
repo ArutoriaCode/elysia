@@ -66,6 +66,10 @@ const fields = [
       field: "",
       label: "Label",
       inputValue: "",
+      required: false,
+      "x-rules": [],
+      "x-required-message": "",
+      "x-error-message": "",
       maxlength: undefined,
       size: undefined, // default
       readonly: false,

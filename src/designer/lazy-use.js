@@ -9,7 +9,8 @@ import {
   Select,
   Switch,
   Tree,
-  Alert
+  Alert,
+  Spin
 } from "ant-design-vue";
 
 import { Modal } from "ant-design-vue";
@@ -29,6 +30,7 @@ export default {
       .use(Switch)
       .use(Tree)
       .use(Alert)
+      .use(Spin)
       .use(Modal);
   }
 };

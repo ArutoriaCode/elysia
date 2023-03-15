@@ -5,9 +5,11 @@
     </div>
     <div class="main-wrapper" :style="mainWrapperStyle">
       <elysia-toolbar v-model="active">
-        <elysia-render v-show="active === 'render'"></elysia-render>
-        <elysia-json v-show="active === 'json'"></elysia-json>
-        <elysia-builds v-show="active === 'builds'" />
+        <a-spin :spinning="active === 'loading'">
+          <elysia-render v-show="active === 'render'"></elysia-render>
+          <elysia-json v-show="active === 'json'"></elysia-json>
+          <elysia-builds v-if="active === 'builds'" />
+        </a-spin>
       </elysia-toolbar>
     </div>
     <div class="aside-wrapper settings">

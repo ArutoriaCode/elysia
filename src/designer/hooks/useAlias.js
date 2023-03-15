@@ -22,7 +22,11 @@ const aliasDict = reactive({
     label: "标签",
     size: "大小",
     maxlength: "文本最大长度",
-    allowClear: "显示清除"
+    allowClear: "显示清除",
+    required: "是否必填",
+    "x-rules": "校验规则",
+    "x-required-message": "必填校验提示",
+    "x-error-message": "校验错误提示"
   },
   [EVENT_KEY_NAME]: {
     onClick: "点击事件",

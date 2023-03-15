@@ -1,8 +1,14 @@
 import { seletedSchema } from "@/designer/core/select.js";
 import { useAttrs, toRef, ref } from "vue";
+import useProp from "./useProp";
 export default function () {
-  const { property, propertyCN } = useAttrs();
-  const modelValue = toRef(seletedSchema.value.options, property);
+  const { property } = useAttrs();
+
+  const {
+    propertyModel: modelValue,
+    propertyAlias: propertyCN,
+    ...args
+  } = useProp(property);
 
   const selectOptions = ref([]);
   const selects = seletedSchema.value.selects;
@@ -10,5 +16,5 @@ export default function () {
     selectOptions.value = selects[property];
   }
 
-  return { property, modelValue, selectOptions, propertyCN };
+  return { property, modelValue, selectOptions, propertyCN, ...args };
 }

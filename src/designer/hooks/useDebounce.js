@@ -1,16 +1,16 @@
 import { ref } from "vue";
 
 export default function useDebounce(fn, deply = 250) {
-  const timer = ref(null);
+  let timer = null;
 
   function debounce(...args) {
-    if (timer.value) {
-      clearTimeout(timer.value);
+    if (timer) {
+      clearTimeout(timer);
     }
 
-    timer.value = setTimeout(() => {
+    timer = setTimeout(() => {
       fn(...args);
-      timer.value = null;
+      timer = null;
     }, deply || 250);
   }
 

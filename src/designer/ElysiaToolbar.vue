@@ -23,7 +23,10 @@
           <play-circle-filled title="预览" @click="onViewBuilds" />
           <code-filled title="查看代码" @click="onViewJson" />
         </template>
-        <build-filled title="设计视图" v-else @click="onViewRender" />
+        <template v-else>
+          <sync-outlined title="刷新" @click="onRefresh" />
+          <build-filled title="设计视图" @click="onViewRender" />
+        </template>
       </div>
     </div>
     <div class="elysia-main-content" :class="{ [`active-${active}`]: true }">
@@ -36,15 +39,10 @@ import {
   PlayCircleFilled,
   CodeFilled,
   ClearOutlined,
-  BuildFilled
+  BuildFilled,
+  SyncOutlined
 } from '@ant-design/icons-vue'
-import {
-  clearStore,
-  viewBuilds,
-  viewJson,
-  viewBuildsJson,
-  viewSchemaJson
-} from './core/store'
+import { clearStore, viewBuilds, viewJson } from './core/store'
 import recorder, {
   isViewStatus,
   disabledUndo,
@@ -76,35 +74,45 @@ const onClearStore = () => {
   clearStore()
 }
 
+const onRefresh = () => {
+  if (active.value === 'builds') {
+    active.value = 'loading'
+    nextTick(() => {
+      active.value = 'builds'
+      viewBuilds()
+    })
+  }
+
+  active.value === 'json' && viewJson()
+}
+
+// 性能考虑，在切换视图之后才开始重新渲染組件
 const onViewBuilds = () => {
   active.value = 'builds'
   viewBuilds()
 }
 
+// 性能考虑，在切换视图之后才开始写入json
 const onViewJson = () => {
   active.value = 'json'
   viewJson()
 }
 
 const onViewRender = () => {
-  viewBuildsJson.value = null
-  viewSchemaJson.value = null
   active.value = 'render'
 }
 
 const onUndo = () => {
   recorder.undo()
   nextTick(() => {
-    active.value === 'builds' && viewBuilds()
-    active.value === 'json' && viewJson()
+    onRefresh()
   })
 }
 
 const onRedo = () => {
   recorder.redo()
   nextTick(() => {
-    active.value === 'builds' && viewBuilds()
-    active.value === 'json' && viewJson()
+    onRefresh()
   })
 }
 </script>
