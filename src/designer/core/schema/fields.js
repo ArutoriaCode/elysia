@@ -79,6 +79,29 @@ const fields = [
     selects: {
       size: [{ value: "large" }, { value: "default" }, { value: "small" }]
     }
+  },
+  {
+    id: uuidv4(),
+    name: "select", // 对应 components/fields/input/input.vue 的组件名称
+    type: FIELD_TYPE,
+    isFormItem: true, // 表单项
+    icon: "down-select-icon", // from icons/
+    options: {
+      field: "",
+      label: "Label",
+      value: "",
+      required: false,
+      "x-rules": [],
+      "x-required-message": "",
+      "x-error-message": "",
+      size: undefined, // default
+      readonly: false,
+      disabled: false,
+      allowClear: true
+    },
+    selects: {
+      size: [{ value: "large" }, { value: "default" }, { value: "small" }]
+    }
   }
 ];
 

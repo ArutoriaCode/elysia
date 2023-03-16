@@ -4,7 +4,7 @@
       <a-input
         :readonly="readonly"
         :disabled="disabled"
-        :size="formItemSize"
+        :size="size"
         :allow-clear="widget.options.allowClear"
         :maxlength="widget.options.maxlength"
         v-model:value="widget.options.inputValue"
@@ -19,5 +19,5 @@ const props = defineProps({
   widget: Object
 })
 
-const { readonly, disabled, formItemSize } = useDefineFormItem(props.widget)
+const { readonly, disabled, size } = useDefineFormItem(props.widget)
 </script>

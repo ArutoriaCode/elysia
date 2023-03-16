@@ -12,13 +12,13 @@ export default function useDefineFormItem(widget = {}) {
     return store.options.disabled && disabled;
   });
 
-  const formItemSize = computed(
+  const size = computed(
     () => widget.options.size || store.options.size || "default"
   );
 
   return {
     readonly: formIsReadonly,
     disabled: formIsDisabled,
-    formItemSize
+    size
   };
 }
