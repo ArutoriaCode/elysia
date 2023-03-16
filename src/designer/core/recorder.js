@@ -59,6 +59,11 @@ const recorder = {
     if (!isViewStatus.value) {
       return;
     }
+
+    Object.keys(actionStore.value).forEach(key => {
+      store[key] = actionStore.value[key];
+    });
+
     actionStore.value = null;
   },
   /** 还原当前选中预览的历史记录 */
