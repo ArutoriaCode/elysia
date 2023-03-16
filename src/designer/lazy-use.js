@@ -10,7 +10,10 @@ import {
   Switch,
   Tree,
   Alert,
-  Spin
+  Spin,
+  Skeleton,
+  Row,
+  Col
 } from "ant-design-vue";
 
 import { Modal } from "ant-design-vue";
@@ -31,6 +34,9 @@ export default {
       .use(Tree)
       .use(Alert)
       .use(Spin)
+      .use(Skeleton)
+      .use(Row)
+      .use(Col)
       .use(Modal);
   }
 };

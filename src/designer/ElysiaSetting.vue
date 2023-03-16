@@ -44,12 +44,24 @@
             ]
           }"
         >
-          <component
-            v-for="item in commonComponentList"
-            :is="item.module"
-            :key="item.property"
-            :property="item.property"
-          ></component>
+          <template v-for="item in commonComponentList" :key="item.property">
+            <Suspense>
+              <component
+                :is="item.module"
+                :property="item.property"
+              ></component>
+              <template #fallback>
+                <a-row gutter="6" class="prop-loading-skeleton">
+                  <a-col :span="8">
+                    <a-skeleton-button active shape="default" block />
+                  </a-col>
+                  <a-col :span="16">
+                    <a-skeleton-input style="width: 100%" active />
+                  </a-col>
+                </a-row>
+              </template>
+            </Suspense>
+          </template>
         </a-form>
       </a-collapse-panel>
       <a-collapse-panel
@@ -63,12 +75,24 @@
           :label-col="{ span: 8 }"
           :wrapper-col="{ span: 16 }"
         >
-          <component
-            v-for="item in eventComponentList"
-            :is="item.module"
-            :key="item.property"
-            :property="item.property"
-          ></component>
+          <template v-for="item in eventComponentList" :key="item.property">
+            <Suspense>
+              <component
+                :is="item.module"
+                :property="item.property"
+              ></component>
+              <template #fallback>
+                <a-row gutter="6" class="prop-loading-skeleton">
+                  <a-col :span="8">
+                    <a-skeleton-button active shape="default" block />
+                  </a-col>
+                  <a-col :span="16">
+                    <a-skeleton-input style="width: 100%" active />
+                  </a-col>
+                </a-row>
+              </template>
+            </Suspense>
+          </template>
         </a-form>
       </a-collapse-panel>
     </a-collapse>
@@ -209,5 +233,9 @@ watch(
       transform: rotate(180deg);
     }
   }
+}
+
+.prop-loading-skeleton + .prop-loading-skeleton {
+  margin-top: 14px;
 }
 </style>
