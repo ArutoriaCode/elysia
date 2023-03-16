@@ -14,7 +14,8 @@
         ></redo-icon>
       </div>
       <div v-else>
-        <restore-icon title="还原" @click="recorder.restore"></restore-icon>
+        <rollback-outlined title="取消返回" @click="recorder.cancelView" />
+        <restore-icon title="还原" @click="recorder.restore" />
       </div>
 
       <div>
@@ -40,7 +41,8 @@ import {
   CodeFilled,
   ClearOutlined,
   BuildFilled,
-  SyncOutlined
+  SyncOutlined,
+  RollbackOutlined
 } from '@ant-design/icons-vue'
 import { clearStore, viewBuilds, viewJson } from './core/store'
 import recorder, {

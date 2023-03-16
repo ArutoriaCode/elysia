@@ -9,12 +9,13 @@ import regiter from "../utils/regiter";
 Github.name = "github"; // 与当前文件夹以及vue文件名对应
 const GithubSchema = {
   id: uuidv4(),
-  // 注册组件的名称（前面还会拼上 ‘elysia-’ 哦~）
+  // 注册组件的名称（前面会自动拼上'elysia-'）
   name: Github.name,
-  // 组件栏中别名（展示中文）
+  // 组件栏中别名（最终展示的文本）
   nameAlias: useAlias([COMMON_KEY_NAME, Github.name], "Github"),
+  // 组件是容器类型还是字段类型
   type: FIELD_TYPE,
-  // 可导入图标组件或者已经全局注册的组件名称
+  // 可导入图标组件或者已经全局注册的组件名称（string）
   icon: defineAsyncComponent(() => import("@ant-design/icons-vue/GithubOutlined")),
   // 可编辑的属性
   options: {
@@ -47,8 +48,7 @@ const GithubProperties = {
 
 Github.install = () => {
   const schema = regiter(Github, GithubSchema, GithubProperties);
-  // 加入到设计器组件栏中去
-  addSchema(schema);
+  addSchema(schema); // 加入到设计器组件栏中去
 };
 
 export default Github;

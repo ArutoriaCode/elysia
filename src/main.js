@@ -5,6 +5,6 @@ import ElysiaDesigner from "./designer/index";
 import extension from "./extension";
 
 const app = createApp(App);
-window.__elysia_component__ = app.component;
+window.__elysia_app__ = app;
 
 app.use(ElysiaDesigner).use(extension).mount("#app");

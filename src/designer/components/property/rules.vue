@@ -7,7 +7,7 @@
       <a-form-item :label="requiredMessageLabel">
         <a-input
           v-model:value="requiredMessage"
-          @blur="requiredActiveRecord"
+          @blur="requiredChangeRecord"
         ></a-input>
       </a-form-item>
       <a-form-item :label="rulesLabel">
@@ -18,13 +18,13 @@
           placeholder="可输入正则表单式定义自定义的规则"
           :options="defaultRules"
           :max-tag-count="3"
-          @change="rulesActiveRecord"
+          @change="rulesChangeRecord"
         />
       </a-form-item>
       <a-form-item :label="errorMessageLabel">
         <a-input
           v-model:value="errorMessage"
-          @blur="messageActiveRecord"
+          @blur="messageChangeRecord"
         ></a-input>
       </a-form-item>
     </template>
@@ -39,25 +39,20 @@ const { modelValue, propertyCN } = useDefineModel()
 const {
   propertyAlias: rulesLabel,
   propertyModel: rules,
-  useActiveRecord
+  checkChangeRecord: rulesChangeRecord
 } = useProp('x-rules')
-const rulesActiveRecord = useActiveRecord()
 
 const {
   propertyAlias: requiredMessageLabel,
   propertyModel: requiredMessage,
-  useActiveRecord: useRequiredActiveRecord
+  checkChangeRecord: requiredChangeRecord
 } = useProp('x-required-message')
-
-const requiredActiveRecord = useRequiredActiveRecord()
 
 const {
   propertyAlias: errorMessageLabel,
   propertyModel: errorMessage,
-  useActiveRecord: useMessageActiveRecord
+  checkChangeRecord: messageChangeRecord
 } = useProp('x-error-message')
-
-const messageActiveRecord = useMessageActiveRecord()
 
 const defaultRules = [
   { value: '/^\w*?$/', label: '只允许字母' },

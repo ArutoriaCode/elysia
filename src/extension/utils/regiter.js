@@ -1,24 +1,21 @@
-import { isObject } from "@/designer/utils";
 import useAlias from "../../designer/hooks/useAlias";
 import useSetProperyEditor from "../../designer/hooks/useSetProperyEditor";
+import { isObject } from "@/designer/utils";
+import { regiterComponet } from "../../designer/utils/helper";
 
 /**
  * 注册组件并处理schema中的一些情况
  * @param {import("vue").Component} component
- * @param {{ id: string; name: string; nameAlias?: string; type: 'container' | 'field'; icon: string | import("vue").AsyncComponentOptions<T> | import("vue").AsyncComponentLoader<T>; options: { [key: string]: any } }} schemaJson
- * @param {{ [key: string]: { name: string; type: 'BASE_PROPERTYS' | 'EVENT_PROPERTYS'; component?: import("vue").AsyncComponentOptions<T> | import("vue").AsyncComponentLoader<T> }; }} propertys
+ * @param {{ id: string; name: string; nameAlias?: string; type: 'container' | 'field'; icon: string | import("vue").AsyncComponentOptions<T> | import("vue").AsyncComponentLoader<T> | import("vue").Component; options: { [key: string]: any } }} schemaJson
+ * @param {{ [key: string]: { name: string; type: 'BASE_PROPERTYS' | 'EVENT_PROPERTYS'; component?: import("vue").AsyncComponentOptions<T> | import("vue").AsyncComponentLoader<T> | import("vue").Component }; }} propertys
  * @returns
  */
 export default function (component, schemaJson, propertys = {}) {
-  const regiterComponet = window.__elysia_component__; // app.component
-
   regiterComponet("elysia-" + schemaJson.name, component);
 
   if (typeof schemaJson.icon !== "string" && isObject(schemaJson.icon)) {
-    // 处理reactive将图标组件进行深层的响应式转换的问题，先行注册图标组件，并把icon对象转为组件名称的文本
-    const iconName = schemaJson.name + "-icon";
-    regiterComponet(iconName, schemaJson.icon);
-    schemaJson.icon = iconName;
+    // 先行注册图标组件，以免reactive将该图标组件进行深层次转换
+    schemaJson.icon = regiterComponet(schemaJson.name + "-icon", schemaJson.icon);
   }
 
   Object.keys(propertys).forEach(key => {

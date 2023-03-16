@@ -7,9 +7,7 @@ import useDefineModel from '~property/useDefineModel.js'
 
 const extensions = [javascript(), ctxComplete]
 
-const { modelValue, propertyCN, property, useActiveRecord } = useDefineModel()
-const activeRecod = useActiveRecord()
-
+const { modelValue, propertyCN, property, checkChangeRecord } = useDefineModel()
 const visible = ref(false)
 const onEditCode = () => {
   visible.value = true
@@ -27,7 +25,7 @@ const onEditCode = () => {
       :footer="null"
       :keyboard="false"
       class="custom-code-modal"
-      @close="activeRecod"
+      @close="checkChangeRecord"
     >
       <a-alert type="info" show-icon>
         <template #message>

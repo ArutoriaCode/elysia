@@ -27,8 +27,8 @@ const recorder = {
    * @param {string} icon 记录所展示的图标
    */
   add(action, icon) {
-    // 防止记录的历史数据过多
-    if (historys.historyList.length === 20) {
+    // 防止记录的历史数据过多，目前设为最大25条记录
+    if (historys.historyList.length === 25) {
       historys.historyList.pop();
     }
 
@@ -53,6 +53,13 @@ const recorder = {
     });
 
     setSelected(historyItem.selectedPath);
+  },
+  /** 取消当前还原前的预览操作 */
+  cancelView() {
+    if (!isViewStatus.value) {
+      return;
+    }
+    actionStore.value = null;
   },
   /** 还原当前选中预览的历史记录 */
   restore(record = true) {

@@ -1,6 +1,6 @@
 <template>
   <a-form-item :label="propertyCN">
-    <a-select v-model:value="modelValue" allowClear>
+    <a-select v-model:value="modelValue" allowClear @change="checkChangeRecord">
       <a-select-option
         v-for="option in selectOptions"
         :value="option.value"
@@ -14,5 +14,5 @@
 <script setup>
 import useDefineModel from './useDefineModel'
 
-const { propertyCN, modelValue, selectOptions } = useDefineModel()
+const { propertyCN, modelValue, selectOptions, checkChangeRecord } = useDefineModel()
 </script>
