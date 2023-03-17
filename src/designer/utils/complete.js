@@ -1,10 +1,11 @@
 import { javascriptLanguage } from "@codemirror/lang-javascript";
 import { seletedSchema } from "../core/select";
 
+const autoCompleteStr = ["ctx.", "return ctx."];
 export const ctxComplete = javascriptLanguage.data.of({
   autocomplete: function (context) {
     let word = context.matchBefore(/.*ctx\./);
-    if (word && word.text.trim() === "ctx.") {
+    if (word && autoCompleteStr.includes(word.text.trim())) {
       let hintOptions = [
         {
           label: "props",
@@ -23,7 +24,18 @@ export const ctxComplete = javascriptLanguage.data.of({
         },
         {
           label: "axios",
-          type: "object"
+          type: "variable",
+          info: '具体查看axios文档：https://axios-http.com/zh/docs/intro'
+        },
+        {
+          label: "$formData.value",
+          type: "variable",
+          info: '表单数据 注意使用$formData.value来操作'
+        },
+        {
+          label: '$rules.value',
+          type: "variable",
+          info: '表单校验规则 注意使用$rules.value来操作'
         }
       ];
 

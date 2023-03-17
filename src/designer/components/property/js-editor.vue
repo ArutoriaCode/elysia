@@ -15,9 +15,9 @@ const onEditCode = () => {
 </script>
 <template>
   <a-form-item class="javascript-editor" :label="propertyCN || property">
-    <a-button @click="onEditCode" class="code-edit-btn">
+    <a-button @click="onEditCode" class="property-edit-btn" block>
       <js-code-icon></js-code-icon>
-      编辑
+      <span style="margin-bottom: 2px">编辑</span>
     </a-button>
     <a-modal
       v-model:visible="visible"
@@ -25,7 +25,8 @@ const onEditCode = () => {
       :footer="null"
       :keyboard="false"
       class="custom-code-modal"
-      @close="checkChangeRecord"
+      @cancel="checkChangeRecord"
+      @ok="checkChangeRecord"
     >
       <a-alert type="info" show-icon>
         <template #message>

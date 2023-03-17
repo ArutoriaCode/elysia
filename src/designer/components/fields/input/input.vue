@@ -1,23 +1,23 @@
 <template>
   <static-wrapper :widget="widget">
-    <a-form-item :label="widget.options.label" :name="widget.options.field">
+    <a-form-item :label="model.label" :name="model.field" :required="model.required">
       <a-input
         :readonly="readonly"
         :disabled="disabled"
         :size="size"
-        :allow-clear="widget.options.allowClear"
-        :maxlength="widget.options.maxlength"
-        v-model:value="widget.options.inputValue"
+        :allow-clear="model.allowClear"
+        :maxlength="model.maxlength"
+        v-model:value="model.inputValue"
       />
     </a-form-item>
   </static-wrapper>
 </template>
 <script setup>
 import staticWrapper from '@/designer/components/wrapper/static-wrapper.vue'
-import useDefineFormItem from '@/designer/hooks/useDefineFormItem.js'
+import useGlobalSetting from '@/designer/hooks/useGlobalSetting.js'
 const props = defineProps({
   widget: Object
 })
 
-const { readonly, disabled, size } = useDefineFormItem(props.widget)
+const { readonly, disabled, size, model } = useGlobalSetting(props.widget)
 </script>

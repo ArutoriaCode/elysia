@@ -1,46 +1,47 @@
 <template>
-  <a-form-item :label="formItem.label" :name="formItem.field">
+  <a-form-item :label="model.label" :name="model.field">
     <a-select
       :size="size"
       :readonly="readonly"
       :disabled="disabled"
       :options="selectOptions"
-      :allow-clear="formItem.allowClear"
+      :allow-clear="model.allowClear"
       v-model:value="modelValue"
     >
     </a-select>
   </a-form-item>
 </template>
 <script setup>
-import { getCurrentInstance, computed, ref } from 'vue'
-import { useDefineFormItem } from '../../hooks/useDefineFormModel'
+import useDefineContext from '../../hooks/useDefineContext'
+import { getCurrentInstance, computed, ref, toRef } from 'vue'
+import { useDefineFormModel } from '../../hooks/useDefineFormModel'
 import { execFunction } from '../../utils/helper'
 const props = defineProps({
   widget: Object
 })
 
-const { readonly, disabled, size, formItem, modelValue } = useDefineFormItem({
-  widget: props.widget,
-  defaultValueKey: 'selectValue'
-})
+const { readonly, disabled, size, model, modelValue } = useDefineFormModel(
+  props.widget,
+  'selectValue'
+)
 
 // 可选项，目前支持同步和异步的数据
 const selectOptions = ref([])
-const ctx = getCurrentInstance()
 const jsonOptions = computed(() => {
   try {
-    return JSON.parse(formItem.selectOptions)
+    return JSON.parse(model.selectOptions)
   } catch {
     return null
   }
 })
 
+const ctx = useDefineContext(props.widget.field)
 // JSON转换为数据
 if (jsonOptions.value !== null) {
   selectOptions.value = jsonOptions.value
 } else {
   // javascript代码执行返回数据
-  const result = execFunction(ctx, formItem.selectOptions)
+  const result = execFunction(ctx, model.selectOptions)
   if (Array.isArray(result)) {
     selectOptions.value = result
   }

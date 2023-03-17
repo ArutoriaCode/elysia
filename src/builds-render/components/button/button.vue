@@ -1,23 +1,26 @@
 <template>
   <a-button
     @click="onClick"
-    :type="widget.options.type"
-    :ghost="widget.options.ghost"
-    :disabled="widget.options.disabled"
-    :shape="widget.options.shape"
-    :block="widget.options.block"
+    :size="size"
+    :disabled="disabled"
+    :type="model.type"
+    :ghost="model.ghost"
+    :shape="model.shape"
+    :block="model.block"
   >
-    {{ widget.options.text }}
+    {{ model.text }}
   </a-button>
 </template>
 <script setup>
-import { getCurrentInstance } from 'vue'
 import { execFunction } from '../../utils/helper'
+import { useDefineFormModel } from '../../hooks/useDefineFormModel'
+import useDefineContext from '../../hooks/useDefineContext';
 const props = defineProps({
   widget: Object
 })
 
-const ctx = getCurrentInstance()
+const { model, size, disabled } = useDefineFormModel(props.widget)
+const ctx = useDefineContext(props.widget.field)
 const onClick = () => {
   const { options } = props.widget
   if (options && options.onClick) {

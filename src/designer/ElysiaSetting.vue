@@ -38,7 +38,7 @@
             field: [
               {
                 required: true,
-                message: '唯一标识字段必须输入',
+                message: '唯一标识为必填项',
                 trigger: 'blur'
               }
             ]

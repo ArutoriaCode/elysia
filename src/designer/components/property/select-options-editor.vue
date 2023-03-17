@@ -4,10 +4,10 @@ import { Codemirror } from 'vue-codemirror'
 import { javascript } from '@codemirror/lang-javascript'
 import { json } from '@codemirror/lang-json'
 import { ctxComplete } from '@/designer/utils/complete.js'
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import useDefineModel from '~property/useDefineModel.js'
 
-const extensions = [json(), javascript(), ctxComplete]
+const extensions = [javascript(), ctxComplete, json()]
 
 const { modelValue, propertyCN, property, checkChangeRecord } = useDefineModel()
 const visible = ref(false)
@@ -16,36 +16,19 @@ const onEditCode = () => {
 }
 
 const example = `/**
-   * JSON字符串
+   * 合法的JSON
    * [{"label":"标签","value":"值"}]
    * 
-   * 同步返回
+   * js代码直接返回数组
    * return [{ label: 'label', value: 'value' }]
    * 
-   * 异步返回
+   * js代码异步请求返回数组数据
    * return ctx.axios.post(...).then((res) => {
    *   省略错误处理的代码等，最终一定要返回数组
    *   return [{ label: 'label', value: 'value' }]
    * })
    * 
 */`
-
-const value = computed({
-  set (value) {
-    if (modelValue.value == example) {
-      return
-    }
-
-    modelValue.value = value
-  },
-  get () {
-    if (!modelValue.value) {
-      return example
-    }
-
-    return modelValue.value
-  }
-})
 </script>
 <template>
   <a-form-item
@@ -62,7 +45,8 @@ const value = computed({
       :footer="null"
       :keyboard="false"
       class="custom-code-modal"
-      @close="checkChangeRecord"
+      @cancel="checkChangeRecord"
+      @ok="checkChangeRecord"
     >
       <a-alert type="info" show-icon>
         <template #message>
@@ -74,22 +58,14 @@ const value = computed({
         </template>
       </a-alert>
       <codemirror
-        v-model="value"
+        v-model="modelValue"
         style="width: 100%; height: 450px"
         :autofocus="true"
         :indent-with-tab="true"
         :tab-size="2"
         :extensions="extensions"
+        :placeholder="example"
       />
     </a-modal>
   </a-form-item>
 </template>
-<style lang="less">
-.select-options-editor {
-  .property-edit-btn {
-    line-height: 1;
-    font-size: 14px;
-    border-radius: 4px;
-  }
-}
-</style>

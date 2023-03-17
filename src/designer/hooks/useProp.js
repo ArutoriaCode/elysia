@@ -16,15 +16,15 @@ export default function useProp(property) {
    * 主动记录，需要主动绑定到组件的事件上，如：
    * - 输入框失去焦点后才检查是否有变动
    * ```vue
-   * <a-input @blur="activeRecord" v-model:value="propertyModel" />
+   * <a-input @blur="checkChangeRecord" v-model:value="propertyModel" />
    * ```
    * - 下拉选择器更改选择之后才触发
    * ```vue
-   * <a-select @change="activeRecord" v-model:value="propertyModel"></a-select>
+   * <a-select @change="checkChangeRecord" v-model:value="propertyModel"></a-select>
    * ```
-   * - 模态框点击确认按钮之后才记录 或者 关闭的时候才记录
+   * - 模态框点击确认按钮之后或者取消关闭的时候才记录
    * ```vue
-   * <a-modal @ok="activeRecord">
+   * <a-modal @ok="checkChangeRecord" @cancel="checkChangeRecord">
    *  <a-input v-model:value="propertyModel"></a-input>
    * </a-modal>
    * ```

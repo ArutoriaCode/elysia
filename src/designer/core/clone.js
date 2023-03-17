@@ -46,10 +46,10 @@ export function clone(widget) {
   const cloneWidget = cloneDeep(widget);
   cloneWidget.id = uuidV4(); // id 必须重新生成并覆盖
 
-  if (cloneWidget.isFormItem) {
-    cloneWidget.options.field =
-      cloneWidget.name + Math.round(Math.random() * 100 * Math.random()) * 5;
-  }
+  cloneWidget.options = {
+    field: widget.name + Math.round(Math.random() * 100 * Math.random()) * 5,
+    ...cloneWidget.options
+  };
 
   if (cloneWidget.type === CONTAINER_TYPE && !Array.isArray(cloneWidget.childrenList)) {
     cloneWidget.childrenList = []; // 容器组件如未定义子组件列表，自动定义

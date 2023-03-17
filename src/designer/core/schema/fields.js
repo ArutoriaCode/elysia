@@ -12,10 +12,11 @@ const fields = [
       text: "按钮",
       type: "default",
       shape: "default",
+      size: '',
       ghost: false,
       disabled: false,
       block: false,
-      onClick: ""
+      onClick: "",
     },
     selects: {
       type: [
@@ -24,6 +25,7 @@ const fields = [
         { value: "danger" },
         { value: "link" }
       ],
+      size: [{ value: "large" }, { value: "default" }, { value: "small" }],
       shape: [{ value: "default" }, { value: "circle" }, { value: "round" }]
     }
   },
@@ -63,7 +65,6 @@ const fields = [
     isFormItem: true, // 表单项
     icon: "input-icon", // from icons/
     options: {
-      field: "",
       label: "Label",
       inputValue: "",
       required: false,
@@ -87,7 +88,6 @@ const fields = [
     isFormItem: true, // 表单项
     icon: "down-select-icon", // from icons/
     options: {
-      field: "",
       label: "Label",
       selectValue: "",
       selectOptions: '',

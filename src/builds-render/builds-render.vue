@@ -19,10 +19,10 @@ import {
   getCurrentInstance,
   onMounted,
   onUnmounted,
-  provide
+  unref
 } from 'vue'
 import { useGetForm } from './hooks/useDefineFormModel'
-import { execFunction } from './utils/helper'
+import { execFunction, initFormSchema } from './utils/helper'
 
 const defaultSchemaJson = {
   id: 'default-root-id',
@@ -31,7 +31,12 @@ const defaultSchemaJson = {
   options: {
     globalStyle: '',
     onMounted: '',
-    onUnmounted: ''
+    onUnmounted: '',
+    formReadonly: false,
+    formDisabled: false,
+    formSize: '',
+    formName: 'rootForm',
+    formRefName: 'formRef'
   }
 }
 
@@ -42,31 +47,30 @@ const props = defineProps({
 })
 
 const schemaJsonStore = computed(() => {
+  let schemaJson = defaultSchemaJson
   if (typeof props.schemaJson === 'string') {
-    return JSON.parse(props.schemaJson)
+    try {
+      schemaJson = JSON.parse(props.schemaJson)
+    } catch (e) {
+      // pass
+    }
   }
 
   if (typeof props.schemaJson === 'object' && props.schemaJson !== null) {
-    return props.schemaJson
+    schemaJson = props.schemaJson
   }
 
-  return defaultSchemaJson
+  return initFormSchema(schemaJson)
 })
 
-const rootForm = computed(() => ({
-  name: 'rootForm', // 表单名称，在有多表时名称会不一样
-  options: schemaJsonStore.value.options
-}))
-
-provide('elysia-form', () => rootForm.value)
-
-const { formRef, formData, rules } = useGetForm(rootForm.value.name)
+const { formName, formRefName } = schemaJsonStore.value.options
+const { formRef, formData, rules } = useGetForm(formName)
 
 // 设置实例中refs对象的动态名称
 const setDynamicRefName = (el, refs) => {
   if (el) {
     formRef.value = el
-    refs[rootForm.value.options.formRefName || 'formRef'] = el
+    refs[formRefName] = el
   }
 }
 

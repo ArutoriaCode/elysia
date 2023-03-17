@@ -1,7 +1,6 @@
+import recorder from "./recorder";
 import { reactive, shallowRef, computed } from "vue";
 import { v4 as uuidv4 } from "uuid";
-import recorder from "./recorder";
-import cloneDeep from "lodash.clonedeep";
 import { CONTAINER_TYPE, FIELD_TYPE } from "../utils/helper";
 import { isObject } from "../utils";
 
@@ -23,14 +22,18 @@ export function checkSchema(schema) {
 }
 
 const defaultGlobalOptions = {
+  // 表单名称 与field作用一致
+  formName: "form" + Math.round(Math.random() * 100 * Math.random()) * 5,
   // refs 中的名称
   formRefName: "formRef",
   // 全局样式
   globalStyle: "",
+  // 全局表单项组件的大小
+  formSize: "",
   // 全局表单项只读
-  readonly: false,
+  formReadonly: false,
   // 全局表单项禁用
-  disabled: false,
+  formDisabled: false,
   onMounted: "",
   onUnmounted: ""
 };
@@ -43,7 +46,10 @@ const schemaJson = reactive({
   name: "a-form",
   childrenList: [],
   type: CONTAINER_TYPE,
-  options: { ...defaultGlobalOptions }
+  options: { ...defaultGlobalOptions },
+  selects: {
+    formSize: [{ value: "large" }, { value: "default" }, { value: "small" }]
+  }
 });
 
 export function clearStore(record = true) {

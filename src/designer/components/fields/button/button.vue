@@ -3,9 +3,10 @@
     <a-button
       :type="widget.options.type"
       :ghost="widget.options.ghost"
-      :disabled="widget.options.disabled"
+      :disabled="disabled"
       :shape="widget.options.shape"
       :block="widget.options.block"
+      :size="size"
     >
       {{ widget.options.text }}
     </a-button>
@@ -13,7 +14,10 @@
 </template>
 <script setup>
 import staticWrapper from '@/designer/components/wrapper/static-wrapper.vue'
-defineProps({
+import useGlobalSetting from '@/designer/hooks/useGlobalSetting.js';
+const props = defineProps({
   widget: Object
 })
+
+const { size, disabled } = useGlobalSetting(props.widget)
 </script>

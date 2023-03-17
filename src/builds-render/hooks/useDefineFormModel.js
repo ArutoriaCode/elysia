@@ -1,12 +1,18 @@
-import { inject, reactive, onUnmounted, computed, unref, toRef, ref } from "vue";
+import { shallowReactive, reactive, onUnmounted, computed, unref, toRef, ref } from "vue";
 import set from "lodash.set";
 import get from "lodash.get";
+import { GLOBAL_FORM_CONFIG } from "../utils/helper";
 
+export const formRefs = shallowReactive({});
 export const forms = reactive({});
 export const rules = reactive({});
 
 export function useGetForm(formName) {
-  const formRef = ref(null);
+  if (!formRefs[formName]) {
+    formRefs[formName] = null;
+  }
+
+  const formRef = toRef(formRefs, formName); // 使用toRef可以保证绑定到ref之后同步到formRefs对象
   return {
     formRef,
     formData: toRef(forms, formName, {}),
@@ -50,7 +56,7 @@ function handleRules(
 
   xRules.unshift({
     required: true,
-    message: requiredMessage,
+    message: requiredMessage || `[${field}]字段为必填项`,
     trigger: ["blur", "change"]
   });
 
@@ -63,23 +69,47 @@ function handleRules(
 
 /**
  * 定义 AFormItem 表单项相关属性，自动组成`FormData`对象
- * @param {{ widget: { id: string; field: string; options: {[key: string]: any}; [key: string]: any }, model: string }} param0
+ * @param {{ id: string; options: { [key: string]:any }; name: string; nameAlias?: string; childrenList?: []}} widget
+ * @param {string} 默认值key，在设计器没有可以配置默认值的情况下可以不传递
  * @example
  * ```javascript
- * const { modelValue, formItem } = useDefineFormItem({ widget: props.widget, model: '双向绑定的key' })
+ * const { modelValue, model } = useDefineFormModel(props.widget, '默认值key')
  *
  * // 如果有多个双向绑定，请自己定义
  * // const modelValue2 = toRef(formItem, 'modelValue2')
  * <a-input v-model:value="modelValue">
  * ```
  */
-export function useDefineFormItem({ widget, defaultValueKey }) {
-  const useGetParentForm = inject("elysia-form");
-
-  const form = useGetParentForm(); // 返回响应式对象
-  const { name: formName } = unref(form);
+export function useDefineFormModel(widget, defaultValueKey) {
+  const { formName } = widget[GLOBAL_FORM_CONFIG];
 
   const { required, field, [defaultValueKey]: defaultValue } = widget.options;
+
+  const model = toRef(widget, "options");
+
+  const readonly = computed(() => {
+    const form = widget[GLOBAL_FORM_CONFIG];
+    return unref(form).formReadonly || model.readonly;
+  });
+
+  const disabled = computed(() => {
+    const form = widget[GLOBAL_FORM_CONFIG];
+    return unref(form).formDisabled || model.disabled;
+  });
+
+  const size = computed(() => {
+    const form = widget[GLOBAL_FORM_CONFIG];
+    return unref(form).formSize || model.size || "default";
+  });
+
+  if (!field) {
+    return {
+      model,
+      readonly,
+      disabled,
+      size
+    };
+  }
 
   if (!Reflect.has(forms, formName)) {
     set(forms, formName, {});
@@ -100,17 +130,21 @@ export function useDefineFormItem({ widget, defaultValueKey }) {
 
   const target = get(forms, formName);
   const modelValue = toRef(target, field);
+
   return {
+    model,
     modelValue,
-    formItem: widget.options,
     readonly: computed(() => {
-      return unref(form).options.readonly || widget.options.readonly;
+      const form = widget[GLOBAL_FORM_CONFIG];
+      return unref(form).formReadonly || model.readonly;
     }),
     disabled: computed(() => {
-      return unref(form).options.disabled || widget.options.disabled;
+      const form = widget[GLOBAL_FORM_CONFIG];
+      return unref(form).formDisabled || model.disabled;
     }),
     size: computed(() => {
-      return unref(form).options.size || widget.options.size || "default";
+      const form = widget[GLOBAL_FORM_CONFIG];
+      return unref(form).formSize || model.size || "default";
     })
   };
 }
