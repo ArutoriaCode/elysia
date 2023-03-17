@@ -22,7 +22,7 @@ export default function useProp(property) {
    * ```vue
    * <a-select @change="activeRecord" v-model:value="propertyModel"></a-select>
    * ```
-   * - 模态框点击确认按钮之后才记录
+   * - 模态框点击确认按钮之后才记录 或者 关闭的时候才记录
    * ```vue
    * <a-modal @ok="activeRecord">
    *  <a-input v-model:value="propertyModel"></a-input>

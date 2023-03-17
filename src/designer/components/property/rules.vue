@@ -1,5 +1,5 @@
 <template>
-  <div class="rules-editor">
+  <div class="rules-editor property-editor">
     <a-form-item :label="propertyCN">
       <a-switch v-model:checked="modelValue" />
     </a-form-item>

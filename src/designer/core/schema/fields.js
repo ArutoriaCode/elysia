@@ -89,7 +89,8 @@ const fields = [
     options: {
       field: "",
       label: "Label",
-      value: "",
+      selectValue: "",
+      selectOptions: '',
       required: false,
       "x-rules": [],
       "x-required-message": "",

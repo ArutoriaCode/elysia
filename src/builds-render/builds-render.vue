@@ -70,18 +70,18 @@ const setDynamicRefName = (el, refs) => {
   }
 }
 
-const app = getCurrentInstance()
+const ctx = getCurrentInstance()
 onMounted(() => {
   const { options } = schemaJsonStore.value
   if (options && options.onMounted) {
-    execFunction(app, options.onMounted)
+    execFunction(ctx, options.onMounted)
   }
 })
 
 onUnmounted(() => {
   const { options } = schemaJsonStore.value
   if (options && options.onUnmounted) {
-    execFunction(app, options.onUnmounted)
+    execFunction(ctx, options.onUnmounted)
   }
 })
 </script>

@@ -17,11 +17,11 @@ const props = defineProps({
   widget: Object
 })
 
-const app = getCurrentInstance()
+const ctx = getCurrentInstance()
 const onClick = () => {
   const { options } = props.widget
   if (options && options.onClick) {
-    execFunction(app, options.onClick)
+    execFunction(ctx, options.onClick)
   }
 }
 </script>

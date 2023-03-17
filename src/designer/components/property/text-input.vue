@@ -1,5 +1,5 @@
 <template>
-  <a-form-item :label="propertyCN">
+  <a-form-item :label="propertyCN" class="property-editor">
     <a-input v-model:value="modelValue" @blur="checkChangeRecord"></a-input>
   </a-form-item>
 </template>

@@ -1,5 +1,5 @@
 import useAlias from "../../designer/hooks/useAlias";
-import useSetProperyEditor from "../../designer/hooks/useSetProperyEditor";
+import useProperyEditor from "../../designer/hooks/useProperyEditor";
 import { isObject } from "@/designer/utils";
 import { regiterComponet } from "../../designer/utils/helper";
 
@@ -24,7 +24,7 @@ export default function (component, schemaJson, propertys = {}) {
       regiterComponet(name, component);
     }
 
-    useSetProperyEditor(type, key, name);
+    useProperyEditor(type, key, name);
     if (alias) {
       useAlias([type, key], alias);
     }

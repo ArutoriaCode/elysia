@@ -1,5 +1,5 @@
 <template>
-  <a-form-item :label="propertyCN">
+  <a-form-item :label="propertyCN" class="property-editor">
     <a-select v-model:value="modelValue" allowClear @change="checkChangeRecord">
       <a-select-option
         v-for="option in selectOptions"

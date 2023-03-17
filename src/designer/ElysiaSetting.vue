@@ -51,7 +51,7 @@
                 :property="item.property"
               ></component>
               <template #fallback>
-                <a-row gutter="6" class="prop-loading-skeleton">
+                <a-row :gutter="6" class="prop-loading-skeleton">
                   <a-col :span="8">
                     <a-skeleton-button active shape="default" block />
                   </a-col>
@@ -82,7 +82,7 @@
                 :property="item.property"
               ></component>
               <template #fallback>
-                <a-row gutter="6" class="prop-loading-skeleton">
+                <a-row :gutter="6" class="prop-loading-skeleton">
                   <a-col :span="8">
                     <a-skeleton-button active shape="default" block />
                   </a-col>
@@ -152,6 +152,13 @@ watch(
   .ant-row.ant-form-item {
     border-bottom: 1px solid #f0f0f2;
     margin-bottom: 0;
+    padding: 14px 0;
+    &:first-child {
+      padding-top: 0;
+    }
+  }
+
+  .property-editor {
     padding: 14px 0;
     &:first-child {
       padding-top: 0;

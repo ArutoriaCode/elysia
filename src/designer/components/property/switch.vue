@@ -1,5 +1,5 @@
 <template>
-  <a-form-item :label="propertyCN" :help="help">
+  <a-form-item :label="propertyCN" :help="help" class="property-editor">
     <a-switch v-model:checked="modelValue" @change="checkChangeRecord"></a-switch>
   </a-form-item>
 </template>

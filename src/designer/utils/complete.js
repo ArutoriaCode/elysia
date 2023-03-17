@@ -20,6 +20,10 @@ export const ctxComplete = javascriptLanguage.data.of({
           label: "emit",
           type: "function",
           detail: "触发自定义事件"
+        },
+        {
+          label: "axios",
+          type: "object"
         }
       ];
 

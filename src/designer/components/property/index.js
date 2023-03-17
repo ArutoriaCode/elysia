@@ -1,19 +1,14 @@
-import { defineAsyncComponent, getCurrentInstance, unref } from "vue";
-import useSetProperyEditor from "../../hooks/useSetProperyEditor";
+import { defineAsyncComponent, unref } from "vue";
+import useProperyEditor from "../../hooks/useProperyEditor";
 
 function getPropertyType(type, prop) {
-  return useSetProperyEditor(type, prop);
+  return useProperyEditor(type, prop);
 }
 
-let app = null;
 const modules = import.meta.glob("./*.vue");
 export default function importUseComponent(type, propertys) {
-  const initApp = getCurrentInstance();
-  if (initApp) {
-    app = initApp;
-  }
-
-  const registeredComps = app && app.appContext ? app.appContext.components : {};
+  const app = window.__elysia_app__;
+  const registeredComps = app && app._context ? app._context.components : {};
   const components = [];
 
   propertys = unref(propertys);

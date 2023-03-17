@@ -27,7 +27,8 @@ const aliasDict = reactive({
     "x-rules": "校验规则",
     "x-required-message": "必填校验提示",
     "x-error-message": "校验错误提示",
-    formRefName: "引用名称"
+    formRefName: "引用名称",
+    selectOptions: '数据选项'
   },
   [EVENT_KEY_NAME]: {
     onClick: "点击事件",
