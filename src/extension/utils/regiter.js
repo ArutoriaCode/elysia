@@ -1,6 +1,6 @@
 import useAlias from "../../designer/hooks/useAlias";
 import useProperyEditor from "../../designer/hooks/useProperyEditor";
-import { isObject } from "@/designer/utils";
+import { isObject } from "@/utils";
 import { regiterComponet } from "../../designer/utils/helper";
 
 /**

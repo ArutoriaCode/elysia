@@ -16,7 +16,7 @@ const aliasDict = reactive({
     dashed: "是否虚线",
     orientation: "标题位置",
     field: "唯一标识",
-    formName: "表单唯一标识",
+    formField: "表单唯一标识",
     inputValue: "默认值",
     readonly: "只读",
     disabled: "禁用",

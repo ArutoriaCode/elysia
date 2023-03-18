@@ -2,7 +2,7 @@ import recorder from "./recorder";
 import { reactive, shallowRef, computed } from "vue";
 import { v4 as uuidv4 } from "uuid";
 import { CONTAINER_TYPE, FIELD_TYPE } from "../utils/helper";
-import { isObject } from "../utils";
+import { isObject } from "@/utils";
 
 /**
  * 校验schema是否合法，支持单个schema对象或者多个schema对象的数组
@@ -23,7 +23,7 @@ export function checkSchema(schema) {
 
 const defaultGlobalOptions = {
   // 表单名称 与field作用一致
-  formName: "form" + Math.round(Math.random() * 100 * Math.random()) * 5,
+  formField: "form" + Math.round(Math.random() * 100 * Math.random()) * 5,
   // refs 中的名称
   formRefName: "formRef",
   // 全局样式

@@ -15,7 +15,7 @@ const propertys = reactive({
     block: "switch",
     dashed: "switch",
     orientation: "selecter",
-    formName: "field-input",
+    formField: "field-input",
     field: "field-input",
     inputValue: "text-input",
     readonly: "switch",

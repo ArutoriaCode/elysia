@@ -1,12 +1,14 @@
 <template>
-  <p v-show="!widget.options.hidden">
-    {{ widget.options.text }}
+  <p v-show="!model.options.hidden">
+    {{ model.options.text }}
   </p>
 </template>
-<script>
-export default {
-  props: {
-    widget: Object
-  }
-}
+<script setup>
+import useFormContext from '../../hooks/useFormContext'
+
+const { widget } = defineProps({
+  widget: Object
+})
+
+const { model } = useFormContext()
 </script>

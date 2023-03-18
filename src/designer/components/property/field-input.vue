@@ -1,5 +1,15 @@
 <template>
-  <a-form-item :label="propertyCN" class="property-editor" :name="property">
+  <a-form-item
+    class="property-editor"
+    :label="propertyCN"
+    :name="property"
+    :rules="[
+      {
+        required: true,
+        message: '唯一标识为必填项'
+      }
+    ]"
+  >
     <a-input
       v-model:value.trim="modelValue"
       @blur="checkChangeRecord"

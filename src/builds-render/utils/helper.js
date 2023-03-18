@@ -1,5 +1,6 @@
 import { CONTAINER_TYPE } from "../../designer/utils/helper";
-import { useGetForm } from "../hooks/useDefineFormModel";
+import { fieldRefs } from "../hooks/useFormContext";
+import { useGetForm } from "../hooks/useFormContext";
 
 export function getCompName(widget) {
   return "ely-" + widget.name;
@@ -35,20 +36,22 @@ export function execFunction(ctx, fucn, argsName, ...args) {
   // 获取组件所在的表单，取出表单绑定的响应式数据、校验规则，并合并到上下文中
   const { formName, formRefName } = ctx.props.widget[GLOBAL_FORM_CONFIG];
   const { formData, rules, formRef } = useGetForm(formName);
-  Object.assign(ctx, {
+  const context = {
+    ...ctx,
+    ["$fieldRefs"]: fieldRefs, // 表单内所有组件的实例
     ["$formData"]: formData,
     ["$rules"]: rules,
     [formRefName]: formRef
-  });
+  };
 
   let execFun = null;
   try {
     if (Array.isArray(args) && Array.isArray(argsName)) {
       execFun = new Function("ctx", ...argsName, fucn);
-      return execFun(ctx, ...args);
+      return execFun(context, ...args);
     } else {
       execFun = new Function("ctx", fucn);
-      return execFun(ctx);
+      return execFun(context);
     }
   } catch (e) {
     console.error("Error executing", e.message);

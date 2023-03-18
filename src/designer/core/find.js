@@ -1,6 +1,6 @@
 import get from "lodash.get";
 import store from "./store";
-import { isObject, hasProp } from "../utils/index.js";
+import { isObject, hasProp } from "@/utils/index.js";
 
 /**
  * 通过组件schema中所带的path属性路径来查找到某个组件

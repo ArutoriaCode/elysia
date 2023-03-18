@@ -12,19 +12,16 @@
   </a-button>
 </template>
 <script setup>
+import useFormContext from '../../hooks/useFormContext'
 import { execFunction } from '../../utils/helper'
-import { useDefineFormModel } from '../../hooks/useDefineFormModel'
-import useDefineContext from '../../hooks/useDefineContext';
 const props = defineProps({
   widget: Object
 })
 
-const { model, size, disabled } = useDefineFormModel(props.widget)
-const ctx = useDefineContext(props.widget.field)
+const { model, size, disabled, context } = useFormContext()
 const onClick = () => {
-  const { options } = props.widget
-  if (options && options.onClick) {
-    execFunction(ctx, options.onClick)
+  if (model && model.onClick) {
+    execFunction(context, model.onClick)
   }
 }
 </script>

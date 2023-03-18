@@ -30,19 +30,12 @@
         v-show="commonComponentList.length > 0"
       >
         <a-form
+          :model="seletedSchema.options"
+          name="common"
           layout="horizontal"
           label-align="left"
           :label-col="{ span: 8 }"
           :wrapper-col="{ span: 16 }"
-          :rules="{
-            field: [
-              {
-                required: true,
-                message: '唯一标识为必填项',
-                trigger: 'blur'
-              }
-            ]
-          }"
         >
           <template v-for="item in commonComponentList" :key="item.property">
             <Suspense>
@@ -70,6 +63,7 @@
         v-show="eventComponentList.length > 0"
       >
         <a-form
+          name="event"
           layout="horizontal"
           label-align="left"
           :label-col="{ span: 8 }"
