@@ -31,6 +31,16 @@ const fields = [
   },
   {
     id: uuidv4(),
+    name: "text", // 对应 components/fields/text/text.vue 的组件名称
+    type: FIELD_TYPE,
+    icon: "text-icon", // from icons/
+    options: {
+      text: "文本",
+      hidden: false
+    }
+  },
+  {
+    id: uuidv4(),
     name: "divider", // 对应 components/fields/divider/divider.vue 的组件名称
     type: FIELD_TYPE,
     icon: "divider-icon", // from icons/
@@ -46,16 +56,6 @@ const fields = [
         { value: "vertical", label: "垂直" }
       ],
       orientation: [{ value: "left" }, { value: "right" }, { value: "center" }]
-    }
-  },
-  {
-    id: uuidv4(),
-    name: "text", // 对应 components/fields/text/text.vue 的组件名称
-    type: FIELD_TYPE,
-    icon: "text-icon", // from icons/
-    options: {
-      text: "文本",
-      hidden: false
     }
   },
   {

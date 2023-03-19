@@ -74,7 +74,7 @@
       "type": "field",
       "icon": "button-icon",
       "options": {
-        "field": "button4325666113609680",
+        "field": "button4325",
         "text": "禁用所有输入框",
         "type": "default",
         "shape": "default",
@@ -127,7 +127,7 @@
   ],
   "type": "container",
   "options": {
-    "formField": "form31679218207651",
+    "formField": "form3167",
     "formRefName": "formRef",
     "globalStyle": "",
     "formSize": "",

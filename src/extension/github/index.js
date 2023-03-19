@@ -19,7 +19,7 @@ const GithubSchema = {
   icon: defineAsyncComponent(() => import("@ant-design/icons-vue/GithubOutlined")),
   // 可编辑的属性
   options: {
-    link: "https://arutoriacode.github.io/elysia/",
+    link: "https://github.com/ArutoriaCode/elysia.git",
     fontSize: 18,
     hidden: false
   },

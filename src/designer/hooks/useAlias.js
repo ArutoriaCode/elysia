@@ -45,7 +45,8 @@ const aliasDict = reactive({
     text: "文本",
     divider: "分割线",
     input: "输入框",
-    select: "选择器"
+    select: "选择器",
+    grid: '栅格'
   }
 });
 

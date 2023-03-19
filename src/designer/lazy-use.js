@@ -13,7 +13,7 @@ import {
   Spin,
   Skeleton,
   Row,
-  Col,
+  Col
 } from "ant-design-vue";
 
 import { Modal } from "ant-design-vue";

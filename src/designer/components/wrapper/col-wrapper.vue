@@ -1,14 +1,13 @@
 <template>
-  <div
-    class="static-wrapper move-area"
+  <a-col
+    class="col-wrapper"
     :class="{ [widget.name]: true, 'show-shadow': isSelected }"
     @click.stop.prevent="onSetSelect"
+    :span="widget.options.span"
   >
-    <div class="warapper-slot">
-      <slot></slot>
-    </div>
-    <div class="static-tr" v-if="isSelected">
-      <span class="w-name move-area" title="长按拖拽">
+    <slot></slot>
+    <div class="col-tr" v-if="isSelected">
+      <span class="w-name">
         <EyeInvisibleFilled
           v-show="widget.options.hidden === true"
           title="已隐藏"
@@ -16,47 +15,41 @@
         {{ widget.nameAlias }}
       </span>
       <div class="baisc-btns">
-        <DragOutlined class="move-area" title="长按拖拽" />
-        <CopyOutlined @click.stop.prevent="copy(widget)" title="拷贝组件" />
+        <CopyOutlined @click.stop.prevent="onCopyCol" title="拷贝栅格" />
         <ArrowUpOutlined
           @click.stop.prevent="upMove(widget)"
-          title="上移组件"
+          title="左移栅格"
         />
         <ArrowDownOutlined
           @click.stop.prevent="downMove(widget)"
-          title="下移组件"
+          title="右移栅格"
         />
-        <slot name="custom-bar"></slot>
         <DeleteFilled
           @click.stop.prevent="remove(widget)"
-          title="删除组件"
+          title="删除栅格"
         ></DeleteFilled>
       </div>
     </div>
-  </div>
+  </a-col>
 </template>
 <script setup>
 import {
-  DragOutlined,
   CopyOutlined,
   ArrowUpOutlined,
   ArrowDownOutlined,
   DeleteFilled,
   EyeInvisibleFilled
 } from '@ant-design/icons-vue'
-import { computed } from 'vue'
+import { computed, nextTick } from 'vue'
 import { seletedSchema, setSelected } from '@/designer/core/select.js'
 import { upMove, downMove, remove } from '@/designer/core/move.js'
 import copy from '@/designer/core/copy.js'
 import { isViewStatus } from '../../core/recorder'
+import { findParent } from '../../core/find'
 const props = defineProps({
   widget: {
     type: Object,
     default: () => ({})
-  },
-  autoActive: {
-    type: Boolean,
-    default: true
   }
 })
 
@@ -77,18 +70,20 @@ const onSetSelect = () => {
   setSelected(props.widget)
 }
 
-props.autoActive && setSelected(props.widget)
+const onCopyCol = () => {
+  copy(props.widget)
+  const parentWidget = findParent(props.widget)
+  parentWidget.options.cols += 1
+}
 </script>
 <style lang="less" scoped>
-.static-wrapper {
+.col-wrapper {
   position: relative;
   margin-bottom: 3px;
   width: auto;
   padding: 12px;
-  & + .static-wrapper {
-    margin-top: 8px;
-  }
-  .static-tr {
+  border: 1px dashed var(--primary-color);
+  .col-tr {
     position: absolute;
     right: 12px;
     top: -8px;

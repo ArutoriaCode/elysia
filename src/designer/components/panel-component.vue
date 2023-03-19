@@ -21,7 +21,7 @@
           <li
             class="widget-item"
             :key="index"
-            :title="widget.name"
+            :title="widget.nameAlias || widget.name"
             @dblclick="onPushComponent(widget)"
             slot="item"
           >
@@ -47,7 +47,7 @@
           <li
             class="widget-item"
             :key="index"
-            :title="widget.name"
+            :title="widget.nameAlias || widget.name"
             @dblclick="onPushComponent(widget)"
             slot="item"
           >
@@ -65,8 +65,7 @@ import store from '@/designer/core/store.js'
 import { clone } from '@/designer/core/clone.js'
 import { checkMove } from '@/designer/core/move.js'
 import { containersSchema, fieldsSchema } from '@/designer/core/schema/index.js'
-import { setSelected } from '@/designer/core/select.js'
-import { ref, nextTick } from 'vue'
+import { ref } from 'vue'
 import recorder from '../core/recorder'
 
 const activeKey = ref(['1', '2'])
@@ -101,6 +100,10 @@ const onEndMove = evt => {
     }
   }
 
+  .ant-collapse-content-box {
+    padding: 16px 8px;
+  }
+
   .widget-ul {
     margin: 0;
     padding: 0;
@@ -108,9 +111,9 @@ const onEndMove = evt => {
     flex-wrap: wrap;
   }
   .widget-item {
-    min-width: 84px;
+    min-width: 95px;
     height: 36px;
-    padding: 0 8px;
+    padding: 0 4px;
     line-height: 36px;
     text-align: center;
     border-radius: 8px;
