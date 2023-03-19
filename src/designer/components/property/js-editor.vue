@@ -1,5 +1,4 @@
 <script setup>
-import { Codemirror } from 'vue-codemirror'
 import { javascript } from '@codemirror/lang-javascript'
 import { ctxComplete } from '@/designer/utils/complete.js'
 import { ref } from 'vue'

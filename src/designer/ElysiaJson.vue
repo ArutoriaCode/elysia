@@ -1,5 +1,4 @@
 <script setup>
-import { Codemirror } from 'vue-codemirror'
 import { json } from '@codemirror/lang-json'
 import { viewSchemaJson } from '@/designer/core/store.js'
 const extensions = [json()]
@@ -8,7 +7,7 @@ const extensions = [json()]
   <div class="elysia-json">
     <codemirror
       v-model="viewSchemaJson"
-      style="width: 100%"
+      style="width: 100%; height: 100%;"
       :autofocus="true"
       :indent-with-tab="true"
       :tab-size="2"

@@ -19,6 +19,7 @@
       </div>
 
       <div>
+        <import-icon title="导入JSON" @click="onImport"></import-icon>
         <template v-if="active === 'render'">
           <clear-outlined title="清空设计" @click="onClearStore" />
           <play-circle-filled title="预览" @click="onViewBuilds" />
@@ -34,6 +35,24 @@
       <slot :active="active"></slot>
     </div>
   </div>
+
+  <a-modal
+    class="custom-code-modal"
+    v-model:visible="showImport"
+    title="导入jsonSchema"
+    ok-text="确认导入"
+    cancel-text="取消"
+    @ok="onConfirmImport"
+  >
+    <codemirror
+      v-model="importJson"
+      :style="{ width: '100%', height: '480px' }"
+      :autofocus="true"
+      :indentWithTab="true"
+      :tabSize="2"
+      :extensions="[json()]"
+    ></codemirror>
+  </a-modal>
 </template>
 <script setup>
 import {
@@ -50,8 +69,11 @@ import recorder, {
   disabledUndo,
   disabledRedo
 } from './core/recorder'
-import { computed, nextTick } from 'vue'
+import { computed, nextTick, ref } from 'vue'
 import { setSelected } from '@/designer/core/select.js'
+import { json } from '@codemirror/lang-json'
+import store, { importSchemaJson } from '@/designer/core/store.js'
+import { message } from 'ant-design-vue'
 
 const props = defineProps({
   modelValue: String
@@ -74,6 +96,26 @@ const onClearStore = () => {
 
   setSelected(null)
   clearStore()
+}
+
+const showImport = ref(false)
+const importJson = ref('')
+const onImport = () => {
+  importJson.value = JSON.stringify(store, null, 2)
+  showImport.value = true
+}
+
+const onConfirmImport = () => {
+  const result = importSchemaJson(importJson)
+  if (!result) {
+    message.error('导入错误，jsonSchema不符合规范!')
+    return
+  }
+
+  showImport.value = false
+  message.success('导入成功！')
+
+  onRefresh()
 }
 
 const onRefresh = () => {

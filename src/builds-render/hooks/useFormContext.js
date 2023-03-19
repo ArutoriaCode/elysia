@@ -121,8 +121,6 @@ export default function useFormContext(defaultValueKey) {
   // 表单全局禁用
   const disabled = computed(() => {
     const formConfig = widget[GLOBAL_FORM_CONFIG];
-    console.log("widget", widget, isReactive(widget));
-    console.log("model", model, isReactive(model));
     return formConfig.formDisabled || model.disabled;
   });
   // 表单全局大小

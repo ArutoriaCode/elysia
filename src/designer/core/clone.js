@@ -7,7 +7,7 @@ import { checkSchema } from "./store";
 function cloneWG(widget) {
   const newWidget = cloneDeep(widget);
   const uniqField =
-    widget.name + Math.round(Math.random() * 10000 * Math.random()) * Date.now();
+    widget.name + Math.round(Math.random() * 100 * Math.random()) * Date.now();
   const isFormComp =
     widget.type === CONTAINER_TYPE && Reflect.has(widget.options, "formField");
   if (isFormComp) {

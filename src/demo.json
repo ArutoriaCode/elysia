@@ -1,0 +1,152 @@
+{
+  "id": "3d0ce97f-3d7d-47df-92a7-f7d1cec948e3",
+  "name": "a-form",
+  "childrenList": [
+    {
+      "id": "bc9e5591-107b-4a9a-a713-449cce37be5c",
+      "name": "input",
+      "type": "field",
+      "isFormItem": true,
+      "icon": "input-icon",
+      "options": {
+        "field": "name",
+        "label": "姓名",
+        "inputValue": "",
+        "required": true,
+        "x-rules": [],
+        "x-required-message": "请输入姓名",
+        "x-error-message": "",
+        "readonly": false,
+        "disabled": false,
+        "allowClear": true
+      },
+      "selects": {
+        "size": [
+          {
+            "value": "large"
+          },
+          {
+            "value": "default"
+          },
+          {
+            "value": "small"
+          }
+        ]
+      },
+      "nameAlias": "输入框"
+    },
+    {
+      "id": "fbbf236c-7f59-4acf-8c18-294436748126",
+      "name": "input",
+      "type": "field",
+      "isFormItem": true,
+      "icon": "input-icon",
+      "options": {
+        "field": "address",
+        "label": "地址",
+        "inputValue": "",
+        "required": true,
+        "x-rules": [],
+        "x-required-message": "请输入地址",
+        "x-error-message": "",
+        "readonly": false,
+        "disabled": false,
+        "allowClear": true
+      },
+      "selects": {
+        "size": [
+          {
+            "value": "large"
+          },
+          {
+            "value": "default"
+          },
+          {
+            "value": "small"
+          }
+        ]
+      },
+      "nameAlias": "输入框"
+    },
+    {
+      "id": "d9d2c2d7-fa1c-4279-b41a-21471a39e494",
+      "name": "button",
+      "type": "field",
+      "icon": "button-icon",
+      "options": {
+        "field": "button4325666113609680",
+        "text": "禁用所有输入框",
+        "type": "default",
+        "shape": "default",
+        "size": "",
+        "ghost": false,
+        "disabled": false,
+        "block": false,
+        "onClick": "ctx.$fieldRefs.name.model.disabled = true;\nctx.$fieldRefs.address.model.disabled = true;\n"
+      },
+      "selects": {
+        "type": [
+          {
+            "value": "default"
+          },
+          {
+            "value": "primary"
+          },
+          {
+            "value": "danger"
+          },
+          {
+            "value": "link"
+          }
+        ],
+        "size": [
+          {
+            "value": "large"
+          },
+          {
+            "value": "default"
+          },
+          {
+            "value": "small"
+          }
+        ],
+        "shape": [
+          {
+            "value": "default"
+          },
+          {
+            "value": "circle"
+          },
+          {
+            "value": "round"
+          }
+        ]
+      },
+      "nameAlias": "按钮"
+    }
+  ],
+  "type": "container",
+  "options": {
+    "formField": "form31679218207651",
+    "formRefName": "formRef",
+    "globalStyle": "",
+    "formSize": "",
+    "formReadonly": false,
+    "formDisabled": false,
+    "onMounted": "",
+    "onUnmounted": ""
+  },
+  "selects": {
+    "formSize": [
+      {
+        "value": "large"
+      },
+      {
+        "value": "default"
+      },
+      {
+        "value": "small"
+      }
+    ]
+  }
+}

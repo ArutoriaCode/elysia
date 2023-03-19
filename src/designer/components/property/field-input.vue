@@ -13,7 +13,6 @@
 import useDefineModel from './useDefineModel'
 import { uniqueField } from '../../core/store'
 import { message } from 'ant-design-vue'
-import 'ant-design-vue/es/message/style/css'
 import { reactive, unref } from 'vue'
 import { seletedSchema } from '@/designer/core/select.js'
 

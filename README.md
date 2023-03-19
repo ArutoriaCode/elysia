@@ -1,7 +1,49 @@
-# Vue 3 + Vite
+# Elysia Form
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+基于**Vue3**、**Ant Design of Vue**、**Vite**的可视化设计低代码表单
 
-## Recommended IDE Setup
+### 在线预览
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+[在线Demo](https://arutoriacode.github.io/elysia)
+
+### 功能一览
+
+- [x] 拖拽式可视化表单设计
+- [x] 支持用户自定义代码来控制组件
+- [ ] 支持自定义CSS样式（开发中）
+- [x] 支持自定义校验逻辑
+- [x] 支持开发自定义组件
+- [ ] 支持响应式自适应布局（开发中）
+
+### 安装依赖
+
+```shell
+npm install
+```
+
+### 本地调试
+
+```shell
+npm run dev
+```
+
+### 打包
+
+完善中
+
+### 浏览器兼容性
+
+不支持IE 11(包括)以下的浏览器
+
+### 开发自定义组件
+
+在 **src/extension** 下有个 github 自定义组件可以参考
+
+同时还需要在渲染器**builds-render**目录下有对应的渲染组件
+
+**需要注意** 不管设计器还是渲染器的组件都采用了`<script setup>` + `hooks`的形式进行编写的
+
+### 自定义图标
+
+设计器**designer**下的**icons**图标来源于[fontawesome](https://fontawesome.com/icons?d=gallery)免费且开源的图标，你可以从中复制SVG的代码在icons文件夹中新建一个svg文件并粘贴复制的内容，保存后将会自动导入并注册为组件，**组件名称就是文件名（不包含.svg后缀）**
+

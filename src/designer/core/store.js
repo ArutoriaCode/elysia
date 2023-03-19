@@ -1,5 +1,5 @@
 import recorder from "./recorder";
-import { reactive, shallowRef, computed } from "vue";
+import { reactive, shallowRef, computed, unref } from "vue";
 import { v4 as uuidv4 } from "uuid";
 import { CONTAINER_TYPE, FIELD_TYPE } from "../utils/helper";
 import { isObject } from "@/utils";
@@ -43,7 +43,6 @@ const schemaJson = reactive({
  */
 export const uniqueField = {};
 
-
 /**
  * 校验schema是否合法，支持单个schema对象或者多个schema对象的数组
  */
@@ -68,6 +67,28 @@ export function clearStore(record = true) {
   if (record) {
     recorder.add(`清空数据`, "broom-icon");
   }
+}
+
+export function importSchemaJson(json) {
+  json = unref(json)
+  if (typeof json === "string") {
+    try {
+      json = JSON.parse(json);
+    } catch (e) {
+      return false;
+    }
+  }
+
+  const result = checkSchema(json);
+  if (!result) {
+    return false;
+  }
+
+  Object.keys(schemaJson).map(key => {
+    schemaJson[key] = json[key];
+  });
+
+  return true;
 }
 
 export const viewSchemaJson = shallowRef(null);
