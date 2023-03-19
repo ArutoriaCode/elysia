@@ -9,26 +9,25 @@ import useDefineModel from '~property/useDefineModel.js'
 
 const extensions = [javascript(), ctxComplete, json()]
 
-const { modelValue, propertyCN, property, checkChangeRecord } = useDefineModel()
+const { modelValue, propertyCN, property, action } = useDefineModel()
 const visible = ref(false)
 const onEditCode = () => {
   visible.value = true
 }
 
-const example = `/**
-   * 合法的JSON
-   * [{"label":"标签","value":"值"}]
-   * 
-   * js代码直接返回数组
-   * return [{ label: 'label', value: 'value' }]
-   * 
-   * js代码异步请求返回数组数据
-   * return ctx.axios.post(...).then((res) => {
-   *   省略错误处理的代码等，最终一定要返回数组
-   *   return [{ label: 'label', value: 'value' }]
-   * })
-   * 
-*/`
+const example = `
+  合法的JSON
+  [{"label":"标签","value":"值"}]
+
+  js代码直接返回数组
+  return [{ label: 'label', value: 'value' }]
+
+  js代码异步请求返回数组数据
+  return ctx.axios.post(...).then((res) => {
+    省略错误处理的代码等，最终一定要返回数组
+    return [{ label: 'label', value: 'value' }]
+  })
+`
 </script>
 <template>
   <a-form-item
@@ -45,8 +44,8 @@ const example = `/**
       :footer="null"
       :keyboard="false"
       class="custom-code-modal"
-      @cancel="checkChangeRecord"
-      @ok="checkChangeRecord"
+      @cancel="action.record"
+      @ok="action.record"
     >
       <a-alert type="info" show-icon>
         <template #message>

@@ -4,6 +4,30 @@ import { CONTAINER_TYPE } from "@/designer/utils/helper";
 import { reactive } from "vue";
 import { checkSchema } from "./store";
 
+function cloneWG(widget) {
+  const newWidget = cloneDeep(widget);
+  const uniqField =
+    widget.name + Math.round(Math.random() * 10000 * Math.random()) * Date.now();
+  const isFormComp =
+    widget.type === CONTAINER_TYPE && Reflect.has(widget.options, "formField");
+  if (isFormComp) {
+    delete newWidget.options.formField;
+    newWidget.options = {
+      formField: uniqField, // 让formField渲染成组件排在第一行
+      ...newWidget.options
+    };
+  } else {
+    delete newWidget.options.field;
+    newWidget.options = {
+      field: uniqField, // 让field渲染成组件排在第一行
+      ...newWidget.options
+    };
+  }
+
+  newWidget.id = uuidV4();
+  return newWidget;
+}
+
 /**
  * 深度克隆组件信息
  *
@@ -11,8 +35,7 @@ import { checkSchema } from "./store";
  */
 export function cloneSchema(schema) {
   function _cloneDeepSchema(value) {
-    const newWidget = cloneDeep(value);
-    newWidget.id = uuidV4(); // 更换id
+    const newWidget = cloneWG(value);
 
     if (newWidget.type !== CONTAINER_TYPE) {
       return newWidget;
@@ -43,13 +66,7 @@ export function cloneSchema(schema) {
 
 /** 用于绑定到 `vuedraggable` 库的clone钩子函数，如要克隆组件信息请使用`cloneSchema` */
 export function clone(widget) {
-  const cloneWidget = cloneDeep(widget);
-  cloneWidget.id = uuidV4(); // id 必须重新生成并覆盖
-
-  cloneWidget.options = {
-    field: widget.name + Math.round(Math.random() * 100 * Math.random()) * 5,
-    ...cloneWidget.options
-  };
+  const cloneWidget = cloneWG(widget);
 
   if (cloneWidget.type === CONTAINER_TYPE && !Array.isArray(cloneWidget.childrenList)) {
     cloneWidget.childrenList = []; // 容器组件如未定义子组件列表，自动定义

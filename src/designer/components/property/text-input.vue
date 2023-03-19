@@ -1,10 +1,10 @@
 <template>
   <a-form-item :label="propertyCN" class="property-editor">
-    <a-input v-model:value="modelValue" @blur="checkChangeRecord"></a-input>
+    <a-input v-model:value="modelValue" @blur="action.record"></a-input>
   </a-form-item>
 </template>
 <script setup>
 import useDefineModel from './useDefineModel'
 
-const { propertyCN, modelValue, checkChangeRecord } = useDefineModel()
+const { propertyCN, modelValue, action } = useDefineModel()
 </script>

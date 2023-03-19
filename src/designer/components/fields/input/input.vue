@@ -19,5 +19,5 @@ const props = defineProps({
   widget: Object
 })
 
-const { readonly, disabled, size, model } = useGlobalSetting(props.widget)
+const { readonly, disabled, size, model } = useGlobalSetting()
 </script>

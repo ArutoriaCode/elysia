@@ -4,26 +4,9 @@ import { v4 as uuidv4 } from "uuid";
 import { CONTAINER_TYPE, FIELD_TYPE } from "../utils/helper";
 import { isObject } from "@/utils";
 
-/**
- * 校验schema是否合法，支持单个schema对象或者多个schema对象的数组
- */
-export function checkSchema(schema) {
-  if (Array.isArray(schema)) {
-    return schema.every(s => checkSchema(s));
-  }
-
-  if (!isObject(schema)) {
-    return false;
-  }
-
-  const schemaKeys = ["id", "name", "options", "type"];
-  const valid = schemaKeys.every(key => Reflect.has(schema, key));
-  return valid && [CONTAINER_TYPE, FIELD_TYPE].includes(schema.type);
-}
-
 const defaultGlobalOptions = {
   // 表单名称 与field作用一致
-  formField: "form" + Math.round(Math.random() * 100 * Math.random()) * 5,
+  formField: "form" + Math.round(Math.random() * 100 * Math.random()) + Date.now(),
   // refs 中的名称
   formRefName: "formRef",
   // 全局样式
@@ -51,6 +34,32 @@ const schemaJson = reactive({
     formSize: [{ value: "large" }, { value: "default" }, { value: "small" }]
   }
 });
+
+/**
+ * 所有组件的唯一标识
+ * ```javascript
+ * { id: Ref<string> }
+ * ```
+ */
+export const uniqueField = {};
+
+
+/**
+ * 校验schema是否合法，支持单个schema对象或者多个schema对象的数组
+ */
+export function checkSchema(schema) {
+  if (Array.isArray(schema)) {
+    return schema.every(s => checkSchema(s));
+  }
+
+  if (!isObject(schema)) {
+    return false;
+  }
+
+  const schemaKeys = ["id", "name", "options", "type"];
+  const valid = schemaKeys.every(key => Reflect.has(schema, key));
+  return valid && [CONTAINER_TYPE, FIELD_TYPE].includes(schema.type);
+}
 
 export function clearStore(record = true) {
   schemaJson.childrenList = [];

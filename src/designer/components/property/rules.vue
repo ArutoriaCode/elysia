@@ -7,7 +7,7 @@
       <a-form-item :label="requiredMessageLabel">
         <a-input
           v-model:value="requiredMessage"
-          @blur="requiredChangeRecord"
+          @blur="requiredAction.record"
         ></a-input>
       </a-form-item>
       <a-form-item :label="rulesLabel">
@@ -18,13 +18,13 @@
           placeholder="可输入正则表单式定义自定义的规则"
           :options="defaultRules"
           :max-tag-count="3"
-          @change="rulesChangeRecord"
+          @change="rulesAction.record"
         />
       </a-form-item>
       <a-form-item :label="errorMessageLabel">
         <a-input
           v-model:value="errorMessage"
-          @blur="messageChangeRecord"
+          @blur="messageAction.record"
         ></a-input>
       </a-form-item>
     </template>
@@ -39,19 +39,19 @@ const { modelValue, propertyCN } = useDefineModel()
 const {
   propertyAlias: rulesLabel,
   propertyModel: rules,
-  checkChangeRecord: rulesChangeRecord
+  action: rulesAction
 } = useProp('x-rules')
 
 const {
   propertyAlias: requiredMessageLabel,
   propertyModel: requiredMessage,
-  checkChangeRecord: requiredChangeRecord
+  action: requiredAction
 } = useProp('x-required-message')
 
 const {
   propertyAlias: errorMessageLabel,
   propertyModel: errorMessage,
-  checkChangeRecord: messageChangeRecord
+  action: messageAction
 } = useProp('x-error-message')
 
 const defaultRules = [

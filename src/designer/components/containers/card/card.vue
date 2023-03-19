@@ -17,9 +17,12 @@
 <script setup>
 import containerDraggable from '@/designer/components/container-draggable.vue'
 import staticWrapper from '@/designer/components/wrapper/static-wrapper.vue'
+import useGlobalSetting from '@/designer/hooks/useGlobalSetting';
 defineProps({
   widget: Object
 })
+
+useGlobalSetting()
 </script>
 <style>
 .container-draggable {
