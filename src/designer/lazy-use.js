@@ -13,7 +13,9 @@ import {
   Spin,
   Skeleton,
   Row,
-  Col
+  Col,
+  Radio,
+  Checkbox
 } from "ant-design-vue";
 
 import { Modal } from "ant-design-vue";
@@ -37,6 +39,8 @@ export default {
       .use(Skeleton)
       .use(Row)
       .use(Col)
+      .use(Radio)
+      .use(Checkbox)
       .use(Modal);
   }
 };
