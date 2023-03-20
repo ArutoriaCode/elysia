@@ -12,11 +12,11 @@ const fields = [
       text: "按钮",
       type: "default",
       shape: "default",
-      size: '',
+      size: "",
       ghost: false,
       disabled: false,
       block: false,
-      onClick: "",
+      onClick: ""
     },
     selects: {
       type: [
@@ -89,8 +89,8 @@ const fields = [
     icon: "down-select-icon", // from icons/
     options: {
       label: "Label",
-      selectValue: "",
-      selectOptions: '',
+      selectValue: [],
+      selectOptions: "",
       required: false,
       "x-rules": [],
       "x-required-message": "",
@@ -102,6 +102,26 @@ const fields = [
     },
     selects: {
       size: [{ value: "large" }, { value: "default" }, { value: "small" }]
+    }
+  },
+  {
+    id: uuidv4(),
+    name: "checkbox", // 对应 components/fields/input/input.vue 的组件名称
+    type: FIELD_TYPE,
+    isFormItem: true, // 表单项
+    icon: "checkbox-icon", // from icons/
+    options: {
+      label: "Label",
+      selectValue: [],
+      selectOptions: JSON.stringify([
+        { label: "选项一", value: "option1" },
+        { label: "选项二", value: "option2" }
+      ]),
+      required: false,
+      "x-rules": [],
+      "x-required-message": "",
+      "x-error-message": "",
+      disabled: false
     }
   }
 ];

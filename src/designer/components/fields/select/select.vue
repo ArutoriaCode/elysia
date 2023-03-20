@@ -7,7 +7,7 @@
         :disabled="disabled"
         :options="[]"
         :allow-clear="model.allowClear"
-        v-model:value="model.value"
+        v-model:value="model.selectValue"
       >
         <template #dropdownRender>
           <a-empty description="请通过预览查看选项" :image="simple" />

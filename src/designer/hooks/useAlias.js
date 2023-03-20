@@ -57,7 +57,8 @@ const aliasDict = reactive({
     input: "输入框",
     select: "选择器",
     grid: '栅格',
-    col: '栅格列'
+    col: '栅格列',
+    checkbox: '多选项'
   }
 });
 
