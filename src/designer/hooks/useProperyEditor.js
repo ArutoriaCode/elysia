@@ -32,14 +32,15 @@ const propertys = reactive({
     selectOptions: "select-options-editor",
     gutter: "input-number",
     flex: "switch",
-    align: "selector",
-    justify: "selector",
+    align: "selecter",
+    justify: "selecter",
     wrap: "switch",
     cols: "col-editor",
     span: "span-input",
     pull: "input-number",
     push: "input-number",
-    offset: "input-number"
+    offset: "input-number",
+    optionType: "selecter"
   },
   [EVENT_KEY_NAME]: {
     onClick: "js-editor",

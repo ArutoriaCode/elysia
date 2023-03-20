@@ -42,7 +42,8 @@ const aliasDict = reactive({
     flex: "flex布局",
     align: "flex垂直对齐方式",
     justify: "flex水平排列方式",
-    wrap: '自动换行'
+    wrap: '自动换行',
+    optionType: '单选框类型'
   },
   [EVENT_KEY_NAME]: {
     onClick: "点击事件",
@@ -58,7 +59,8 @@ const aliasDict = reactive({
     select: "选择器",
     grid: '栅格',
     col: '栅格列',
-    checkbox: '多选项'
+    checkbox: '多选项',
+    radio: '单选项'
   }
 });
 

@@ -113,15 +113,49 @@ const fields = [
     options: {
       label: "Label",
       selectValue: [],
-      selectOptions: JSON.stringify([
-        { label: "选项一", value: "option1" },
-        { label: "选项二", value: "option2" }
-      ]),
+      selectOptions: JSON.stringify(
+        [
+          { label: "多选项一", value: "option1" },
+          { label: "多选项二", value: "option2" }
+        ],
+        null,
+        2
+      ),
       required: false,
       "x-rules": [],
       "x-required-message": "",
       "x-error-message": "",
       disabled: false
+    }
+  },
+  {
+    id: uuidv4(),
+    name: "radio", // 对应 components/fields/input/input.vue 的组件名称
+    type: FIELD_TYPE,
+    isFormItem: true, // 表单项
+    icon: "radio-icon", // from icons/
+    options: {
+      label: "Label",
+      selectValue: [],
+      selectOptions: JSON.stringify(
+        [
+          { label: "单选项一", value: "option1" },
+          { label: "单选项二", value: "option2" }
+        ],
+        null,
+        2
+      ),
+      required: false,
+      "x-rules": [],
+      "x-required-message": "",
+      "x-error-message": "",
+      optionType: "default",
+      size: "default",
+      disabled: false,
+    },
+    selects: {
+      size: [{ value: "large" }, { value: "default" }, { value: "small" }],
+      optionType: [{ value: "default" }, { value: "button" }]
     }
   }
 ];
