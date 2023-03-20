@@ -3,6 +3,41 @@ import { v4 as uuidv4 } from "uuid";
 import useAlias from "@/designer/hooks/useAlias";
 import { cloneSchema } from "../clone";
 
+// 该组件不提供在左侧拖拽栏
+export const colSchema = {
+  id: "col-1",
+  name: "col",
+  nameAlias: useAlias([PANEL_COMPONENT, "col"]),
+  type: CONTAINER_TYPE,
+  childrenList: [],
+  options: {
+    responsive: false,
+    offset: 0,
+    span: 12,
+    pull: 0,
+    push: 0
+  },
+  "x-editor-props": {
+    offset: {
+      min: 0,
+      max: 24,
+      precision: 0
+    },
+    span: {
+      min: 0,
+      precision: 0
+    },
+    pull: {
+      min: 0,
+      precision: 0
+    },
+    push: {
+      min: 0,
+      precision: 0
+    }
+  }
+};
+
 const containers = [
   {
     id: uuidv4(),
@@ -21,28 +56,7 @@ const containers = [
     name: "grid", // 对应 components/containers/card/card.vue 的组件名称
     type: CONTAINER_TYPE,
     icon: "grid-icon", // from icons/
-    childrenList: [
-      cloneSchema({
-        id: "col-1",
-        name: "col",
-        nameAlias: useAlias([PANEL_COMPONENT, "col"], "栅格列"),
-        type: CONTAINER_TYPE,
-        childrenList: [],
-        options: {
-          span: 12
-        }
-      }),
-      cloneSchema({
-        id: "col-1",
-        name: "col",
-        nameAlias: useAlias([PANEL_COMPONENT, "col"], "栅格列"),
-        type: CONTAINER_TYPE,
-        childrenList: [],
-        options: {
-          span: 12
-        }
-      })
-    ],
+    childrenList: [cloneSchema(colSchema), cloneSchema(colSchema)],
     options: {
       hidden: false,
       cols: 2,

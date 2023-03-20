@@ -38,7 +38,7 @@ export default function useProp(property) {
         propertyModel.value = oldPropModel; // 取消本次更改，用途：用户定义的唯一标识重复，就撤销本次更改
         noRecordNum += 1;
       },
-      record: () => {
+      record: callback => {
         // 延迟记录，以免撤销更改的操作也被记录进行
         nextTick(() => {
           if (isEqual(oldPropModel, propertyModel.value)) {
@@ -46,12 +46,19 @@ export default function useProp(property) {
           }
 
           const { name, nameAlias } = seletedSchema.value;
-          // 记录本次值用作下次匹配
-          oldPropModel = propertyModel.value;
+
           recorder.add(
             `${nameAlias || name}组件属性[${propertyAlias}]被修改`,
             "prop-icon"
           );
+
+          if (typeof callback === "function") {
+            // 返回新值、旧值
+            callback(propertyModel.value, oldPropModel);
+          }
+
+          // 记录本次值用作下次匹配
+          oldPropModel = propertyModel.value;
         });
       }
     };

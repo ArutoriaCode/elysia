@@ -29,7 +29,12 @@ const propertys = reactive({
     formSize: "selecter",
     required: "rules",
     formRefName: "text-input",
-    selectOptions: "select-options-editor"
+    selectOptions: "select-options-editor",
+    cols: "col-editor",
+    span: "span-input",
+    pull: "input-number",
+    push: "input-number",
+    offset: "input-number"
   },
   [EVENT_KEY_NAME]: {
     onClick: "js-editor",

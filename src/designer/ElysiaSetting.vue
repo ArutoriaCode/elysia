@@ -144,12 +144,17 @@ watch(
   transition: display 0.2s;
   min-width: 172px;
   .ant-row.ant-form-item {
-    border-bottom: 1px solid #f0f0f2;
+    border-top: 1px solid #f0f0f2;
     margin-bottom: 0;
     padding: 14px 0;
     &:first-child {
       padding-top: 0;
+      border-top: 0;
     }
+  }
+
+  .ant-divider + .ant-row.ant-form-item {
+    border-top: 0;
   }
 
   .property-editor {

@@ -3,7 +3,7 @@
     <a-input-number
       v-model:value="modelValue"
       v-bind="inputNumberProps"
-      @blur="checkChangeRecord"
+      @blur="action.record"
     ></a-input-number>
   </a-form-item>
 </template>
@@ -12,7 +12,7 @@ import useDefineModel from '~property/useDefineModel.js'
 import { seletedSchema } from '@/designer/core/select.js'
 import { ref } from 'vue'
 
-const { propertyCN, modelValue, property, checkChangeRecord } = useDefineModel()
+const { propertyCN, modelValue, property, action } = useDefineModel()
 
 const { inputNumber } = seletedSchema.value
 const inputNumberProps = ref({})

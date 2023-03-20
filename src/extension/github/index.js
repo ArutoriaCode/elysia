@@ -36,11 +36,11 @@ const GithubSchema = {
 const GithubProperties = {
   fontSize: {
     // 属性编辑器组件注册名称：可以使用已经内置且注册的属性编辑器组件名称 又或者 使用下方component导入的组件
-    name: "input-number",
+    name: "custom-input-number",
     // 属性的类型 目前有基础属性以及事件属性
     type: COMMON_KEY_NAME,
     // 自定义属性编辑器组件需要自身导入
-    component: defineAsyncComponent(() => import("./property/input-number.vue")),
+    component: defineAsyncComponent(() => import("./property/custom-input-number.vue")),
     // useAlias([COMMON_KEY_NAME, 'fontSize', '字体大小'])
     alias: "字体大小"
   }

@@ -4,6 +4,9 @@
     :class="{ [widget.name]: true, 'show-shadow': isSelected }"
     @click.stop.prevent="onSetSelect"
     :span="widget.options.span"
+    :pull="widget.options.pull"
+    :push="widget.options.push"
+    :offset="widget.options.offset"
   >
     <slot></slot>
     <div class="col-tr" v-if="isSelected">

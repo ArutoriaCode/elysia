@@ -32,7 +32,12 @@ const aliasDict = reactive({
     "x-required-message": "必填校验提示",
     "x-error-message": "校验错误提示",
     formRefName: "引用名称",
-    selectOptions: '数据选项'
+    selectOptions: '数据选项',
+    width: '宽度',
+    offset: '左侧间隔格数',
+    span: '栅格宽度',
+    pull: '栅格左移格数',
+    push: '栅格右移格数'
   },
   [EVENT_KEY_NAME]: {
     onClick: "点击事件",
@@ -46,7 +51,8 @@ const aliasDict = reactive({
     divider: "分割线",
     input: "输入框",
     select: "选择器",
-    grid: '栅格'
+    grid: '栅格',
+    col: '栅格列'
   }
 });
 

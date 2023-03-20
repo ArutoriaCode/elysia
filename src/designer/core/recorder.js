@@ -3,6 +3,7 @@ import store from "./store";
 import { reactive, shallowRef, computed } from "vue";
 import { seletedSchema, setSelected } from "./select";
 import cloneDeep from "lodash.clonedeep";
+import { isObject } from "../../utils";
 
 export const historys = reactive({
   historyList: [],
@@ -30,6 +31,12 @@ const recorder = {
     // 防止记录的历史数据过多，目前设为最大25条记录
     if (historys.historyList.length === 25) {
       historys.historyList.pop();
+    }
+
+    if (isObject(icon) && icon.name) {
+      const app = window.__elysia_app__
+      app.component(icon.name, icon)
+      icon = icon.name
     }
 
     const selected = seletedSchema.value;
