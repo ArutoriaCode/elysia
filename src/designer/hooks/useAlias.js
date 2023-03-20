@@ -37,7 +37,12 @@ const aliasDict = reactive({
     offset: '左侧间隔格数',
     span: '栅格宽度',
     pull: '栅格左移格数',
-    push: '栅格右移格数'
+    push: '栅格右移格数',
+    gutter: '栅格间隔',
+    flex: "flex布局",
+    align: "flex垂直对齐方式",
+    justify: "flex水平排列方式",
+    wrap: '自动换行'
   },
   [EVENT_KEY_NAME]: {
     onClick: "点击事件",

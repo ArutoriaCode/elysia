@@ -4,6 +4,7 @@
       v-bind="numberProps"
       v-model:value="modelValue"
       @blur="onCustomRecord"
+      style="width: 100%"
     ></a-input-number>
   </a-form-item>
 </template>
@@ -18,7 +19,6 @@ const onCustomRecord = () => {
     return
   }
 
-  console.log("🚀 ~ file: input-number.vue:22 ~ onCustomRecord ~ max:", max)
   if (max !== null && max < modelValue.value) {
     return
   }

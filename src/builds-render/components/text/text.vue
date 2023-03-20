@@ -1,6 +1,6 @@
 <template>
-  <p v-show="!model.options.hidden">
-    {{ model.options.text }}
+  <p v-show="!model.hidden">
+    {{ model.text }}
   </p>
 </template>
 <script setup>

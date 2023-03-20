@@ -31,6 +31,7 @@
 <script setup>
 import useDefineModel from '~property/useDefineModel.js'
 import useAlias from '../../hooks/useAlias'
+import recorder from '~core/recorder'
 import { DeleteFilled, PlusSquareFilled } from '@ant-design/icons-vue'
 import { seletedSchema } from '@/designer/core/select.js'
 import { find } from '~core/find'
@@ -38,7 +39,6 @@ import { colSchema } from '~core/schema/containers.js'
 import { cloneSchema } from '~core/clone'
 import { PANEL_COMPONENT } from '../../utils/helper'
 import { toRef } from 'vue'
-import recorder from '~core/recorder'
 import { COMMON_KEY_NAME } from '@/designer/utils/helper.js'
 
 const colAlias = useAlias([PANEL_COMPONENT, 'col'])

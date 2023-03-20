@@ -1,6 +1,13 @@
 <template>
   <static-wrapper :widget="widget">
-    <a-row :gutter="widget.options.gutter" style="width: 100%">
+    <a-row
+      :gutter="widget.options.gutter"
+      :type="widget.options.flex ? 'flex' : undefined"
+      :align="widget.options.align"
+      :justify="widget.options.justify"
+      :wrap="widget.options.wrap"
+      style="width: 100%"
+    >
       <elysia-col
         v-for="(col, index) in widget.childrenList"
         :key="col.id"

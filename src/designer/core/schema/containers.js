@@ -60,7 +60,30 @@ const containers = [
     options: {
       hidden: false,
       cols: 2,
-      gutter: 8
+      gutter: 8,
+      flex: false,
+      align: "top",
+      justify: "start",
+      wrap: false
+    },
+    selects: {
+      align: [{ value: "top" }, { value: "middle" }, { value: "bottom" }],
+      justify: [
+        { value: "start" },
+        { value: "end" },
+        { value: "center" },
+        { value: "space-around" },
+        { value: "space-between" }
+      ]
+    },
+    "x-editor-props": {
+      gutter: {
+        min: 0,
+        max: 24,
+        precision: 0,
+        formatter: value => `${value}px`,
+        parser: value => value.replace("px", "")
+      }
     }
   }
 ];
