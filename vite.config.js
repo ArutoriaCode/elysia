@@ -45,7 +45,11 @@ export default defineConfig({
               case "@vue":
               case "ant-design-vue":
               case "@ant-design/icons-vue":
-                return "module-" + arr[0];
+              case "axios":
+              case "dayjs":
+              case "lodash.clonedeep":
+              case "lodash.isequal":
+                return "module-" + arr[0].replace('.', '-');
                 break;
               default:
                 return "vendor";
