@@ -40,7 +40,8 @@ const propertys = reactive({
     pull: "input-number",
     push: "input-number",
     offset: "input-number",
-    optionType: "selecter"
+    optionType: "selecter",
+    starCount: 'input-number',
   },
   [EVENT_KEY_NAME]: {
     onClick: "js-editor",

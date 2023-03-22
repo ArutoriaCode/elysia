@@ -26,7 +26,7 @@ const aliasDict = reactive({
     formSize: "全局大小",
     label: "标签",
     maxlength: "文本最大长度",
-    allowClear: "显示清除",
+    allowClear: "可清除",
     required: "是否必填",
     "x-rules": "校验规则",
     "x-required-message": "必填校验提示",
@@ -43,7 +43,8 @@ const aliasDict = reactive({
     align: "flex垂直对齐方式",
     justify: "flex水平排列方式",
     wrap: '自动换行',
-    optionType: '单选框类型'
+    optionType: '单选框类型',
+    starCount: 'star 总数'
   },
   [EVENT_KEY_NAME]: {
     onClick: "点击事件",
@@ -60,7 +61,8 @@ const aliasDict = reactive({
     grid: '栅格',
     col: '栅格列',
     checkbox: '多选项',
-    radio: '单选项'
+    radio: '单选项',
+    rate: '评分'
   }
 });
 

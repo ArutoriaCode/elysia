@@ -12,7 +12,8 @@
 import useDefineModel from './useDefineModel'
 import { seletedSchema } from '../../core/select'
 const { property, propertyCN, modelValue, action } = useDefineModel()
-const numberProps = seletedSchema.value['x-editor-props'][property] || {}
+const editorProps = seletedSchema.value['x-editor-props']
+const numberProps = editorProps ? editorProps[property] : {}
 const onCustomRecord = () => {
   const { min = null, max = null } = numberProps
   if (min !== null && min > modelValue.value) {

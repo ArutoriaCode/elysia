@@ -64,7 +64,7 @@ const containers = [
       flex: false,
       align: "top",
       justify: "start",
-      wrap: false
+      wrap: true
     },
     selects: {
       align: [{ value: "top" }, { value: "middle" }, { value: "bottom" }],

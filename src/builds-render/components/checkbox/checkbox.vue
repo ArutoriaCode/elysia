@@ -5,20 +5,20 @@
     :required="model.required"
   >
     <a-checkbox-group
-      v-model:value="model.selectValue"
+      v-model:value="modelValue"
       :options="dataSource"
       :disabled="disabled"
     />
   </a-form-item>
 </template>
 <script setup>
-import useGlobalSetting from '@/designer/hooks/useGlobalSetting.js'
+import useFormContext from '../../hooks/useFormContext'
 import useGetDataSource from '../../hooks/useGetDataSource'
 const props = defineProps({
   widget: Object
 })
 
-const { disabled, model } = useGlobalSetting()
+const { disabled, model, modelValue } = useFormContext('selectValue')
 
 const dataSource = useGetDataSource()
 </script>

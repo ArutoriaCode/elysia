@@ -157,6 +157,26 @@ const fields = [
       size: [{ value: "large" }, { value: "default" }, { value: "small" }],
       optionType: [{ value: "default" }, { value: "button" }]
     }
+  },
+  {
+    id: uuidv4(),
+    name: "rate", // 对应 components/fields/input/input.vue 的组件名称
+    type: FIELD_TYPE,
+    isFormItem: true, // 表单项
+    icon: "rate-icon", // from icons/
+    options: {
+      label: "Label",
+      value: 0,
+      required: false,
+      "x-rules": [],
+      "x-required-message": "",
+      "x-error-message": "",
+      disabled: false,
+      allowClear: true,
+      character: undefined,
+      allowHalf: false,
+      starCount: 5,
+    }
   }
 ];
 

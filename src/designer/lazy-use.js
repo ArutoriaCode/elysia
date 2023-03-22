@@ -15,7 +15,8 @@ import {
   Row,
   Col,
   Radio,
-  Checkbox
+  Checkbox,
+  Rate
 } from "ant-design-vue";
 
 import { Modal } from "ant-design-vue";
@@ -41,6 +42,7 @@ export default {
       .use(Col)
       .use(Radio)
       .use(Checkbox)
+      .use(Rate)
       .use(Modal);
   }
 };
