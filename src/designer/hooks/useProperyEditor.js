@@ -48,8 +48,16 @@ const propertys = reactive({
     stringMode: "switch",
     min: "input-number",
     max: "input-number",
+    step: "input-number",
     formatter: "prop-func-editor",
-    parser: "prop-func-editor"
+    parser: "prop-func-editor",
+    dots: "switch",
+    range: "switch",
+    reverse: "switch",
+    sliderStep: "input-number",
+    tooltipPlacement: "selecter",
+    tooltipVisible: "switch",
+    vertical: "switch"
   },
   [EVENT_KEY_NAME]: {
     onClick: "js-editor",

@@ -53,7 +53,14 @@ const aliasDict = reactive({
     min: "最小值",
     max: "最大值",
     formatter: "展示格式",
-    parser: "转换方式"
+    parser: "转换方式",
+    step: "步数",
+    sliderStep: "步长",
+    range: "双滑块模式",
+    reverse: "反向坐标轴",
+    tooltipPlacement: "提示显示方向",
+    tooltipVisible: "始终显示提示",
+    vertical: '垂直方向展示'
   },
   [EVENT_KEY_NAME]: {
     onClick: "点击事件",
@@ -72,7 +79,8 @@ const aliasDict = reactive({
     checkbox: "多选项",
     radio: "单选项",
     rate: "评分",
-    "input-number": "计数器"
+    "input-number": "计数器",
+    slider: "滑动条"
   }
 });
 

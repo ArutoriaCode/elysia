@@ -12,7 +12,7 @@ export default function () {
   } = useProp(property);
 
   const selectOptions = ref([]);
-  const xSelects = seletedSchema.value.xSelects;
+  const xSelects = seletedSchema.value['x-selects'] || [];
   if (xSelects && xSelects[property]) {
     selectOptions.value = xSelects[property];
   }

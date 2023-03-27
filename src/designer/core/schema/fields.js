@@ -101,13 +101,13 @@ const fields = [
       disabled: false,
       min: undefined,
       max: undefined,
+      step: 1,
       allowClear: true,
       autofocus: false,
       controls: true,
       formatter: undefined,
       parser: undefined,
       keyboard: true,
-      step: 1,
       stringMode: false
     },
     "x-selects": {
@@ -213,6 +213,56 @@ const fields = [
       character: undefined,
       allowHalf: false,
       starCount: 5
+    }
+  },
+  {
+    id: uuidv4(),
+    name: "slider", // 对应 components/fields/slider/slider.vue 的组件名称
+    type: FIELD_TYPE,
+    isFormItem: true, // 表单项
+    icon: "slider-icon", // from icons/
+    options: {
+      label: "Label",
+      value: 0,
+      required: false,
+      "x-rules": [],
+      "x-required-message": "",
+      "x-error-message": "",
+      disabled: false,
+      vertical: false,
+      min: 0,
+      max: 100,
+      sliderStep: 1,
+      autofocus: false,
+      range: false,
+      reverse: false,
+      tooltipVisible: false,
+      tooltipPlacement: "top"
+    },
+    "x-selects": {
+      tooltipPlacement: [
+        { value: "top" },
+        { value: "left" },
+        { value: "right" },
+        { value: "bottom" },
+        { value: "topLeft" },
+        { value: "topRight" },
+        { value: "bottomLeft" },
+        { value: "bottomRight" },
+        { value: "leftTop" },
+        { value: "leftBottom" },
+        { value: "rightTop" },
+        { value: "rightBottom" }
+      ]
+    },
+    "x-editor-props": {
+      sliderStep: () => {
+        const { min, max } = seletedSchema.value;
+        return {
+          min,
+          max
+        };
+      }
     }
   }
 ];
