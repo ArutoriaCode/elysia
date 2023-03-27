@@ -104,7 +104,7 @@ export default function useFormContext(defaultValueKey) {
   const [widget, setWidget] = useReactive(ctx.props.widget);
   // 指向组件可绑定的属性对象
   const [model, setModel] = useReactive(widget.options);
-  // 合并到上下文，让用户可以在自定义代码中修改
+  // 合并到上下文，让用户可以在自定义代码可以操作、修改
   ctx.model = model;
 
   const { formName } = widget[GLOBAL_FORM_CONFIG];

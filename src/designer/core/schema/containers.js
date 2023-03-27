@@ -66,7 +66,7 @@ const containers = [
       justify: "start",
       wrap: true
     },
-    selects: {
+    'x-selects': {
       align: [{ value: "top" }, { value: "middle" }, { value: "bottom" }],
       justify: [
         { value: "start" },

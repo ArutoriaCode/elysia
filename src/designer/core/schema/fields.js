@@ -1,6 +1,7 @@
 import { FIELD_TYPE, PANEL_COMPONENT } from "@/designer/utils/helper";
 import { v4 as uuidv4 } from "uuid";
 import useAlias from "@/designer/hooks/useAlias";
+import { seletedSchema } from "../select";
 
 const fields = [
   {
@@ -18,7 +19,7 @@ const fields = [
       block: false,
       onClick: ""
     },
-    selects: {
+    "x-selects": {
       type: [
         { value: "default" },
         { value: "primary" },
@@ -50,7 +51,7 @@ const fields = [
       dashed: false,
       orientation: "center"
     },
-    selects: {
+    "x-selects": {
       type: [
         { value: "horizontal", label: "水平" },
         { value: "vertical", label: "垂直" }
@@ -75,15 +76,51 @@ const fields = [
       size: undefined, // default
       readonly: false,
       disabled: false,
-      allowClear: true
+      allowClear: true,
+      autofocus: false
     },
-    selects: {
+    "x-selects": {
       size: [{ value: "large" }, { value: "default" }, { value: "small" }]
     }
   },
   {
     id: uuidv4(),
-    name: "select", // 对应 components/fields/input/input.vue 的组件名称
+    name: "input-number", // 对应 components/fields/input-number/input-number.vue 的组件名称
+    type: FIELD_TYPE,
+    isFormItem: true, // 表单项
+    icon: "input-numeric-icon", // from icons/
+    options: {
+      label: "Label",
+      numberValue: 1,
+      required: false,
+      "x-rules": [],
+      "x-required-message": "",
+      "x-error-message": "",
+      size: undefined, // default
+      readonly: false,
+      disabled: false,
+      min: undefined,
+      max: undefined,
+      allowClear: true,
+      autofocus: false,
+      controls: true,
+      formatter: undefined,
+      parser: undefined,
+      keyboard: true,
+      step: 1,
+      stringMode: false
+    },
+    "x-selects": {
+      size: [{ value: "large" }, { value: "default" }, { value: "small" }]
+    },
+    "x-autocomplete": {
+      formatter: [{ label: "value", info: "number | string" }],
+      parser: [{ label: "value", info: "string" }]
+    }
+  },
+  {
+    id: uuidv4(),
+    name: "select", // 对应 components/fields/select/select.vue 的组件名称
     type: FIELD_TYPE,
     isFormItem: true, // 表单项
     icon: "down-select-icon", // from icons/
@@ -100,13 +137,13 @@ const fields = [
       disabled: false,
       allowClear: true
     },
-    selects: {
+    "x-selects": {
       size: [{ value: "large" }, { value: "default" }, { value: "small" }]
     }
   },
   {
     id: uuidv4(),
-    name: "checkbox", // 对应 components/fields/input/input.vue 的组件名称
+    name: "checkbox", // 对应 components/fields/checkbox/checkbox.vue 的组件名称
     type: FIELD_TYPE,
     isFormItem: true, // 表单项
     icon: "checkbox-icon", // from icons/
@@ -130,7 +167,7 @@ const fields = [
   },
   {
     id: uuidv4(),
-    name: "radio", // 对应 components/fields/input/input.vue 的组件名称
+    name: "radio", // 对应 components/fields/radio/radio.vue 的组件名称
     type: FIELD_TYPE,
     isFormItem: true, // 表单项
     icon: "radio-icon", // from icons/
@@ -151,16 +188,16 @@ const fields = [
       "x-error-message": "",
       optionType: "default",
       size: "default",
-      disabled: false,
+      disabled: false
     },
-    selects: {
+    "x-selects": {
       size: [{ value: "large" }, { value: "default" }, { value: "small" }],
       optionType: [{ value: "default" }, { value: "button" }]
     }
   },
   {
     id: uuidv4(),
-    name: "rate", // 对应 components/fields/input/input.vue 的组件名称
+    name: "rate", // 对应 components/fields/rate/rate.vue 的组件名称
     type: FIELD_TYPE,
     isFormItem: true, // 表单项
     icon: "rate-icon", // from icons/
@@ -175,7 +212,7 @@ const fields = [
       allowClear: true,
       character: undefined,
       allowHalf: false,
-      starCount: 5,
+      starCount: 5
     }
   }
 ];

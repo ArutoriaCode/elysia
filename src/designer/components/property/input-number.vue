@@ -11,9 +11,18 @@
 <script setup>
 import useDefineModel from './useDefineModel'
 import { seletedSchema } from '../../core/select'
+import { ref } from 'vue';
 const { property, propertyCN, modelValue, action } = useDefineModel()
 const editorProps = seletedSchema.value['x-editor-props']
-const numberProps = editorProps ? editorProps[property] : {}
+const numberProps = ref({})
+if (editorProps) {
+  if (typeof editorProps === 'function') {
+    numberProps.value = editorProps()
+  } else {
+    numberProps.value = editorProps[property] || {}
+  }
+}
+
 const onCustomRecord = () => {
   const { min = null, max = null } = numberProps
   if (min !== null && min > modelValue.value) {

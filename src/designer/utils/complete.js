@@ -25,17 +25,17 @@ export const ctxComplete = javascriptLanguage.data.of({
         {
           label: "axios",
           type: "variable",
-          info: '具体查看axios文档：https://axios-http.com/zh/docs/intro'
+          info: "具体查看axios文档：https://axios-http.com/zh/docs/intro"
         },
         {
           label: "$formData.value",
           type: "variable",
-          info: '表单数据 注意使用$formData.value来操作'
+          info: "表单数据 注意使用$formData.value来操作"
         },
         {
-          label: '$rules.value',
+          label: "$rules.value",
           type: "variable",
-          info: '表单校验规则 注意使用$rules.value来操作'
+          info: "表单校验规则 注意使用$rules.value来操作"
         }
       ];
 
@@ -103,6 +103,42 @@ export const ctxComplete = javascriptLanguage.data.of({
     };
   }
 });
+
+export const propComplete = prop => {
+  return javascriptLanguage.data.of({
+    autocomplete: function (context) {
+      const completes = seletedSchema.value["x-autocomplete"];
+      if (!completes) {
+        return null;
+      }
+
+      const completeList = completes[prop];
+      if (!Array.isArray(completeList)) {
+        return null;
+      }
+
+      let word = context.matchBefore(/.*?/);
+      if (!word) {
+        return null;
+      }
+
+      word.text = word.text.trim();
+
+      const options = completeList
+        .filter(a => word.text.includes(a.label) || a.label.includes(word.text))
+        .map(a => ({
+          ...a,
+          label: a.label,
+          type: "variable"
+        }));
+
+      return {
+        from: word.from,
+        options
+      };
+    }
+  });
+};
 
 export default {
   ctxComplete

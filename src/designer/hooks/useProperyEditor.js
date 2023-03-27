@@ -41,7 +41,15 @@ const propertys = reactive({
     push: "input-number",
     offset: "input-number",
     optionType: "selecter",
-    starCount: 'input-number',
+    starCount: "input-number",
+    autofocus: "switch",
+    controls: "switch",
+    keyboard: "switch",
+    stringMode: "switch",
+    min: "input-number",
+    max: "input-number",
+    formatter: "prop-func-editor",
+    parser: "prop-func-editor"
   },
   [EVENT_KEY_NAME]: {
     onClick: "js-editor",

@@ -6,6 +6,7 @@
       :size="size"
       :allow-clear="model.allowClear"
       :maxlength="model.maxlength"
+      :autofocus="model.autofocus"
       v-model:value="modelValue"
     />
   </a-form-item>

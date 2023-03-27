@@ -30,7 +30,7 @@ const schemaJson = reactive({
   childrenList: [],
   type: CONTAINER_TYPE,
   options: { ...defaultGlobalOptions },
-  selects: {
+  "x-selects": {
     formSize: [{ value: "large" }, { value: "default" }, { value: "small" }]
   }
 });
@@ -70,7 +70,7 @@ export function clearStore(record = true) {
 }
 
 export function importSchemaJson(json) {
-  json = unref(json)
+  json = unref(json);
   if (typeof json === "string") {
     try {
       json = JSON.parse(json);
