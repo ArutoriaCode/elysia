@@ -33,6 +33,6 @@ const onCustomRecord = () => {
     return
   }
 
-  action.record()
+  action.record('')
 }
 </script>

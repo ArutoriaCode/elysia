@@ -46,7 +46,7 @@ function createTree (children, path) {
       path: [...path, index]
     }
 
-    if (v.type === CONTAINER_TYPE) {
+    if (v.type === CONTAINER_TYPE && Array.isArray(v.childrenList)) {
       tree.children = createTree(v.childrenList, tree.path)
     }
 
@@ -56,11 +56,12 @@ function createTree (children, path) {
 
 const outlineTree = reactive([
   {
-    title: '表单',
+    ...store,
     key: store.id,
+    title: '表单',
     iconType: 'layer-group-icon',
-    children: [],
-    path: ['root']
+    path: ['root'],
+    children: []
   }
 ])
 
@@ -69,14 +70,9 @@ const updateTree = useDebounce(childrenList => {
   outlineTree[0].children = children
 }, 800)
 
-watch(() => store.childrenList, updateTree, { deep: true })
+watch(() => store.childrenList, updateTree, { deep: true, immediate: true })
 
 function onSelect (selectedKeys, { node }) {
-  if (node.parent === undefined) {
-    setSelected()
-    return
-  }
-
   setSelected(node.path)
 }
 </script>

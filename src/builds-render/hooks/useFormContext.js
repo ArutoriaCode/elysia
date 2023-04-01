@@ -19,21 +19,22 @@ export const fieldRefs = shallowReactive({});
 export const forms = reactive({});
 export const rules = reactive({});
 
-export function useGetForm(formName) {
-  if (!formRefs[formName]) {
-    formRefs[formName] = null;
+export function useGetForm(formField) {
+  if (!formRefs[formField]) {
+    formRefs[formField] = {};
   }
 
-  const formRef = toRef(formRefs, formName); // 使用toRef可以保证绑定到ref之后同步到formRefs对象
+  const [formRef, setFormRef] = useReactive(formRefs[formField]); // 使用toRef可以保证绑定到ref之后同步到formRefs对象
   return {
+    setFormRef,
     formRef,
-    formData: toRef(forms, formName, {}),
-    rules: toRef(rules, formName, {})
+    formData: toRef(forms, formField, {}),
+    rules: toRef(rules, formField, {})
   };
 }
 
 function handleRules(
-  formName,
+  formField,
   {
     field,
     required,
@@ -72,11 +73,11 @@ function handleRules(
     trigger: ["blur", "change"]
   });
 
-  if (!Reflect.has(rules, formName)) {
-    set(forms, formName, {});
+  if (!Reflect.has(rules, formField)) {
+    set(forms, formField, {});
   }
 
-  set(rules, [formName, field], xRules);
+  set(rules, [formField, field], xRules);
 }
 
 /**
@@ -107,10 +108,15 @@ export default function useFormContext(defaultValueKey) {
   // 合并到上下文，让用户可以在自定义代码可以操作、修改
   ctx.model = model;
 
-  const { formName } = widget[GLOBAL_FORM_CONFIG];
-  const { required, field, formField, [defaultValueKey]: defaultValue } = widget.options;
-  const uniField = formField || field; // 表单组件或者容器、字段组件的唯一标识
+  const { formField } = widget[GLOBAL_FORM_CONFIG]; // 组件所在的表单
+  const {
+    required,
+    field,
+    formField: subFormField, // 子表
+    [defaultValueKey]: defaultValue
+  } = widget.options;
 
+  const uniField = subFormField || field; // 表单组件或者容器、字段组件的唯一标识
   fieldRefs[uniField] = ctx; // 记录组件的上下文，在执行组件的用户自定义代码让用户通过ctx操作组件
 
   // 表单全局只读
@@ -129,35 +135,35 @@ export default function useFormContext(defaultValueKey) {
     return formConfig.formSize || model.size || "default";
   });
 
-  if (!Reflect.has(forms, formName)) {
-    set(forms, formName, {});
+  if (!Reflect.has(forms, formField)) {
+    set(forms, formField, {});
   }
 
   // 设置字段在响应式对象中，并设置可能有的默认值
-  set(forms[formName], uniField, defaultValue); // 定义表单的字段名称和字段值
+  set(forms[formField], uniField, defaultValue); // 定义表单的字段名称和字段值
 
   // 处理字段的校验
-  handleRules(formName, widget.options);
+  handleRules(formField, widget.options);
 
   // 监听属性变化（应该不会变）
   watch(
     () => ctx.props.widget,
     val => {
       setWidget(val);
-      setModel(val.options)
+      setModel(val.options);
     },
     { deep: true }
   );
 
   onUnmounted(() => {
     delete fieldRefs[uniField];
-    delete forms[formName][uniField];
+    delete forms[formField][uniField];
     if (required) {
-      delete rules[formName][uniField];
+      delete rules[formField][uniField];
     }
   });
 
-  const target = get(forms, formName);
+  const target = get(forms, formField);
   const modelValue = toRef(target, uniField);
 
   return {

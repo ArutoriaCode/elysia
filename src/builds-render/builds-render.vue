@@ -14,12 +14,7 @@
 </template>
 <script setup>
 import { getCompName } from './utils/helper'
-import {
-  computed,
-  getCurrentInstance,
-  onMounted,
-  onUnmounted,
-} from 'vue'
+import { computed, getCurrentInstance, onMounted, onUnmounted } from 'vue'
 import { useGetForm } from './hooks/useFormContext'
 import { execFunction, initFormSchema } from './utils/helper'
 
@@ -62,13 +57,13 @@ const schemaJsonStore = computed(() => {
   return initFormSchema(schemaJson)
 })
 
-const { formName, formRefName } = schemaJsonStore.value.options
-const { formRef, formData, rules } = useGetForm(formName)
+const { formField, formRefName } = schemaJsonStore.value.options
+const { setFormRef, formData, rules } = useGetForm(formField)
 
 // 设置实例中refs对象的动态名称
 const setDynamicRefName = (el, refs) => {
   if (el) {
-    formRef.value = el
+    setFormRef(el)
     refs[formRefName] = el
   }
 }

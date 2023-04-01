@@ -18,10 +18,8 @@ export function upMove(widget) {
   }
 
   const parent = findParent(path);
-  const newChildrenList = cloneDeep(parent.childrenList);
-  newChildrenList.splice(currentIndex, 1); // 从当前数组中删除
-  newChildrenList.splice(prevIndex, 0, widget); // 删除后再往前面插入
-  parent.childrenList = newChildrenList; // 移动后要重新计算路径信息
+  parent.childrenList.splice(currentIndex, 1); // 从当前数组中删除
+  parent.childrenList.splice(prevIndex, 0, widget); // 删除后再往前面插入
 
   recorder.add(`向上移动 ${nameAlias} 组件`, "history-up-icon");
 }
@@ -36,10 +34,8 @@ export function downMove(widget) {
     return;
   }
 
-  const newChildrenList = cloneDeep(parent.childrenList);
-  newChildrenList.splice(currentIndex, 1); // 从当前数组中删除
-  newChildrenList.splice(nextIndex, 0, widget);
-  parent.childrenList = newChildrenList;
+  parent.childrenList.splice(currentIndex, 1); // 从当前数组中删除
+  parent.childrenList.splice(nextIndex, 0, widget);
 
   recorder.add(`向下移动 ${nameAlias} 组件`, "history-down-icon");
 }
@@ -49,8 +45,8 @@ export function remove(widget) {
   const { path, nameAlias, id } = widget;
   const parent = findParent(path);
   if (parent) {
-    const newChildrenList = parent.childrenList.filter(c => c.id !== id);
-    parent.childrenList = newChildrenList;
+    const removeIndex = parent.childrenList.findIndex(c => c.id === id);
+    parent.childrenList.splice(removeIndex, 1);
 
     recorder.add(`删除${nameAlias}组件`, "minus-icon");
   }

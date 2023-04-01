@@ -19,11 +19,11 @@
       </span>
       <div class="baisc-btns">
         <CopyOutlined @click.stop.prevent="onCopyCol" title="拷贝栅格" />
-        <ArrowUpOutlined
+        <ArrowLeftOutlined
           @click.stop.prevent="upMove(widget)"
           title="左移栅格"
         />
-        <ArrowDownOutlined
+        <ArrowRightOutlined
           @click.stop.prevent="downMove(widget)"
           title="右移栅格"
         />
@@ -38,12 +38,12 @@
 <script setup>
 import {
   CopyOutlined,
-  ArrowUpOutlined,
-  ArrowDownOutlined,
+  ArrowLeftOutlined,
+  ArrowRightOutlined,
   DeleteFilled,
   EyeInvisibleFilled
 } from '@ant-design/icons-vue'
-import { computed, nextTick } from 'vue'
+import { computed } from 'vue'
 import { seletedSchema, setSelected } from '@/designer/core/select.js'
 import { upMove, downMove, remove } from '@/designer/core/move.js'
 import copy from '@/designer/core/copy.js'

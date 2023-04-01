@@ -1,5 +1,5 @@
 import { javascriptLanguage } from "@codemirror/lang-javascript";
-import { seletedSchema } from "../core/select";
+import store from "../core/store";
 
 const autoCompleteStr = ["ctx.", "return ctx."];
 export const ctxComplete = javascriptLanguage.data.of({
@@ -28,6 +28,11 @@ export const ctxComplete = javascriptLanguage.data.of({
           info: "具体查看axios文档：https://axios-http.com/zh/docs/intro"
         },
         {
+          label: "$modal",
+          type: "variable",
+          info: "具体查看文档：https://antdv.com/components/modal-cn#Modal-method"
+        },
+        {
           label: "$formData.value",
           type: "variable",
           info: "表单数据 注意使用$formData.value来操作"
@@ -39,37 +44,37 @@ export const ctxComplete = javascriptLanguage.data.of({
         }
       ];
 
-      const { options } = seletedSchema.value;
+      const { options } = store
       if (options && options.formRefName) {
         hintOptions = [
           ...hintOptions,
           {
-            label: `refs.${options.formRefName}`,
+            label: `${options.formRefName}`,
             type: "variable",
             detail: "表单实例对象"
           },
           {
-            label: `refs.${options.formRefName}.validate`,
+            label: `${options.formRefName}.validate`,
             type: "function",
             detail: "触发表单验证, 同 validateFields"
           },
           {
-            label: `refs.${options.formRefName}.validateFields`,
+            label: `${options.formRefName}.validateFields`,
             type: "function",
             detail: "触发表单验证"
           },
           {
-            label: `refs.${options.formRefName}.clearValidate`,
+            label: `${options.formRefName}.clearValidate`,
             type: "function",
             info: "移除表单项的校验结果。传入待移除的表单项的 name 属性或者 name 组成的数组，如不传则移除整个表单的校验结果"
           },
           {
-            label: `refs.${options.formRefName}.scrollToField`,
+            label: `${options.formRefName}.scrollToField`,
             type: "function",
             detail: "滚动到对应字段位置"
           },
           {
-            label: `refs.${options.formRefName}.resetFields`,
+            label: `${options.formRefName}.resetFields`,
             type: "function",
             info: "对整个表单进行重置，将所有字段值重置为初始值并移除校验结果"
           }

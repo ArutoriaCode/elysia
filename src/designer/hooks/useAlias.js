@@ -60,7 +60,12 @@ const aliasDict = reactive({
     reverse: "反向坐标轴",
     tooltipPlacement: "提示显示方向",
     tooltipVisible: "始终显示提示",
-    vertical: '垂直方向展示'
+    vertical: "垂直方向展示",
+    loading: "显示加载",
+    checkedChildren: "选中展示内容",
+    checkedValue: "选中值",
+    unCheckedChildren: "非选中展示内容",
+    unCheckedValue: "非选中值"
   },
   [EVENT_KEY_NAME]: {
     onClick: "点击事件",
@@ -80,7 +85,8 @@ const aliasDict = reactive({
     radio: "单选项",
     rate: "评分",
     "input-number": "计数器",
-    slider: "滑动条"
+    slider: "滑动条",
+    switch: "开关"
   }
 });
 

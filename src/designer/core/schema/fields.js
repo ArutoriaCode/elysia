@@ -81,6 +81,12 @@ const fields = [
     },
     "x-selects": {
       size: [{ value: "large" }, { value: "default" }, { value: "small" }]
+    },
+    "x-editor-props": {
+      maxlength: {
+        min: 1,
+        precision: 0
+      }
     }
   },
   {
@@ -263,6 +269,33 @@ const fields = [
           max
         };
       }
+    }
+  },
+  {
+    id: uuidv4(),
+    name: "switch", // 对应 components/fields/switch/switch.vue 的组件名称
+    type: FIELD_TYPE,
+    isFormItem: true, // 表单项
+    icon: "switch-icon", // from icons/
+    options: {
+      label: "Label",
+      value: 0,
+      required: false,
+      "x-rules": [],
+      "x-required-message": "",
+      "x-error-message": "",
+      disabled: false,
+      size: undefined,
+      autofocus: false,
+      loading: false,
+      checkedChildren: "开",
+      checkedValue: true,
+      unCheckedChildren: "关",
+      unCheckedValue: false,
+      checked: false
+    },
+    "x-selects": {
+      size: [{ value: "default" }, { value: "small" }]
     }
   }
 ];

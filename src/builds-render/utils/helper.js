@@ -1,6 +1,7 @@
 import { CONTAINER_TYPE } from "../../designer/utils/helper";
 import { fieldRefs } from "../hooks/useFormContext";
 import { useGetForm } from "../hooks/useFormContext";
+import { Modal } from "ant-design-vue";
 
 export function getCompName(widget) {
   return "ely-" + widget.name;
@@ -21,7 +22,7 @@ export function initFormSchema(store, formConfig) {
   }
 
   store.childrenList.map(s => {
-    const isSubForm = s.type === CONTAINER_TYPE && s.options && s.options.formName;
+    const isSubForm = s.type === CONTAINER_TYPE && s.options && s.options.formField;
     if (isSubForm) {
       initFormSchema(s, s.options);
     } else {
@@ -34,16 +35,17 @@ export function initFormSchema(store, formConfig) {
 
 export function execFunction(ctx, fucn, argsName, ...args) {
   // 获取组件所在的表单，取出表单绑定的响应式数据、校验规则，并合并到上下文中
-  const { formName, formRefName } = ctx.props.widget[GLOBAL_FORM_CONFIG];
-  const { formData, rules, formRef } = useGetForm(formName);
+  const { formField, formRefName } = ctx.props.widget[GLOBAL_FORM_CONFIG];
+  const { formData, rules, formRef } = useGetForm(formField);
   const context = {
     ...ctx,
     ["$fieldRefs"]: fieldRefs, // 表单内所有组件的实例
     ["$formData"]: formData,
     ["$rules"]: rules,
-    [formRefName]: formRef
+    ['$modal']: Modal,
+    [formRefName]: formRef,
   };
-
+  
   let execFun = null;
   try {
     if (Array.isArray(args) && Array.isArray(argsName)) {

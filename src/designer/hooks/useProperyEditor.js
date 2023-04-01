@@ -24,7 +24,7 @@ const propertys = reactive({
     formDisabled: "switch",
     label: "text-input",
     allowClear: "switch",
-    maxlength: "text-input",
+    maxlength: "input-number",
     size: "selecter",
     formSize: "selecter",
     required: "rules",
@@ -57,7 +57,10 @@ const propertys = reactive({
     sliderStep: "input-number",
     tooltipPlacement: "selecter",
     tooltipVisible: "switch",
-    vertical: "switch"
+    vertical: "switch",
+    loading: "switch",
+    checkedChildren: "text-input",
+    unCheckedChildren: "text-input"
   },
   [EVENT_KEY_NAME]: {
     onClick: "js-editor",

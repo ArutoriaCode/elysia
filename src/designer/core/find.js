@@ -30,7 +30,7 @@ export function find(indexInParentList) {
     }
   });
 
-  return get(store, fullPathList);
+  return { ...get(store, fullPathList), path: indexInParentList };
 }
 
 /**
