@@ -5,9 +5,7 @@ import {
   computed,
   toRef,
   getCurrentInstance,
-  watch,
-  isRef,
-  isReactive
+  watch
 } from "vue";
 import set from "lodash.set";
 import get from "lodash.get";
@@ -74,7 +72,7 @@ function handleRules(
   });
 
   if (!Reflect.has(rules, formField)) {
-    set(forms, formField, {});
+    set(rules, formField, {});
   }
 
   set(rules, [formField, field], xRules);
