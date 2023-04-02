@@ -6,11 +6,12 @@
       :required="model.required"
     >
       <a-radio-group
-        v-model:value="model.selectValue"
+        :value="model.selectValue"
         :optionType="model.optionType"
         :options="selectOptions"
         :disabled="disabled"
         :size="size"
+        @click.capture="onChange"
       />
     </a-form-item>
   </static-wrapper>
@@ -31,4 +32,8 @@ const selectOptions = computed(() => {
     return []
   }
 })
+
+const onChange = e => {
+  model.selectValue = e.target._value
+}
 </script>

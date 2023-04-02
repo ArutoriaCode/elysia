@@ -9,6 +9,7 @@
         v-model:value="model.selectValue"
         :options="selectOptions"
         :disabled="disabled"
+        @click.capture="onChange"
       />
     </a-form-item>
   </static-wrapper>
@@ -29,4 +30,14 @@ const selectOptions = computed(() => {
     return []
   }
 })
+
+const onChange = e => {
+  const value = e.target._value
+  const index = model.selectValue.indexOf(value)
+  if (index > -1) {
+    model.selectValue.splice(index, 1)
+  } else {
+    model.selectValue.push(value)
+  }
+}
 </script>

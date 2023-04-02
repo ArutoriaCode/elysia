@@ -224,8 +224,8 @@
               "options": {
                 "field": "radio26700",
                 "label": "是否合格",
-                "selectValue": "",
-                "selectOptions": "[\n  {\n    \"label\": \"合格\",\n    \"value\": \"合格\"\n  },\n  {\n    \"label\": \"不合格\",\n    \"value\": \"不合格\"\n  }\n]",
+                "selectValue": "ok",
+                "selectOptions": "[\n  {\n    \"label\": \"合格\",\n    \"value\": \"ok\"\n  },\n  {\n    \"label\": \"不合格\",\n    \"value\": \"noOk\"\n  }\n]",
                 "required": true,
                 "x-rules": [],
                 "x-required-message": "请选择",
