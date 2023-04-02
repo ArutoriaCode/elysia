@@ -1,6 +1,10 @@
 <template>
   <static-wrapper :widget="widget">
-    <a-form-item :label="model.label" :name="model.field" :required="model.required">
+    <a-form-item
+      :label="model.label"
+      :name="model.field"
+      :required="model.required"
+    >
       <a-select
         :size="size"
         :readonly="readonly"

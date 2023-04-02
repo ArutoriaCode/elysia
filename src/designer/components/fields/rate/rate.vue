@@ -27,7 +27,7 @@ const { disabled, readonly, model } = useGlobalSetting()
 <style lang="less">
 .rate.show-shadow {
   .ant-rate-star.ant-rate-star-zero .ant-rate-star-second {
-    color: #fff;
+    color: #fff !important;
   }
 }
 </style>

@@ -82,6 +82,12 @@ const onEndMove = evt => {
       width: 100%;
       // 48px: toolbar height; 50px: .elysia-main-content padding(top,bottom): 28px
       min-height: calc(100vh - 48px - 56px);
+
+      .ant-form-item-control
+        .ant-form-item-explain
+        .ant-form-item-explain-error {
+        display: none !important;
+      }
     }
   }
 

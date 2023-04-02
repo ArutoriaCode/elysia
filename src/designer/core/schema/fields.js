@@ -179,7 +179,7 @@ const fields = [
     icon: "radio-icon", // from icons/
     options: {
       label: "Label",
-      selectValue: [],
+      selectValue: "",
       selectOptions: JSON.stringify(
         [
           { label: "单选项一", value: "option1" },

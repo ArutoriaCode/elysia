@@ -1,6 +1,6 @@
 <template>
   <div
-    class="static-wrapper move-area"
+    class="static-wrapper"
     :class="{ [widget.name]: true, 'show-shadow': isSelected }"
     @click.stop.prevent="onSetSelect"
   >
