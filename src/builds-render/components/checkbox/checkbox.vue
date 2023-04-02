@@ -8,6 +8,7 @@
       v-model:value="modelValue"
       :options="dataSource"
       :disabled="disabled"
+      :class="className"
     />
   </a-form-item>
 </template>
@@ -18,7 +19,7 @@ const props = defineProps({
   widget: Object
 })
 
-const { disabled, model, modelValue } = useFormContext('selectValue')
+const { disabled, model, modelValue, className } = useFormContext('selectValue')
 
 const dataSource = useGetDataSource()
 </script>

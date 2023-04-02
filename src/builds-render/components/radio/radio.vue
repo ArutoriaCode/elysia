@@ -10,6 +10,7 @@
       :options="dataSource"
       :disabled="disabled"
       :size="size"
+      :class="className"
     />
   </a-form-item>
 </template>
@@ -20,7 +21,7 @@ const props = defineProps({
   widget: Object
 })
 
-const { disabled, size, model, modelValue } = useFormContext('selectValue')
+const { disabled, size, model, modelValue, className } = useFormContext('selectValue')
 
 const dataSource = useGetDataSource()
 </script>

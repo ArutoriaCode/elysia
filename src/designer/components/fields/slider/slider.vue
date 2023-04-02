@@ -13,6 +13,7 @@
         :vertical="model.vertical"
         :tooltipVisible="model.tooltipVisible"
         :tooltipPlacement="model.tooltipPlacement"
+        :class="className"
         v-model:value="modelValue"
       />
     </a-form-item>
@@ -26,7 +27,7 @@ const props = defineProps({
   widget: Object
 })
 
-const { readonly, disabled, model } = useGlobalSetting()
+const { readonly, disabled, model, className } = useGlobalSetting()
 const modelValue = computed({
   set (value) {
     model.value = value

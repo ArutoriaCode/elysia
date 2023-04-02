@@ -7,6 +7,7 @@
         :size="size"
         :allow-clear="model.allowClear"
         :maxlength="model.maxlength"
+        :class="className"
         v-model:value="model.inputValue"
       />
     </a-form-item>
@@ -19,5 +20,5 @@ const props = defineProps({
   widget: Object
 })
 
-const { readonly, disabled, size, model } = useGlobalSetting()
+const { readonly, disabled, size, model, className } = useGlobalSetting()
 </script>

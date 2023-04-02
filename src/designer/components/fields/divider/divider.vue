@@ -5,6 +5,7 @@
       :type="widget.options.type"
       :dashed="widget.options.dashed"
       :orientation="widget.options.orientation"
+      :class="className"
     >
       <template v-if="widget.options.title">
         {{ widget.options.title }}
@@ -19,7 +20,7 @@ defineProps({
   widget: Object
 })
 
-useGlobalSetting()
+const { className } = useGlobalSetting()
 </script>
 <style lang="less">
 .static-wrapper.divider {

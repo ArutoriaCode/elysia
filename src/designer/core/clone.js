@@ -14,12 +14,16 @@ function cloneWG(widget) {
     delete newWidget.options.formField;
     newWidget.options = {
       formField: uniqField, // 让formField渲染成组件排在第一行
+      className: [],
+      customStyle: "",
       ...newWidget.options
     };
   } else {
     delete newWidget.options.field;
     newWidget.options = {
       field: uniqField, // 让field渲染成组件排在第一行
+      className: [],
+      customStyle: "",
       ...newWidget.options
     };
   }

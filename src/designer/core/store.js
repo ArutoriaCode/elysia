@@ -11,6 +11,8 @@ const defaultGlobalOptions = {
   formRefName: "formRef",
   // 全局样式
   globalStyle: "",
+  // 当前表单使用到的样式名称（名称提取自globalStyle）
+  className: [],
   // 全局表单项组件的大小
   formSize: "",
   // 全局表单项只读

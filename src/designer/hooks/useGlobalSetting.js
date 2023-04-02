@@ -2,6 +2,7 @@ import store from "~core/store";
 import useReactive from "../../hooks/useReactive";
 import { computed, getCurrentInstance, onUnmounted, toRef } from "vue";
 import { uniqueField } from "../core/store";
+import { extractClassName } from "@/utils";
 
 export default function useGlobalSetting() {
   const ctx = getCurrentInstance();
@@ -31,9 +32,18 @@ export default function useGlobalSetting() {
 
   const size = computed(() => store.options.formSize || model.size || "default");
 
+  const className = computed(() => {
+    if (!Array.isArray(model.className)) {
+      return [];
+    }
+
+    return extractClassName(model.className);
+  });
+
   return {
     readonly: formIsReadonly,
     disabled: formIsDisabled,
+    className,
     size,
     model
   };

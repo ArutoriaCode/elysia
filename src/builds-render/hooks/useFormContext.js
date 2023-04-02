@@ -11,6 +11,8 @@ import set from "lodash.set";
 import get from "lodash.get";
 import useReactive from "@/hooks/useReactive";
 import { GLOBAL_FORM_CONFIG } from "../utils/helper";
+import { extractClassName, insertCustomCssToHead } from "../../utils";
+import useGetClassName from "./useGetClassName";
 
 export const formRefs = shallowReactive({});
 export const fieldRefs = shallowReactive({});
@@ -106,6 +108,11 @@ export default function useFormContext(defaultValueKey) {
   // 合并到上下文，让用户可以在自定义代码可以操作、修改
   ctx.model = model;
 
+  // 插入自定义的样式到head中
+  if (model.customStyle) {
+    insertCustomCssToHead(model.customStyle, widget.id);
+  }
+
   const { formField } = widget[GLOBAL_FORM_CONFIG]; // 组件所在的表单
   const {
     required,
@@ -131,6 +138,14 @@ export default function useFormContext(defaultValueKey) {
   const size = computed(() => {
     const formConfig = widget[GLOBAL_FORM_CONFIG];
     return formConfig.formSize || model.size || "default";
+  });
+  // 组件使用到的样式名称
+  const className = computed(() => {
+    if (!Array.isArray(model.className)) {
+      return [];
+    }
+
+    return extractClassName(model.className);
   });
 
   if (!Reflect.has(forms, formField)) {
@@ -170,6 +185,7 @@ export default function useFormContext(defaultValueKey) {
     readonly,
     disabled,
     size,
+    className,
     context: ctx
   };
 }

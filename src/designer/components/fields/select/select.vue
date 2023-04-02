@@ -11,6 +11,7 @@
         :disabled="disabled"
         :options="[]"
         :allow-clear="model.allowClear"
+        :class="className"
         v-model:value="model.selectValue"
       >
         <template #dropdownRender>
@@ -30,5 +31,5 @@ const props = defineProps({
   widget: Object
 })
 
-const { readonly, disabled, size, model } = useGlobalSetting()
+const { readonly, disabled, size, model, className } = useGlobalSetting()
 </script>

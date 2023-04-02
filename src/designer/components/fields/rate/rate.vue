@@ -11,6 +11,7 @@
         :count="model.starCount"
         :allowHalf="model.allowHalf"
         :allowClear="model.allowClear"
+        :class="className"
       />
     </a-form-item>
   </static-wrapper>
@@ -22,7 +23,7 @@ const props = defineProps({
   widget: Object
 })
 
-const { disabled, readonly, model } = useGlobalSetting()
+const { disabled, readonly, model, className } = useGlobalSetting()
 </script>
 <style lang="less">
 .rate.show-shadow {

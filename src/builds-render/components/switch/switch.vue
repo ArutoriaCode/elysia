@@ -12,6 +12,7 @@
       :unCheckedChildren="model.unCheckedChildren"
       :tooltipVisible="model.tooltipVisible"
       :unCheckedValue="model.unCheckedValue"
+      :class="className"
       v-model:checked="modelValue"
     />
   </a-form-item>
@@ -23,7 +24,7 @@ const props = defineProps({
   widget: Object
 })
 
-const { readonly, disabled, size, model, modelValue } = useFormContext('checked')
+const { readonly, disabled, size, model, modelValue, className } = useFormContext('checked')
 
 const customSize = computed(() => {
   if (size.value === 'large') {

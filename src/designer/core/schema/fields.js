@@ -209,7 +209,7 @@ const fields = [
     icon: "rate-icon", // from icons/
     options: {
       label: "Label",
-      value: 0,
+      value: undefined,
       required: false,
       "x-rules": [],
       "x-required-message": "",

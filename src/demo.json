@@ -22,6 +22,8 @@
               "icon": "input-icon",
               "options": {
                 "field": "input5700",
+                "className": [],
+                "customStyle": "",
                 "label": "姓名",
                 "inputValue": "张三",
                 "required": true,
@@ -60,6 +62,8 @@
           ],
           "options": {
             "field": "col9300",
+            "className": [],
+            "customStyle": "",
             "responsive": false,
             "offset": 0,
             "span": 12,
@@ -100,6 +104,8 @@
               "icon": "down-select-icon",
               "options": {
                 "field": "select14100",
+                "className": [],
+                "customStyle": "",
                 "label": "性别",
                 "selectValue": [],
                 "selectOptions": "return [\n  { label: '男', value: 1 },\n  { label: '女', value: 0 }\n]",
@@ -129,6 +135,8 @@
           ],
           "options": {
             "field": "col900",
+            "className": [],
+            "customStyle": "",
             "responsive": false,
             "offset": 0,
             "span": 12,
@@ -169,6 +177,8 @@
               "icon": "checkbox-icon",
               "options": {
                 "field": "checkbox2400",
+                "className": [],
+                "customStyle": "",
                 "label": "爱好",
                 "selectValue": [],
                 "selectOptions": "[\n  {\n    \"label\": \"唱\",\n    \"value\": \"唱\"\n  },\n  {\n    \"label\": \"跳\",\n    \"value\": \"跳\"\n  },\n  {\n    \"label\": \"rap\",\n    \"value\": \"rap\"\n  },\n  {\n    \"label\": \"篮球\",\n    \"value\": \"篮球\"  \n  }\n]",
@@ -183,6 +193,8 @@
           ],
           "options": {
             "field": "col9300",
+            "className": [],
+            "customStyle": "",
             "responsive": false,
             "offset": 0,
             "span": 24,
@@ -223,8 +235,10 @@
               "icon": "radio-icon",
               "options": {
                 "field": "radio26700",
+                "className": [],
+                "customStyle": "",
                 "label": "是否合格",
-                "selectValue": "ok",
+                "selectValue": "",
                 "selectOptions": "[\n  {\n    \"label\": \"合格\",\n    \"value\": \"ok\"\n  },\n  {\n    \"label\": \"不合格\",\n    \"value\": \"noOk\"\n  }\n]",
                 "required": true,
                 "x-rules": [],
@@ -260,6 +274,8 @@
           ],
           "options": {
             "field": "col22650",
+            "className": [],
+            "customStyle": "",
             "responsive": false,
             "offset": 0,
             "span": 24,
@@ -303,9 +319,11 @@
                 "label": "评分",
                 "value": 0,
                 "required": true,
-                "x-rules": [],
+                "x-rules": [
+                  "[1-5]"
+                ],
                 "x-required-message": "请选择评分",
-                "x-error-message": "",
+                "x-error-message": "请评分！",
                 "disabled": false,
                 "allowClear": true,
                 "allowHalf": false,
@@ -316,6 +334,8 @@
           ],
           "options": {
             "field": "col15900",
+            "className": [],
+            "customStyle": "",
             "responsive": false,
             "offset": 0,
             "span": 24,
@@ -345,6 +365,8 @@
       ],
       "options": {
         "field": "grid1500",
+        "className": [],
+        "customStyle": "",
         "hidden": false,
         "cols": 2,
         "gutter": 8,
@@ -399,6 +421,8 @@
       "icon": "divider-icon",
       "options": {
         "field": "divider23700",
+        "className": [],
+        "customStyle": "",
         "title": "",
         "type": "horizontal",
         "dashed": false,
@@ -448,6 +472,8 @@
               "icon": "button-icon",
               "options": {
                 "field": "button96000",
+                "className": [],
+                "customStyle": "",
                 "text": "清除校验",
                 "type": "default",
                 "shape": "default",
@@ -500,6 +526,8 @@
           ],
           "options": {
             "field": "col68250",
+            "className": [],
+            "customStyle": "",
             "responsive": false,
             "offset": 0,
             "span": 12,
@@ -539,6 +567,8 @@
               "icon": "button-icon",
               "options": {
                 "field": "button8250",
+                "className": [],
+                "customStyle": "",
                 "text": "提交",
                 "type": "primary",
                 "shape": "default",
@@ -546,7 +576,7 @@
                 "ghost": false,
                 "disabled": false,
                 "block": true,
-                "onClick": "ctx.$modal.info({\n  title: \"提交表单信息\",\n  content: JSON.stringify(ctx.$formData.value, null, 2)\n})"
+                "onClick": "ctx.formRef.validate().then(() => {\n  ctx.$modal.info({\n    title: \"提交表单信息\",\n    content: JSON.stringify(ctx.$formData.value, null, 2)\n  })\n}).catch((error) => {\n  console.error(error)\n  ctx.$modal.error({\n    title: '提交失败',\n    content: '提交失败，校验有问题哦~'\n  })\n})\n"
               },
               "x-selects": {
                 "type": [
@@ -591,6 +621,8 @@
           ],
           "options": {
             "field": "col35850",
+            "className": [],
+            "customStyle": "",
             "responsive": false,
             "offset": 0,
             "span": 12,
@@ -620,6 +652,8 @@
       ],
       "options": {
         "field": "grid38550",
+        "className": [],
+        "customStyle": "",
         "hidden": false,
         "cols": 2,
         "gutter": 8,
@@ -666,6 +700,69 @@
         }
       },
       "nameAlias": "栅格"
+    },
+    {
+      "id": "504ff9dc-556e-446b-b139-9a12fa4e6e18",
+      "name": "button",
+      "type": "field",
+      "icon": "button-icon",
+      "options": {
+        "field": "button9450",
+        "className": [
+          "mt-20"
+        ],
+        "customStyle": ".mt-20 {\n  margin-top: 20px\n}",
+        "text": "距离上方20px",
+        "type": "default",
+        "shape": "default",
+        "size": "",
+        "ghost": false,
+        "disabled": false,
+        "block": true,
+        "onClick": ""
+      },
+      "x-selects": {
+        "type": [
+          {
+            "value": "default"
+          },
+          {
+            "value": "primary"
+          },
+          {
+            "value": "danger"
+          },
+          {
+            "value": "link"
+          }
+        ],
+        "size": [
+          {
+            "value": "large"
+          },
+          {
+            "value": "default"
+          },
+          {
+            "value": "small"
+          }
+        ],
+        "shape": [
+          {
+            "value": "default"
+          },
+          {
+            "value": "circle"
+          },
+          {
+            "value": "round"
+          }
+        ]
+      },
+      "nameAlias": "按钮",
+      "path": [
+        2
+      ]
     }
   ],
   "type": "container",
@@ -673,6 +770,7 @@
     "formField": "form371680344745245",
     "formRefName": "formRef",
     "globalStyle": "",
+    "className": [],
     "formSize": "",
     "formReadonly": false,
     "formDisabled": false,

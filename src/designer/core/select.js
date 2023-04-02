@@ -1,6 +1,6 @@
 import { find } from "./find";
 import { shallowRef } from "vue";
-import { checkSchema } from "./store";
+import store, { checkSchema } from "./store";
 
 /**
  * 当前选中的组件的schema
@@ -37,4 +37,9 @@ export function setSelected(value) {
   }
 
   return null;
+}
+
+/** 当前选中的组件是否为最顶级的表单 */
+export function isRootForm() {
+  return seletedSchema.value.id === store.id;
 }

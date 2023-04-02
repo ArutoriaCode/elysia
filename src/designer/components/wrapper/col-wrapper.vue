@@ -1,20 +1,17 @@
 <template>
   <a-col
     class="col-wrapper"
-    :class="{ [widget.name]: true, 'show-shadow': isSelected }"
+    :class="colClassName"
     @click.stop.prevent="onSetSelect"
-    :span="widget.options.span"
-    :pull="widget.options.pull"
-    :push="widget.options.push"
-    :offset="widget.options.offset"
+    :span="model.span"
+    :pull="model.pull"
+    :push="model.push"
+    :offset="model.offset"
   >
     <slot></slot>
     <div class="col-tr" v-if="isSelected">
       <span class="w-name">
-        <EyeInvisibleFilled
-          v-show="widget.options.hidden === true"
-          title="已隐藏"
-        />
+        <EyeInvisibleFilled v-show="model.hidden === true" title="已隐藏" />
         {{ widget.nameAlias }}
       </span>
       <div class="baisc-btns">
@@ -46,9 +43,10 @@ import {
 import { computed } from 'vue'
 import { seletedSchema, setSelected } from '@/designer/core/select.js'
 import { upMove, downMove, remove } from '@/designer/core/move.js'
-import copy from '@/designer/core/copy.js'
 import { isViewStatus } from '../../core/recorder'
 import { findParent } from '../../core/find'
+import copy from '@/designer/core/copy.js'
+import useGlobalSetting from '@/designer/hooks/useGlobalSetting'
 const props = defineProps({
   widget: {
     type: Object,
@@ -63,6 +61,18 @@ const isSelected = computed(() => {
 
   const selected = seletedSchema.value
   return selected && selected.id === props.widget.id
+})
+
+const { className, model } = useGlobalSetting()
+const colClassName = computed(() => {
+  const classNameList = [props.widget.name]
+  if (isSelected.value) {
+    classNameList.push('show-shadow')
+  }
+
+  classNameList.push(...className.value)
+
+  return classNameList
 })
 
 const onSetSelect = () => {

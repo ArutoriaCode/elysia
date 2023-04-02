@@ -6,6 +6,7 @@
       :disabled="disabled"
       :options="dataSource"
       :allow-clear="model.allowClear"
+      :class="className"
       v-model:value="modelValue"
     >
     </a-select>
@@ -18,7 +19,7 @@ const props = defineProps({
   widget: Object
 })
 
-const { readonly, disabled, size, model, modelValue, context } =
+const { readonly, disabled, size, model, modelValue, className } =
   useFormContext('selectValue')
 
 const dataSource = useGetDataSource()

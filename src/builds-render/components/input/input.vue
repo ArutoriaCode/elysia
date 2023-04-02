@@ -7,6 +7,7 @@
       :allow-clear="model.allowClear"
       :maxlength="model.maxlength"
       :autofocus="model.autofocus"
+      :class="className"
       v-model:value="modelValue"
     />
   </a-form-item>
@@ -17,6 +18,6 @@ const props = defineProps({
   widget: Object
 })
 
-const { readonly, disabled, size, model, modelValue } =
+const { readonly, disabled, size, model, modelValue, className } =
   useFormContext('inputValue')
 </script>

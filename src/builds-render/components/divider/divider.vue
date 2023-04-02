@@ -1,16 +1,20 @@
 <template>
   <a-divider
-    :type="widget.options.type"
-    :dashed="widget.options.dashed"
-    :orientation="widget.options.orientation"
+    :type="model.type"
+    :dashed="model.dashed"
+    :orientation="model.orientation"
+    :class="className"
   >
-    <template v-if="widget.options.title">
-      {{ widget.options.title }}
+    <template v-if="model.title">
+      {{ model.title }}
     </template>
   </a-divider>
 </template>
 <script setup>
+import useFormContext from '@/builds-render/hooks/useFormContext.js'
 defineProps({
   widget: Object
 })
+
+const { className, model } = useFormContext()
 </script>

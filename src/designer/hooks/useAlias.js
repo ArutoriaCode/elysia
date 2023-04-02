@@ -5,6 +5,8 @@ import { COMMON_KEY_NAME, EVENT_KEY_NAME, PANEL_COMPONENT } from "../utils/helpe
 
 const aliasDict = reactive({
   [COMMON_KEY_NAME]: {
+    globalStyle: "全局样式",
+    customStyle: "组件样式",
     title: "标题",
     text: "文本",
     type: "类型",

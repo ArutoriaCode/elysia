@@ -11,7 +11,7 @@
         :options="selectOptions"
         :disabled="disabled"
         :size="size"
-        @click.capture="onChange"
+        @click.capture="onChecked"
       />
     </a-form-item>
   </static-wrapper>
@@ -33,7 +33,7 @@ const selectOptions = computed(() => {
   }
 })
 
-const onChange = e => {
+const onChecked = e => {
   model.selectValue = e.target._value
 }
 </script>

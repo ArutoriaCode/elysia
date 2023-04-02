@@ -1,6 +1,6 @@
 <template>
   <static-wrapper :widget="widget">
-    <p>
+    <p :class="className">
       {{ widget.options.text }}
     </p>
   </static-wrapper>
@@ -12,5 +12,5 @@ defineProps({
   widget: Object
 })
 
-useGlobalSetting()
+const { className } = useGlobalSetting()
 </script>

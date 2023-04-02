@@ -16,6 +16,7 @@
         :formatter="formatter"
         :keyboard="model.keyboard"
         :parser="parser"
+        :class="className"
         v-model:value="model.numberValue"
       />
     </a-form-item>
@@ -29,7 +30,7 @@ const props = defineProps({
   widget: Object
 })
 
-const { readonly, disabled, size, model } = useGlobalSetting()
+const { readonly, disabled, size, model, className } = useGlobalSetting()
 const formatter = computed(() => {
   if (typeof model.formatter !== 'string') {
     return undefined

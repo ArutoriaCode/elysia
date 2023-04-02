@@ -17,6 +17,7 @@ import { getCompName } from './utils/helper'
 import { computed, getCurrentInstance, onMounted, onUnmounted } from 'vue'
 import { useGetForm } from './hooks/useFormContext'
 import { execFunction, initFormSchema } from './utils/helper'
+import { insertCustomCssToHead } from '@/utils'
 
 const defaultSchemaJson = {
   id: 'default-root-id',
@@ -70,10 +71,12 @@ const setDynamicRefName = (el, refs) => {
 
 const ctx = getCurrentInstance()
 onMounted(() => {
-  const { options } = schemaJsonStore.value
+  const { id, options } = schemaJsonStore.value
   if (options && options.onMounted) {
     execFunction(ctx, options.onMounted)
   }
+
+  insertCustomCssToHead(options.globalStyle, id)
 })
 
 onUnmounted(() => {

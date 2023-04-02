@@ -1,5 +1,5 @@
 <template>
-  <p v-show="!model.hidden">
+  <p v-show="!model.hidden" :class="className">
     {{ model.text }}
   </p>
 </template>
@@ -10,5 +10,5 @@ const { widget } = defineProps({
   widget: Object
 })
 
-const { model } = useFormContext()
+const { model, className } = useFormContext()
 </script>

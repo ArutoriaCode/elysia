@@ -5,6 +5,8 @@ import { reactive } from "vue";
 
 const propertys = reactive({
   [COMMON_KEY_NAME]: {
+    globalStyle: "style-editor",
+    customStyle: "style-editor",
     title: "text-input",
     text: "text-input",
     type: "selecter",

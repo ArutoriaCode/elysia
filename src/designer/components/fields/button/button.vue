@@ -7,6 +7,7 @@
       :shape="model.shape"
       :block="model.block"
       :size="size"
+      :class="className"
     >
       {{ model.text }}
     </a-button>
@@ -19,5 +20,5 @@ const props = defineProps({
   widget: Object
 })
 
-const { size, disabled, model } = useGlobalSetting()
+const { size, disabled, model, className } = useGlobalSetting()
 </script>

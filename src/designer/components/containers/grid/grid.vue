@@ -6,6 +6,7 @@
       :align="widget.options.align"
       :justify="widget.options.justify"
       :wrap="widget.options.wrap"
+      :class="className"
       style="width: 100%"
     >
       <elysia-col
@@ -19,9 +20,12 @@
 <script setup>
 import staticWrapper from '@/designer/components/wrapper/static-wrapper.vue'
 import elysiaCol from './col.vue'
+import useGlobalSetting from '@/designer/hooks/useGlobalSetting';
 const props = defineProps({
   widget: Object
 })
+
+const { className } = useGlobalSetting()
 </script>
 <style lang="less">
 .static-wrapper.grid {

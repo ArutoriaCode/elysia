@@ -9,7 +9,8 @@
         v-model:value="model.selectValue"
         :options="selectOptions"
         :disabled="disabled"
-        @click.capture="onChange"
+        @click.capture="onChecked"
+        :class="className"
       />
     </a-form-item>
   </static-wrapper>
@@ -22,7 +23,7 @@ const props = defineProps({
   widget: Object
 })
 
-const { disabled, model } = useGlobalSetting()
+const { disabled, model, className } = useGlobalSetting()
 const selectOptions = computed(() => {
   try {
     return JSON.parse(model.selectOptions)
@@ -31,11 +32,11 @@ const selectOptions = computed(() => {
   }
 })
 
-const onChange = e => {
+const onChecked = e => {
   const value = e.target._value
   const index = model.selectValue.indexOf(value)
   if (index > -1) {
-    model.selectValue.splice(index, 1)
+    model.selectValue = model.selectValue.filter((_, i) => i !== index)
   } else {
     model.selectValue.push(value)
   }

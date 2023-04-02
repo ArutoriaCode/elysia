@@ -17,7 +17,8 @@ import {
   Radio,
   Checkbox,
   Rate,
-  Slider
+  Slider,
+  Tag
 } from "ant-design-vue";
 
 import { Modal } from "ant-design-vue";
@@ -45,6 +46,7 @@ export default {
       .use(Checkbox)
       .use(Rate)
       .use(Slider)
+      .use(Tag)
       .use(Modal);
   }
 };

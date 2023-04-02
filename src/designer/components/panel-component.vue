@@ -73,7 +73,7 @@ const activeKey = ref(['1', '2'])
 const onPushComponent = widget => {
   const indexInParent = store.childrenList.length - 1
   widget.path = [indexInParent < 0 ? 0 : indexInParent]
-  store.childrenList.push(widget)
+  store.childrenList.push(clone(widget))
 }
 
 const onEndMove = evt => {
