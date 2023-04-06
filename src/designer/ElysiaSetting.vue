@@ -143,7 +143,8 @@ watch(
   border-left: 1px solid var(--primary-color);
   transition: display 0.2s;
   min-width: 172px;
-  .ant-row.ant-form-item {
+  .ant-row.ant-form-item,
+  .rules-editor.property-editor {
     border-top: 1px solid #f0f0f2;
     margin-bottom: 0;
     padding: 14px 0;

@@ -21,13 +21,11 @@ export default function useGlobalSetting() {
   });
 
   const formIsReadonly = computed(() => {
-    const { readonly = false } = model;
-    return store.options.formReadonly && readonly;
+    return store.options.formReadonly || model.readonly;
   });
 
   const formIsDisabled = computed(() => {
-    const { disabled = false } = model;
-    return store.options.formDisabled && disabled;
+    return store.options.formDisabled || model.disabled;
   });
 
   const size = computed(() => store.options.formSize || model.size || "default");

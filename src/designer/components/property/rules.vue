@@ -31,10 +31,10 @@
   </div>
 </template>
 <script setup>
-import useDefineModel from '~property/useDefineModel.js'
+import usePropEditorModel from '~property/hooks/usePropEditorModel.js'
 import useProp from '@/designer/hooks/useProp'
 
-const { modelValue, propertyCN } = useDefineModel()
+const { modelValue, propertyCN } = usePropEditorModel()
 
 const {
   propertyAlias: rulesLabel,

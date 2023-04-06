@@ -3,7 +3,7 @@ import { css } from '@codemirror/lang-css'
 import { ref, toRef, unref } from 'vue'
 import { insertCustomCssToHead, extractCssClass } from '@/utils'
 import { seletedSchema, isRootForm } from '@/designer/core/select.js'
-import useDefineModel from '~property/useDefineModel.js'
+import usePropEditorModel from '~property/hooks/usePropEditorModel.js'
 import store from '@/designer/core/store.js'
 const extensions = [css()]
 const visible = ref(false)
@@ -11,7 +11,7 @@ const onEditStyle = () => {
   visible.value = true
 }
 
-const { modelValue: styles, propertyCN, property, action } = useDefineModel()
+const { modelValue: styles, propertyCN, property, action } = usePropEditorModel()
 const className = toRef(seletedSchema.value.options, 'className') // 当前选中的样式名称
 const classNameList = ref([])
 

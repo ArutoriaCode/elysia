@@ -5,11 +5,11 @@ import { javascript } from '@codemirror/lang-javascript'
 import { json } from '@codemirror/lang-json'
 import { ctxComplete } from '@/designer/utils/complete.js'
 import { ref } from 'vue'
-import useDefineModel from '~property/useDefineModel.js'
+import usePropEditorModel from '~property/hooks/usePropEditorModel.js'
 
 const extensions = [javascript(), ctxComplete, json()]
 
-const { modelValue, propertyCN, property, action } = useDefineModel()
+const { modelValue, propertyCN, property, action } = usePropEditorModel()
 const visible = ref(false)
 const onEditCode = () => {
   visible.value = true

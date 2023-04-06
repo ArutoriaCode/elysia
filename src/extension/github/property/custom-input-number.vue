@@ -8,11 +8,11 @@
   </a-form-item>
 </template>
 <script setup>
-import useDefineModel from '~property/useDefineModel.js'
+import usePropEditorModel from '~property/hooks/usePropEditorModel.js'
 import { seletedSchema } from '@/designer/core/select.js'
 import { ref } from 'vue'
 
-const { propertyCN, modelValue, property, action } = useDefineModel()
+const { propertyCN, modelValue, property, action } = usePropEditorModel()
 
 const { inputNumber } = seletedSchema.value
 const inputNumberProps = ref({})

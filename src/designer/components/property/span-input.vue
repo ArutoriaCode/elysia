@@ -7,8 +7,8 @@
   </a-form-item>
 </template>
 <script setup>
-import useDefineModel from './useDefineModel'
-const { propertyCN, modelValue, action } = useDefineModel()
+import usePropEditorModel from '~property/hooks/usePropEditorModel.js'
+const { propertyCN, modelValue, action } = usePropEditorModel()
 const onCustomRecord = () => {
   const span = modelValue.value
   if (span > 24 || span < 0) {

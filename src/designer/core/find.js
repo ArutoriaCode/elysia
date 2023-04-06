@@ -1,6 +1,7 @@
 import get from "lodash.get";
 import store from "./store";
 import { isObject, hasProp } from "@/utils/index.js";
+import { unref } from "vue";
 
 /**
  * 通过组件schema中所带的path属性路径来查找到某个组件
@@ -8,6 +9,7 @@ import { isObject, hasProp } from "@/utils/index.js";
  * @returns {Reactive<{ id: string; childrenList?:[]; name: string; type: string; options: {} }>}
  */
 export function find(indexInParentList) {
+  indexInParentList = unref(indexInParentList)
   if (isObject(indexInParentList) && hasProp(indexInParentList, "path")) {
     // 防止传递过来了组件对象
     indexInParentList = indexInParentList.path;

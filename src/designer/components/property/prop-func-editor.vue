@@ -2,9 +2,9 @@
 import { javascript } from '@codemirror/lang-javascript'
 import { propComplete } from '@/designer/utils/complete.js'
 import { ref } from 'vue'
-import useDefineModel from '~property/useDefineModel.js'
+import usePropEditorModel from '~property/hooks/usePropEditorModel.js'
 
-const { modelValue, propertyCN, property, action } = useDefineModel()
+const { modelValue, propertyCN, property, action } = usePropEditorModel()
 const extensions = [javascript(), propComplete(property)]
 const visible = ref(false)
 const onEditCode = () => {

@@ -9,10 +9,10 @@
   </a-form-item>
 </template>
 <script setup>
-import useDefineModel from './useDefineModel'
+import usePropEditorModel from '~property/hooks/usePropEditorModel.js'
 import { seletedSchema } from '../../core/select'
 import { ref } from 'vue';
-const { property, propertyCN, modelValue, action } = useDefineModel()
+const { property, propertyCN, modelValue, action } = usePropEditorModel()
 const editorProps = seletedSchema.value['x-editor-props']
 const numberProps = ref({})
 if (editorProps) {

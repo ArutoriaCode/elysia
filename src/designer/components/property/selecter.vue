@@ -12,7 +12,7 @@
   </a-form-item>
 </template>
 <script setup>
-import useDefineModel from './useDefineModel'
+import usePropEditorModel from '~property/hooks/usePropEditorModel.js'
 
-const { propertyCN, modelValue, selectOptions, action } = useDefineModel()
+const { propertyCN, modelValue, selectOptions, action } = usePropEditorModel()
 </script>

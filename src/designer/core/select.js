@@ -28,7 +28,7 @@ export function setSelected(value) {
 
   if (checkSchema(value)) {
     const select = seletedSchema.value;
-    if (checkSchema(select) && select.id === value.id) {
+    if (select && select.id && select.id === value.id) {
       return; // 已经选中该组件了
     }
 

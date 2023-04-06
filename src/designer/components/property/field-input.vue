@@ -10,13 +10,13 @@
   </a-form-item>
 </template>
 <script setup>
-import useDefineModel from './useDefineModel'
+import usePropEditorModel from '~property/hooks/usePropEditorModel.js'
 import { uniqueField } from '../../core/store'
 import { message } from 'ant-design-vue'
 import { reactive, unref } from 'vue'
 import { seletedSchema } from '@/designer/core/select.js'
 
-const { propertyCN, modelValue, action, property } = useDefineModel()
+const { propertyCN, modelValue, action, property } = usePropEditorModel()
 
 const rules = reactive([
   {

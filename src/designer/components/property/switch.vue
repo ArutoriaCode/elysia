@@ -4,10 +4,10 @@
   </a-form-item>
 </template>
 <script setup>
-import useDefineModel from './useDefineModel'
+import usePropEditorModel from '~property/hooks/usePropEditorModel.js'
 import { computed } from 'vue'
 
-const { propertyCN, modelValue, property, action } = useDefineModel()
+const { propertyCN, modelValue, property, action } = usePropEditorModel()
 const help = computed(() => {
   const helps = {
     hidden: '注：隐藏组件需要在预览中才能看到效果',

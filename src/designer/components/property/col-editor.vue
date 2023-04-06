@@ -29,7 +29,7 @@
   </a-button>
 </template>
 <script setup>
-import useDefineModel from '~property/useDefineModel.js'
+import usePropEditorModel from '~property/hooks/usePropEditorModel.js'
 import useAlias from '../../hooks/useAlias'
 import recorder from '~core/recorder'
 import { DeleteFilled, PlusSquareFilled } from '@ant-design/icons-vue'
@@ -45,7 +45,7 @@ const colAlias = useAlias([PANEL_COMPONENT, 'col'])
 const widget = find(seletedSchema.value.path)
 const childrenList = toRef(widget, 'childrenList')
 
-const { propertyCN } = useDefineModel()
+const { propertyCN } = usePropEditorModel()
 
 const recordOldSpan = () => {
   return childrenList.value.reduce((maps, v) => {

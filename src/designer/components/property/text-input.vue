@@ -8,7 +8,7 @@
   </a-form-item>
 </template>
 <script setup>
-import useDefineModel from './useDefineModel'
+import usePropEditorModel from '~property/hooks/usePropEditorModel.js'
 
-const { propertyCN, modelValue, action } = useDefineModel()
+const { propertyCN, modelValue, action } = usePropEditorModel()
 </script>
