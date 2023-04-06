@@ -10,6 +10,6 @@ export default {
   install(app) {
     app.use(Icons).use(LazyUse).use(Components).use(ElysiaBuilds);
     app.component("codemirror", Codemirror);
-    app.component("elysia-designer", ElysiaDesigner);
+    app.component("designer", ElysiaDesigner);
   }
 };

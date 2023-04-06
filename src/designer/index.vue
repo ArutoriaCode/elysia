@@ -4,12 +4,10 @@
       <elysia-panel></elysia-panel>
     </div>
     <div class="main-wrapper" :style="mainWrapperStyle">
-      <elysia-toolbar v-model="active">
-        <a-spin :spinning="active === 'loading'">
-          <elysia-render v-show="active === 'render'"></elysia-render>
-          <elysia-json v-show="active === 'json'"></elysia-json>
-          <elysia-builds v-if="active === 'builds'" />
-        </a-spin>
+      <elysia-toolbar>
+        <elysia-design v-show="activeTab === DESIGN_TAB"></elysia-design>
+        <elysia-json v-show="activeTab === JSONCODE_TAB"></elysia-json>
+        <elysia-builds v-show="activeTab === BUILDS_TAB" />
       </elysia-toolbar>
     </div>
     <div class="aside-wrapper settings">
@@ -19,20 +17,20 @@
 </template>
 <script setup>
 import ElysiaPanel from './ElysiaPanel.vue'
-import ElysiaRender from './ElysiaRender.vue'
+import ElysiaDesign from './ElysiaDesign.vue'
 import ElysiaSetting from './ElysiaSetting.vue'
 import ElysiaToolbar from './ElysiaToolbar.vue'
 import ElysiaJson from './ElysiaJson.vue'
 import ElysiaBuilds from './ElysiaBuilds.vue'
-import { ref, computed } from 'vue'
 import config from '~core/config.js'
 import recorder from './core/recorder'
+import { computed } from 'vue'
 import { CheckCircleFilled } from '@ant-design/icons-vue'
+import { activeTab, DESIGN_TAB, JSONCODE_TAB, BUILDS_TAB } from './core/tabs'
 
-const active = ref('render')
 const mainWrapperStyle = computed(() => {
   let width = 80
-  if (active.value !== 'builds') {
+  if (activeTab !== DESIGN_TAB) {
     width = 55
   }
 

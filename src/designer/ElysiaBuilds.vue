@@ -1,8 +1,8 @@
 <script setup>
-import { viewBuildsJson } from '@/designer/core/store.js'
+import tabContent from './core/tabs'
 </script>
 <template>
   <div class="elysia-builds-render">
-    <builds-render :schema-json="viewBuildsJson"></builds-render>
+    <builds-render :schema-json="tabContent"></builds-render>
   </div>
 </template>

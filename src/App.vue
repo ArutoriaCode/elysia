@@ -1,5 +1,5 @@
 <template>
-  <elysia-designer></elysia-designer>
+  <designer></designer>
 </template>
 <script>
 import { importSchemaJson } from './designer/core/store'

@@ -1,5 +1,5 @@
 import recorder from "./recorder";
-import { reactive, shallowRef, computed, unref } from "vue";
+import { reactive, unref } from "vue";
 import { v4 as uuidv4 } from "uuid";
 import { CONTAINER_TYPE, FIELD_TYPE } from "../utils/helper";
 import { isObject } from "@/utils";
@@ -91,18 +91,6 @@ export function importSchemaJson(json) {
   });
 
   return true;
-}
-
-export const viewSchemaJson = shallowRef(null);
-export const viewStatus = computed(() => !!viewSchemaJson.value);
-export function viewJson() {
-  viewSchemaJson.value = JSON.stringify(schemaJson, null, 2);
-}
-
-export const viewBuildsJson = shallowRef(null);
-export const viewBuildsStatus = computed(() => !!viewBuildsJson.value);
-export function viewBuilds() {
-  viewBuildsJson.value = JSON.stringify(schemaJson, null, 2);
 }
 
 export default schemaJson;

@@ -50,10 +50,8 @@ export default defineConfig({
               case "lodash.clonedeep":
               case "lodash.isequal":
                 return "module-" + arr[0].replace('.', '-');
-                break;
               default:
                 return "vendor";
-                break;
             }
           }
         }

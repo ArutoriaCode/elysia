@@ -5,12 +5,12 @@
         <undo-icon
           title="撤销"
           :class="{ disabled: disabledUndo }"
-          @click="onUndo"
+          @click="recorder.undo"
         ></undo-icon>
         <redo-icon
           title="重做"
           :class="{ disabled: disabledRedo }"
-          @click="onRedo"
+          @click="recorder.redo"
         ></redo-icon>
       </div>
       <div v-else>
@@ -20,15 +20,10 @@
 
       <div>
         <import-icon title="导入JSON" @click="onImport"></import-icon>
-        <template v-if="active === 'render'">
-          <clear-outlined title="清空设计" @click="onClearStore" />
-          <play-circle-filled title="预览" @click="onViewBuilds" />
-          <code-filled title="查看代码" @click="onViewJson" />
-        </template>
-        <template v-else>
-          <sync-outlined title="刷新" @click="onRefresh" />
-          <build-filled title="设计视图" @click="onViewRender" />
-        </template>
+        <clear-outlined title="清空设计" @click="onClearStore" />
+        <play-circle-filled title="预览" @click="onChangeMountTab(BUILDS_TAB)" />
+        <code-filled title="查看代码" @click="onChangeMountTab(JSONCODE_TAB)" />
+        <build-filled title="设计视图" @click="onChangeMountTab(DESIGN_TAB)" />
       </div>
     </div>
     <div class="elysia-main-content" :class="{ [`active-${active}`]: true }">
@@ -63,17 +58,25 @@ import {
   SyncOutlined,
   RollbackOutlined
 } from '@ant-design/icons-vue'
-import { clearStore, viewBuilds, viewJson } from './core/store'
+import { clearStore } from './core/store'
 import recorder, {
   isViewStatus,
   disabledUndo,
   disabledRedo
 } from './core/recorder'
-import { computed, nextTick, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { setSelected } from '@/designer/core/select.js'
 import { json } from '@codemirror/lang-json'
 import store, { importSchemaJson } from '@/designer/core/store.js'
 import { message } from 'ant-design-vue'
+import {
+  onChangeMountTab,
+  BUILDS_TAB,
+  JSONCODE_TAB,
+  DESIGN_TAB,
+  activeTab
+} from './core/tabs'
+import { onUpdateTabContent } from './core/tabs'
 
 const props = defineProps({
   modelValue: String
@@ -96,6 +99,7 @@ const onClearStore = () => {
 
   setSelected(null)
   clearStore()
+  onUpdateTabContent()
 }
 
 const showImport = ref(false)
@@ -114,50 +118,6 @@ const onConfirmImport = () => {
 
   showImport.value = false
   message.success('导入成功！')
-
-  onRefresh()
-}
-
-const onRefresh = () => {
-  if (active.value === 'builds') {
-    active.value = 'loading'
-    nextTick(() => {
-      active.value = 'builds'
-      viewBuilds()
-    })
-  }
-
-  active.value === 'json' && viewJson()
-}
-
-// 性能考虑，在切换视图之后才开始重新渲染組件
-const onViewBuilds = () => {
-  active.value = 'builds'
-  viewBuilds()
-}
-
-// 性能考虑，在切换视图之后才开始写入json
-const onViewJson = () => {
-  active.value = 'json'
-  viewJson()
-}
-
-const onViewRender = () => {
-  active.value = 'render'
-}
-
-const onUndo = () => {
-  recorder.undo()
-  nextTick(() => {
-    onRefresh()
-  })
-}
-
-const onRedo = () => {
-  recorder.redo()
-  nextTick(() => {
-    onRefresh()
-  })
 }
 </script>
 <style lang="less">
