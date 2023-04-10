@@ -139,6 +139,12 @@ export default function useFormContext(defaultValueKey) {
     const formConfig = widget[GLOBAL_FORM_CONFIG];
     return formConfig.formSize || model.size || "default";
   });
+
+  // 插入组件的样式至头部
+  if (model.customStyle) {
+    insertCustomCssToHead(model.customStyle, widget.id);
+  }
+
   // 组件使用到的样式名称
   const className = computed(() => {
     if (!Array.isArray(model.className)) {

@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:render": "vite build --config vite-render-lib.config.js",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -10,11 +10,9 @@
   </a>
 </template>
 <script setup>
-import { defineAsyncComponent } from 'vue'
 import useFormContext from '@/builds-render/hooks/useFormContext.js'
-const GithubOutlined = defineAsyncComponent(() =>
-  import('@ant-design/icons-vue/GithubOutlined')
-)
+import GithubOutlined from '@ant-design/icons-vue/GithubOutlined'
+
 defineProps({
   widget: Object
 })
