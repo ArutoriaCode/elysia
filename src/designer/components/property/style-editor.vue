@@ -5,16 +5,24 @@ import { insertCustomCssToHead, extractCssClass } from '@/utils'
 import { seletedSchema, isRootForm } from '@/designer/core/select.js'
 import usePropEditorModel from '~property/hooks/usePropEditorModel.js'
 import store from '@/designer/core/store.js'
+import useProp from '../../hooks/useProp'
 const extensions = [css()]
 const visible = ref(false)
 const onEditStyle = () => {
   visible.value = true
 }
 
-const { modelValue: styles, propertyCN, property, action } = usePropEditorModel()
-const className = toRef(seletedSchema.value.options, 'className') // 当前选中的样式名称
-const classNameList = ref([])
+const {
+  modelValue: styles,
+  propertyCN,
+  property,
+  action
+} = usePropEditorModel()
 
+const { propertyModel: className, action: classNameAction } =
+  useProp('className')
+
+const classNameList = ref([])
 function createClassNameList () {
   if (unref(styles)) {
     insertCustomCssToHead(unref(styles), seletedSchema.value.id)
@@ -64,6 +72,7 @@ const onRecord = () => {
       :options="classNameList"
       :max-tag-count="2"
       allowClear
+      @change="classNameAction.record"
     />
     <a-button @click="onEditStyle" class="property-edit-btn">
       <css-icon></css-icon>

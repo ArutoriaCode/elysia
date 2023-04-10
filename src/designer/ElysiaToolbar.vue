@@ -21,7 +21,10 @@
       <div>
         <import-icon title="导入JSON" @click="onImport"></import-icon>
         <clear-outlined title="清空设计" @click="onClearStore" />
-        <play-circle-filled title="预览" @click="onChangeMountTab(BUILDS_TAB)" />
+        <play-circle-filled
+          title="预览"
+          @click="onChangeMountTab(BUILDS_TAB)"
+        />
         <code-filled title="查看代码" @click="onChangeMountTab(JSONCODE_TAB)" />
         <build-filled title="设计视图" @click="onChangeMountTab(DESIGN_TAB)" />
       </div>
@@ -55,7 +58,6 @@ import {
   CodeFilled,
   ClearOutlined,
   BuildFilled,
-  SyncOutlined,
   RollbackOutlined
 } from '@ant-design/icons-vue'
 import { clearStore } from './core/store'
@@ -74,9 +76,8 @@ import {
   BUILDS_TAB,
   JSONCODE_TAB,
   DESIGN_TAB,
-  activeTab
+  onUpdateTabContent
 } from './core/tabs'
-import { onUpdateTabContent } from './core/tabs'
 
 const props = defineProps({
   modelValue: String

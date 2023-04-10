@@ -4,6 +4,7 @@ import isEqual from "lodash.isequal";
 import { seletedSchema } from "~core/select";
 import { COMMON_KEY_NAME } from "../utils/helper";
 import { toRef, nextTick } from "vue";
+import { onUpdateTabContent } from "../core/tabs";
 
 /** 属性响应式获取，以及变化监听记录 */
 export default function useProp(property) {
@@ -51,6 +52,8 @@ export default function useProp(property) {
             `${nameAlias || name}组件属性[${propertyAlias}]被修改`,
             "prop-icon"
           );
+
+          onUpdateTabContent(); // 刷新当前tab视图
 
           if (typeof callback === "function") {
             // 返回新值、旧值
