@@ -32,7 +32,10 @@ export function find(indexInParentList) {
     }
   });
 
-  return { ...get(store, fullPathList), path: indexInParentList };
+  const target = get(store, fullPathList)
+  return Object.assign(target, {
+    path: indexInParentList
+  })
 }
 
 /**

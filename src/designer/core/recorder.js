@@ -1,8 +1,8 @@
 import dayjs from "dayjs";
 import store from "./store";
-import { reactive, shallowRef, computed } from "vue";
-import { seletedSchema, setSelected } from "./select";
 import cloneDeep from "lodash.clonedeep";
+import { nextTick, reactive, shallowRef, computed } from "vue";
+import { seletedSchema, setSelected } from "./select";
 import { isObject } from "../../utils";
 
 export const historys = reactive({
@@ -34,9 +34,9 @@ const recorder = {
     }
 
     if (isObject(icon) && icon.name) {
-      const app = window.__elysia_app__
-      app.component(icon.name, icon)
-      icon = icon.name
+      const app = window.__elysia_app__;
+      app.component(icon.name, icon);
+      icon = icon.name;
     }
 
     const selected = seletedSchema.value;

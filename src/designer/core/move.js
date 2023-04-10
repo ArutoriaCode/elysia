@@ -1,5 +1,4 @@
 import recorder from "./recorder";
-import cloneDeep from "lodash.clonedeep";
 import { findParent } from "./find";
 
 /** 校验当前组件是否允许拖到目标组件下 */

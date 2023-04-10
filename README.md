@@ -61,6 +61,33 @@ npm run dev
 npm run build:render
 ```
 
+使用
+```javascript
+// main.js
+import { createApp } from "vue";
+import App from "./App.vue";
+import antd from "ant-design-vue";
+import 'ant-design-vue/dist/antd.css';
+
+
+import ElysiaBuildsRender from "./libs/render.es.js";
+
+createApp(App).use(antd).use(ElysiaBuildsRender).mount("#app");
+```
+```vue
+// xxx.vue
+<script setup>
+import demoJson from './demo.json'
+import { ref } from 'vue'
+
+const json = ref(demoJson)
+</script>
+
+<template>
+  <builds-render :schema-json="json"></builds-render>
+</template>
+```
+
 ### 浏览器兼容性
 
 不支持IE 11(包括)以下的浏览器

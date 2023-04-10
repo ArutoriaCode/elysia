@@ -18,10 +18,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      "@": resolve(__dirname, "src"),
-      "~core": resolve(__dirname, "src/designer/core"),
-      "~components": resolve(__dirname, "src/designer/components"),
-      "~property": resolve(__dirname, "src/designer/components/property")
+      "@": resolve(__dirname, "src")
     }
   },
   build: {

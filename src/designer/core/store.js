@@ -93,4 +93,22 @@ export function importSchemaJson(json) {
   return true;
 }
 
+function cleanUpExcess(childrenList) {
+  return childrenList.map(v => {
+    const newData = { ...v };
+    delete newData["path"];
+    if (newData.type === CONTAINER_TYPE && Array.isArray(newData.childrenList)) {
+      newData.childrenList = cleanUpExcess(newData.childrenList);
+    }
+
+    return newData;
+  });
+}
+
+export function exportSchemaJson() {
+  const jsonSchema = { ...schemaJson, childrenList: cleanUpExcess(store.childrenList) };
+  delete jsonSchema["path"];
+  return JSON.stringify(jsonSchema);
+}
+
 export default schemaJson;
