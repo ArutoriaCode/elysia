@@ -15,6 +15,33 @@
 - [x] 支持开发自定义组件
 - [x] 支持响应式自适应布局
 
+### 项目结构
+
+```
+elysia
+├── public
+├── src
+│   ├── assets
+│   ├── builds-render # 渲染器
+│   ├── components
+│   ├── designer # 设计器
+│   ├── extension # 开展组件
+│   ├── hooks
+│   ├── utils
+│   ├── App.vue
+│   ├── demo.json
+│   ├── main.js
+│   └── style.less
+├── LICENSE
+├── README.md
+├── index.html
+├── install-builds.js
+├── jsconfig.json
+├── package.json
+├── vite-render-lib.config.js
+└── vite.config.js
+```
+
 ### 安装依赖
 
 ```shell
