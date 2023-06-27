@@ -18,7 +18,7 @@
         <restore-icon title="还原" @click="recorder.restore" />
       </div>
 
-      <div>
+      <div class="action-bar" :class="{ [`active-${activeTab}`]: true }">
         <import-icon title="导入JSON" @click="onImport"></import-icon>
         <clear-outlined title="清空设计" @click="onClearStore" />
         <play-circle-filled
@@ -76,7 +76,8 @@ import {
   BUILDS_TAB,
   JSONCODE_TAB,
   DESIGN_TAB,
-  onUpdateTabContent
+  onUpdateTabContent,
+  activeTab
 } from './core/tabs'
 
 const props = defineProps({
@@ -154,6 +155,11 @@ const onConfirmImport = () => {
           transform: scale(1);
         }
       }
+    }
+    .action-bar.active-design .anticon-build,
+    .action-bar.active-jsoncode .anticon-code,
+    .action-bar.active-builds .anticon-play-circle {
+      color: var(--danger-color);
     }
   }
   .elysia-main-content.active-json {

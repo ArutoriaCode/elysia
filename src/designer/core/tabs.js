@@ -34,6 +34,9 @@ export function onChangeMountTab(tab) {
   }
 
   activeTab.value = tab;
+  if (DESIGN_TAB === tab) {
+    return;
+  }
   onUpdateTabContent();
 }
 

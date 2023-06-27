@@ -20,10 +20,11 @@
 import store from '~core/store.js'
 import useDebounce from '@/designer/hooks/useDebounce'
 import { DownOutlined } from '@ant-design/icons-vue'
-import { watch, computed, reactive } from 'vue'
+import { watch, computed, reactive, nextTick } from 'vue'
 import { setSelected } from '../core/select'
 import { seletedSchema } from '@/designer/core/select.js'
 import { CONTAINER_TYPE } from '../utils/helper'
+import { DESIGN_TAB, onChangeMountTab } from '../core/tabs'
 
 const selectedKeys = computed(() => {
   if (seletedSchema.value && seletedSchema.value.id) {
@@ -73,7 +74,10 @@ const updateTree = useDebounce(childrenList => {
 watch(() => store.childrenList, updateTree, { deep: true, immediate: true })
 
 function onSelect (selectedKeys, { node }) {
-  setSelected(node.path)
+  onChangeMountTab(DESIGN_TAB)
+  nextTick(() => {
+    setSelected(node.path)
+  })
 }
 </script>
 <style lang="less">
