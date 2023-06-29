@@ -22,7 +22,10 @@ export function setSelected(value) {
 
   if (Array.isArray(value)) {
     const widget = find(value);
-    seletedSchema.value = { ...widget };
+    if (widget) {
+      seletedSchema.value = { ...widget };
+    }
+
     return widget;
   }
 

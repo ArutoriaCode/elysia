@@ -17,7 +17,11 @@
         <rollback-outlined title="取消返回" @click="recorder.cancelView" />
         <restore-icon title="还原" @click="recorder.restore" />
       </div>
-
+      <div class="page-view">
+        <span id="busuanzi_container_site_pv">
+          本 站 总 访 问 量 <span id="busuanzi_value_site_pv"></span> 次
+        </span>
+      </div>
       <div class="action-bar" :class="{ [`active-${activeTab}`]: true }">
         <import-icon title="导入JSON" @click="onImport"></import-icon>
         <clear-outlined title="清空设计" @click="onClearStore" />
@@ -125,6 +129,7 @@ const onConfirmImport = () => {
 <style lang="less">
 .elysia-main {
   .elysia-toolbar {
+    position: relative;
     width: 100%;
     height: 48px;
     display: flex;
@@ -164,6 +169,19 @@ const onConfirmImport = () => {
   }
   .elysia-main-content.active-json {
     padding: 0 !important;
+  }
+
+  .page-view {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    #busuanzi_container_site_pv {
+      font-size: 13px;
+      color: #bbbbbb;
+      user-select: none;
+      font-family: 'PingFang SC', 'Helvetica Neue', Helvetica, Arial,
+        'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', STHeiti, sans-serif;
+    }
   }
 }
 </style>

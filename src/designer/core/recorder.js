@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import store from "./store";
 import cloneDeep from "lodash.clonedeep";
-import { nextTick, reactive, shallowRef, computed } from "vue";
+import { reactive, shallowRef, computed } from "vue";
 import { seletedSchema, setSelected } from "./select";
 import { isObject } from "../../utils";
 

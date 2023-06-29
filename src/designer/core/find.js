@@ -9,7 +9,7 @@ import { unref } from "vue";
  * @returns {Reactive<{ id: string; childrenList?:[]; name: string; type: string; options: {} }>}
  */
 export function find(indexInParentList) {
-  indexInParentList = unref(indexInParentList)
+  indexInParentList = unref(indexInParentList);
   if (isObject(indexInParentList) && hasProp(indexInParentList, "path")) {
     // 防止传递过来了组件对象
     indexInParentList = indexInParentList.path;
@@ -32,10 +32,14 @@ export function find(indexInParentList) {
     }
   });
 
-  const target = get(store, fullPathList)
+  const target = get(store, fullPathList);
+  if (!target) {
+    return null;
+  }
+
   return Object.assign(target, {
     path: indexInParentList
-  })
+  });
 }
 
 /**
