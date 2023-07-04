@@ -68,6 +68,9 @@ const activeKeys = computed({
     selectedKey.value = value.pop()
   },
   get () {
+    if (config.hiddenPanel) {
+      return []
+    }
     return [selectedKey.value]
   }
 })

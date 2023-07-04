@@ -10,7 +10,10 @@
         <elysia-builds v-show="activeTab === BUILDS_TAB" />
       </elysia-toolbar>
     </div>
-    <div class="aside-wrapper settings">
+    <div
+      class="aside-wrapper settings"
+      :class="{ 'setup-inside': !config.hiddenSetting }"
+    >
       <elysia-setting></elysia-setting>
     </div>
   </div>
