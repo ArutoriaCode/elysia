@@ -4,7 +4,7 @@
       <elysia-panel></elysia-panel>
     </div>
     <div class="main-wrapper" :style="mainWrapperStyle">
-      <elysia-toolbar>
+      <elysia-toolbar v-model="activeTab">
         <elysia-design v-show="activeTab === DESIGN_TAB"></elysia-design>
         <elysia-json v-show="activeTab === JSONCODE_TAB"></elysia-json>
         <elysia-builds v-show="activeTab === BUILDS_TAB" />

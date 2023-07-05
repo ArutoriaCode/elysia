@@ -1,5 +1,5 @@
 <template>
-  <div class="elysia-main">
+  <div class="elysia-main" :class="{ [`active-nav-${active}`]: true }">
     <div class="elysia-toolbar">
       <div v-if="!isViewStatus">
         <undo-icon
@@ -22,9 +22,13 @@
           本 站 总 访 问 量 <span id="busuanzi_value_site_pv"></span> 次
         </span>
       </div>
-      <div class="action-bar" :class="{ [`active-${activeTab}`]: true }">
+      <div class="action-bar">
         <import-icon title="导入JSON" @click="onImport"></import-icon>
-        <clear-outlined title="清空设计" @click="onClearStore" />
+        <clear-outlined
+          title="清空设计"
+          @click="onClearStore"
+          :class="{ disabled: isEmptySotre(store) }"
+        />
         <play-circle-filled
           title="预览"
           @click="onChangeMountTab(BUILDS_TAB)"
@@ -33,7 +37,7 @@
         <build-filled title="设计视图" @click="onChangeMountTab(DESIGN_TAB)" />
       </div>
     </div>
-    <div class="elysia-main-content" :class="{ [`active-${active}`]: true }">
+    <div class="elysia-main-content">
       <slot :active="active"></slot>
     </div>
   </div>
@@ -57,6 +61,17 @@
   </a-modal>
 </template>
 <script setup>
+import store, { importSchemaJson } from '@/designer/core/store.js'
+import recorder, {
+  isViewStatus,
+  disabledUndo,
+  disabledRedo
+} from './core/recorder'
+import { clearStore, isEmptySotre } from './core/store'
+import { computed, ref } from 'vue'
+import { setSelected } from '@/designer/core/select.js'
+import { json } from '@codemirror/lang-json'
+import { message } from 'ant-design-vue'
 import {
   PlayCircleFilled,
   CodeFilled,
@@ -64,24 +79,12 @@ import {
   BuildFilled,
   RollbackOutlined
 } from '@ant-design/icons-vue'
-import { clearStore } from './core/store'
-import recorder, {
-  isViewStatus,
-  disabledUndo,
-  disabledRedo
-} from './core/recorder'
-import { computed, ref } from 'vue'
-import { setSelected } from '@/designer/core/select.js'
-import { json } from '@codemirror/lang-json'
-import store, { importSchemaJson } from '@/designer/core/store.js'
-import { message } from 'ant-design-vue'
 import {
   onChangeMountTab,
   BUILDS_TAB,
   JSONCODE_TAB,
   DESIGN_TAB,
-  onUpdateTabContent,
-  activeTab
+  onUpdateTabContent
 } from './core/tabs'
 
 const props = defineProps({
@@ -100,6 +103,11 @@ const active = computed({
 
 const onClearStore = () => {
   if (isViewStatus.value) {
+    return
+  }
+
+  // 数据已清空，不再重复清空
+  if (isEmptySotre(store)) {
     return
   }
 
@@ -161,13 +169,21 @@ const onConfirmImport = () => {
         }
       }
     }
-    .action-bar.active-design .anticon-build,
-    .action-bar.active-jsoncode .anticon-code,
-    .action-bar.active-builds .anticon-play-circle {
+  }
+
+  &.active-nav {
+    &-design .action-bar .anticon-build {
+      color: var(--danger-color);
+    }
+    &-jsoncode .action-bar .anticon-code {
+      color: var(--danger-color);
+    }
+    &-builds .action-bar .anticon-play-circle {
       color: var(--danger-color);
     }
   }
-  .elysia-main-content.active-json {
+
+  &.active-nav-jsoncode .elysia-main-content {
     padding: 0 !important;
   }
 

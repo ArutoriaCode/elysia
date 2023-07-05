@@ -4,6 +4,7 @@ import cloneDeep from "lodash.clonedeep";
 import { reactive, shallowRef, computed } from "vue";
 import { seletedSchema, setSelected } from "./select";
 import { isObject } from "../../utils";
+import { onUpdateTabContent } from "./tabs";
 
 export const historys = reactive({
   historyList: [],
@@ -83,6 +84,8 @@ const recorder = {
     if (record) {
       recorder.add("还原", "restore-icon");
     }
+
+    onUpdateTabContent()
   },
   /** 重做 */
   redo() {
@@ -102,6 +105,8 @@ const recorder = {
 
     setSelected(redoData.selectedPath);
     historys.step = redoStep;
+
+    onUpdateTabContent()
   },
   /** 撤销 */
   undo() {
@@ -121,6 +126,8 @@ const recorder = {
 
     setSelected(undoData.selectedPath);
     historys.step = undoStep;
+
+    onUpdateTabContent()
   }
 };
 

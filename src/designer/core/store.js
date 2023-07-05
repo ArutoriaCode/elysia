@@ -1,4 +1,5 @@
-import recorder from "./recorder";
+import isEqual from "lodash.isequal";
+import recorder, { historys } from "./recorder";
 import { reactive, unref } from "vue";
 import { v4 as uuidv4 } from "uuid";
 import { CONTAINER_TYPE, FIELD_TYPE } from "../utils/helper";
@@ -62,13 +63,37 @@ export function checkSchema(schema) {
   return valid && [CONTAINER_TYPE, FIELD_TYPE].includes(schema.type);
 }
 
+export const isEmptySotre = store => {
+  return (
+    store &&
+    Reflect.has(store, "childrenList") &&
+    Reflect.has(store, "options") &&
+    store.childrenList.length === 0 &&
+    isEqual(store.options, defaultGlobalOptions)
+  );
+};
+
+/**
+ * 清空数据，可选择是否记录清空操作到历史记录
+ * @param {boolean} record
+ */
 export function clearStore(record = true) {
   schemaJson.childrenList = [];
   schemaJson.options = { ...defaultGlobalOptions };
 
-  if (record) {
-    recorder.add(`清空数据`, "broom-icon");
+  if (!record) {
+    return;
   }
+
+  // 上一条记录是否为清空操作，如果是则不再记录
+  const lastRecordIndex = historys.step - 1;
+  const lastRecord = historys.historyList[lastRecordIndex];
+  if (lastRecord && isEmptySotre(lastRecord.store)) {
+    historys.step = lastRecordIndex; // 回退到上一条记录
+    return;
+  }
+
+  recorder.add(`清空数据`, "broom-icon");
 }
 
 export function importSchemaJson(json) {
