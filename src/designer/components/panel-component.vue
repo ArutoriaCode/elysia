@@ -15,6 +15,7 @@
         :move="checkMove"
         :clone="clone"
         :sort="false"
+        @start="onStartMove"
         @end="onEndMove"
       >
         <template #item="{ element: widget, index }">
@@ -41,6 +42,7 @@
         :clone="clone"
         :sort="false"
         :move="checkMove"
+        @start="onStartMove"
         @end="onEndMove"
       >
         <template #item="{ element: widget, index }">
@@ -66,7 +68,9 @@ import { clone } from '@/designer/core/clone.js'
 import { checkMove } from '@/designer/core/move.js'
 import { containersSchema, fieldsSchema } from '@/designer/core/schema/index.js'
 import { ref } from 'vue'
+import { setPanelVisible } from '~core/config.js'
 import recorder from '../core/recorder'
+import useClientWidth from '../hooks/useClientWidth'
 
 const activeKey = ref(['1', '2'])
 
@@ -74,6 +78,13 @@ const onPushComponent = widget => {
   const indexInParent = store.childrenList.length - 1
   widget.path = [indexInParent < 0 ? 0 : indexInParent]
   store.childrenList.push(clone(widget))
+}
+
+const clientWidth = useClientWidth()
+const onStartMove = () => {
+  if (clientWidth.value <= 768) {
+    setPanelVisible(false)
+  }
 }
 
 const onEndMove = evt => {

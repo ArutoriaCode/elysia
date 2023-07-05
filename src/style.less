@@ -87,7 +87,7 @@ body {
   .elysia-panel {
     width: 100vw !important;
     position: absolute;
-    z-index: 1;
+    z-index: 101;
   }
 
   .elysia-main {
@@ -101,10 +101,65 @@ body {
   .setup-inside {
 
     position: absolute;
-    z-index: 1;
+    z-index: 101;
 
     .elysia-setting {
       width: 100vw !important;
     }
+  }
+
+  .page-view {
+    position: fixed !important;
+    bottom: 4px;
+  }
+
+
+  .anticon.anticon-pushpin {
+    display: none !important;
+  }
+}
+
+.float-icon {
+  &-left {
+    left: -1px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+
+  &-rigth {
+    right: 0;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+
+    .anticon {
+      transition: transform 0.3s;
+    }
+
+    &:hover {
+      background-color: var(--primary-color-3);
+
+      .anticon {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  position: fixed;
+  z-index: 100;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #fff;
+  border: 1px solid var(--primary-color);
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+
+  .anticon {
+    font-size: 28px;
+    color: var(--primary-color);
   }
 }

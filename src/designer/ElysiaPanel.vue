@@ -2,6 +2,7 @@
   <div
     class="elysia-panel"
     :class="{ fixed: config.panelFixed, 'hidden-panel': config.hiddenPanel }"
+    v-show="visibleMenu"
   >
     <a-menu
       v-model:selectedKeys="activeKeys"
@@ -16,6 +17,7 @@
       >
         <component :is="menu.icon"></component>
       </a-menu-item>
+      <menu-fold-outlined class="mobile-menu-fold" @click="closeLeftPanel" />
     </a-menu>
     <div class="menu-content">
       <div class="menu-header">
@@ -36,13 +38,19 @@
       </div>
     </div>
   </div>
+
+  <div v-show="!visibleMenu" class="float-icon float-icon-left">
+    <format-painter-outlined @click="openLeftPanel" />
+  </div>
 </template>
 
 <script setup>
 import {
   PushpinFilled,
   PushpinOutlined,
-  CloseOutlined
+  CloseOutlined,
+  MenuFoldOutlined,
+  FormatPainterOutlined
 } from '@ant-design/icons-vue'
 import { ref, computed, defineAsyncComponent } from 'vue'
 import config, { setPanelFixed, setPanelVisible } from '~core/config.js'
@@ -60,6 +68,17 @@ const menuItems = {
   1: { title: '组件', icon: 'cubes-icon' },
   2: { title: '大纲', icon: 'bars-staggered-icon' },
   3: { title: '历史', icon: 'history-icon' }
+}
+
+const visibleMenu = ref(true)
+const closeLeftPanel = () => {
+  setPanelVisible(false)
+  visibleMenu.value = false
+}
+
+const openLeftPanel = () => {
+  setPanelVisible(true)
+  visibleMenu.value = true
 }
 
 const selectedKey = ref('1')
@@ -169,6 +188,20 @@ const activeKeys = computed({
     .menu-content {
       display: none;
     }
+  }
+
+  .mobile-menu-fold {
+    position: absolute;
+    z-index: 100;
+    bottom: 8px;
+    text-align: center;
+    height: 49px;
+    line-height: 56px;
+    margin: 0 !important;
+    padding: 0 16px;
+    display: block;
+    font-size: 24px;
+    color: var(--primary-color) !important;
   }
 }
 </style>

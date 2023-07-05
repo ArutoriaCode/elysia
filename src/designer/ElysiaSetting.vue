@@ -92,15 +92,16 @@
     </a-collapse>
   </div>
   <div
-    class="show-setting-box"
-    v-if="config.hiddenSetting"
-    @click="setSettingVisible(true)"
+    class="float-icon float-icon-rigth"
+    v-show="config.hiddenSetting"
+    @click="onShowSettingPanel"
   >
     <setting-outlined />
   </div>
 </template>
 <script setup>
-import importUseComponent from './components/property/index.js'
+import importUseComponent from './components/property'
+import useClientWidth from './hooks/useClientWidth'
 import {
   PushpinFilled,
   PushpinOutlined,
@@ -126,11 +127,29 @@ const propertys = computed(() => Object.keys(seletedSchema.value.options || {}))
 const commonComponentList = shallowRef([])
 const eventComponentList = shallowRef([])
 
+const onShowSettingPanel = () => {
+  // 等待动画结束再显示设置面板
+  setTimeout(() => {
+    setSettingVisible(true)
+  }, 300)
+}
+
 watch(
   propertys,
   () => {
     commonComponentList.value = importUseComponent(COMMON_KEY_NAME, propertys)
     eventComponentList.value = importUseComponent(EVENT_KEY_NAME, propertys)
+  },
+  { immediate: true }
+)
+
+const clientWidth = useClientWidth()
+watch(
+  clientWidth,
+  () => {
+    if (clientWidth.value < 768) {
+      setSettingFixed(false)
+    }
   },
   { immediate: true }
 )
@@ -210,35 +229,6 @@ watch(
   .custom-collapse {
     height: calc(100% - 54px);
     overflow: hidden auto;
-  }
-}
-
-.show-setting-box {
-  position: fixed;
-  z-index: 100;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-  background-color: #fff;
-  border: 1px solid var(--primary-color);
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-  width: 42px;
-  height: 42px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  .anticon {
-    font-size: 28px;
-    color: var(--primary-color);
-    transition: transform 0.3s;
-  }
-  &:hover {
-    background-color: var(--primary-color-3);
-    .anticon {
-      transform: rotate(180deg);
-    }
   }
 }
 
