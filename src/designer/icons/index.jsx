@@ -13,6 +13,8 @@ export default {
           return () => <Icon class={className} component={svgs[key]}></Icon>
         }
       });
+
+      // 将本文件目录下的svg注册为全局图标
       app.component(name, comp);
     });
   }

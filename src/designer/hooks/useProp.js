@@ -15,7 +15,7 @@ export default function useProp(property) {
 
   /**
    * 主动记录，需要主动绑定到组件的事件上，如：
-   * - 输入框失去焦点后才检查是否有变动
+   * - 输入框失去焦点后才检查是否有变动，不要直接绑定在@input事件上，这样会造成记录非常频繁
    * ```vue
    * <a-input @blur="action.record" v-model:value="propertyModel" />
    * ```

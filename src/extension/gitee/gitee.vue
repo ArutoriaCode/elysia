@@ -5,7 +5,7 @@
       href="javascript:void(0)"
       :style="{ fontSize: widget.options.fontSize + 'px' }"
     >
-      <component :is="widget.icon"></component> Github
+      <component :is="widget.icon"></component> Gitee
     </a>
   </static-wrapper>
 </template>

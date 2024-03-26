@@ -3,6 +3,43 @@
   "name": "a-form",
   "childrenList": [
     {
+      "id": "0c618c66-871e-4e86-8dff-e5cf5a085363",
+      "name": "gitee",
+      "nameAlias": "码云",
+      "type": "field",
+      "icon": "gitee-icon",
+      "options": {
+        "field": "gitee17550",
+        "className": [
+          "code-block"
+        ],
+        "customStyle": ".code-block {\n  display: block;\n  margin: 20px 0;\n}",
+        "link": "https://gitee.com/Sabermisaka/elysia",
+        "fontSize": 18,
+        "hidden": false
+      }
+    },
+    {
+      "id": "8c422b90-9e40-4117-946d-28e8c77808ec",
+      "name": "github",
+      "nameAlias": "Github",
+      "type": "field",
+      "icon": "github-icon",
+      "options": {
+        "field": "github67200",
+        "className": [
+          "code-block"
+        ],
+        "customStyle": ".code-block {\n  display: block;\n  margin: 20px 0;\n}",
+        "link": "https://github.com/ArutoriaCode/elysia.git",
+        "fontSize": 18,
+        "hidden": false
+      },
+      "inputNumber": {
+        "fontSize": {}
+      }
+    },
+    {
       "id": "64aeb130-33bd-461e-8dff-01f2365be408",
       "name": "grid",
       "type": "container",
